@@ -1,4 +1,3 @@
-relativeURLs = true
 baseURL = ""
 languageCode = "en-us"
 title = "GoMLX — Machine Learning for Go"
