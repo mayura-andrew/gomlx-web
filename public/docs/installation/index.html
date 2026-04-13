@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Installation — GoMLX</title>
+  <meta name="description" content="XLA-accelerated machine learning for Go. No Python. Full static typing. Production-ready.">
+  <meta property="og:title" content="Installation">
+  <meta property="og:description" content="XLA-accelerated machine learning for Go. No Python. Full static typing. Production-ready.">
+  <link rel="canonical" href="http://localhost:1313/docs/installation/">
+
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+
+  
+  <link rel="stylesheet" href="/css/main.css">
+  
+    
+    <link rel="stylesheet" href="/css/docs.css">
+  
+
+  
+  <link rel="icon" type="image/svg+xml" href="/img/favicon.svg">
+</head>
+<body>
+  <nav class="site-nav" id="site-nav">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo" aria-label="GoMLX home">
+      <svg class="logo-mark" width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="28" height="28" rx="7" fill="var(--accent)"/>
+        <path d="M7 14L11 10L14 13L17 9L21 14" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M7 19L11 15L14 18L17 14L21 19" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/>
+      </svg>
+      <span class="nav-wordmark">GoMLX</span>
+      <span class="nav-version">v0.17</span>
+    </a>
+
+    <ul class="nav-links" role="list">
+      
+      <li>
+        <a href="/docs/installation/" class="nav-link">
+          Get Started
+        </a>
+      </li>
+      
+      <li>
+        <a href="/docs/" class="nav-link">
+          Docs
+        </a>
+      </li>
+      
+      <li>
+        <a href="/examples/" class="nav-link">
+          Examples
+        </a>
+      </li>
+      
+      <li>
+        <a href="/community/" class="nav-link">
+          Community
+        </a>
+      </li>
+      
+    </ul>
+
+    <div class="nav-actions">
+      <button class="nav-search-trigger" id="search-trigger" aria-label="Search">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="6.5" cy="6.5" r="4" stroke="currentColor" stroke-width="1.5"/><path d="M10 10L13.5 13.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <span>Search</span>
+        <kbd>⌘K</kbd>
+      </button>
+
+      <a href="https://github.com/gomlx/gomlx" class="nav-github" target="_blank" rel="noopener" aria-label="GitHub">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+      </a>
+
+      <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+        <svg class="icon-sun" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="3" stroke="currentColor" stroke-width="1.5"/><path d="M8 1v2M8 13v2M1 8h2M13 8h2M3.05 3.05l1.41 1.41M11.54 11.54l1.41 1.41M3.05 12.95l1.41-1.41M11.54 4.46l1.41-1.41" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <svg class="icon-moon" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M13.5 9.5A6 6 0 016.5 2.5a6.002 6.002 0 000 11A6 6 0 0013.5 9.5z" stroke="currentColor" stroke-width="1.5"/></svg>
+      </button>
+
+      <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+  <main>
+    
+<div class="docs-layout">
+  <aside class="docs-sidebar" role="navigation" aria-label="Documentation navigation">
+    
+    <div class="sidebar-section">
+      <div class="sidebar-section-title">Get Started</div>
+      
+      <a href="/docs/installation/" class="sidebar-link is-active">Installation</a>
+      
+      <a href="/docs/quick-tutorial/" class="sidebar-link">Quick tutorial</a>
+      
+      <a href="/docs/core-concepts/" class="sidebar-link">Core concepts</a>
+      
+      <a href="/docs/first-model/" class="sidebar-link">Your first model</a>
+      
+    </div>
+    
+    <div class="sidebar-section">
+      <div class="sidebar-section-title">Reference</div>
+      
+      <a href="/docs/graph-execution/" class="sidebar-link">Graph execution</a>
+      
+      <a href="/docs/layers/" class="sidebar-link">Layers API</a>
+      
+      <a href="/docs/training-loops/" class="sidebar-link">Training loops</a>
+      
+      <a href="/docs/optimizers/" class="sidebar-link">Optimizers</a>
+      
+      <a href="/docs/losses/" class="sidebar-link">Losses</a>
+      
+      <a href="/docs/backends/" class="sidebar-link">Backends</a>
+      
+      <a href="/docs/plots-metrics/" class="sidebar-link">Plots &amp; metrics</a>
+      
+    </div>
+    
+    <div class="sidebar-section">
+      <div class="sidebar-section-title">Guides</div>
+      
+      <a href="/docs/datasets/" class="sidebar-link">Working with datasets</a>
+      
+      <a href="/docs/checkpoints/" class="sidebar-link">Saving &amp; loading models</a>
+      
+      <a href="/docs/custom-layers/" class="sidebar-link">Custom layers</a>
+      
+      <a href="/docs/debugging/" class="sidebar-link">Debugging &amp; NaN detection</a>
+      
+      <a href="/docs/performance/" class="sidebar-link">Performance tuning</a>
+      
+    </div>
+    
+    
+    
+    
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+    
+    <div class="sidebar-section">
+      <div class="sidebar-section-title">From upstream</div>
+      
+      <a href="/examples/mnist/" class="sidebar-link">MNIST Classifier</a>
+      
+      <a href="/docs/overview/" class="sidebar-link">What is GoMLX?</a>
+      
+      <a href="/docs/changelog/" class="sidebar-link">CHANGELOG</a>
+      
+      <a href="/docs/todo/" class="sidebar-link">TODO</a>
+      
+      <a href="/docs/developing/" class="sidebar-link">Developing</a>
+      
+      <a href="/docs/dotgeneral-performance/" class="sidebar-link">Dotgeneral Performance</a>
+      
+      <a href="/docs/error-handling/" class="sidebar-link">Error Handling</a>
+      
+    </div>
+    
+  </aside>
+
+  <article class="docs-content">
+    <nav class="docs-breadcrumb" aria-label="Breadcrumb">
+      <a href="/">Home</a><span>›</span>
+      <a href="/docs/">Documentation</a><span>›</span>
+      <span>Installation</span>
+    </nav>
+    
+    <header class="docs-header">
+      <h1>Installation</h1>
+      <p class="lead">Get GoMLX running in your Go project in under five minutes.</p>
+    </header>
+    <div class="docs-body"><h2 id="requirements">Requirements</h2>
+<p>Before installing GoMLX, make sure you have the following:</p>
+<ul>
+<li><strong>Go 1.21 or later</strong> — GoMLX uses generics and newer standard library features</li>
+<li><strong>A C compiler</strong> (gcc or clang) — required to build the XLA bindings</li>
+<li><strong>Optional: CUDA 12+</strong> — for NVIDIA GPU acceleration</li>
+</ul>
+<p>You can verify your Go version with:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>go version
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># go version go1.21.5 linux/amd64</span>
+</span></span></code></pre></div><h2 id="install-via-go-get">Install via go get</h2>
+<p>GoMLX is a standard Go module. Add it to your project with:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>go get github.com/gomlx/gomlx@latest
+</span></span></code></pre></div><p>This pulls in the core library, the default CPU backend, and all sub-packages. The first build will take a minute or two because it compiles the XLA runtime — subsequent builds are cached.</p>
+
+
+<div class="callout callout--tip" role="note">
+  <span class="callout-icon" aria-hidden="true">💡</span>
+  <div>On Linux, the XLA shared library is downloaded as a pre-built binary. On macOS, it is compiled from source. If you see a long compile step, this is expected.</div>
+</div>
+
+<h2 id="verify-the-installation">Verify the installation</h2>
+<p>Create a <code>main.go</code> in a fresh directory and paste this:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#ff79c6">package</span> main
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">import</span> (
+</span></span><span style="display:flex;"><span>    <span style="color:#f1fa8c">&#34;fmt&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f1fa8c">&#34;github.com/gomlx/gomlx/backends&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f1fa8c">&#34;github.com/gomlx/gomlx/graph&#34;</span>
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">main</span>() {
+</span></span><span style="display:flex;"><span>    manager <span style="color:#ff79c6">:=</span> backends.<span style="color:#50fa7b">New</span>()
+</span></span><span style="display:flex;"><span>    result <span style="color:#ff79c6">:=</span> graph.<span style="color:#50fa7b">Compile</span>(manager, <span style="color:#8be9fd;font-style:italic">func</span>(g <span style="color:#ff79c6">*</span>graph.Graph) <span style="color:#ff79c6">*</span>graph.Node {
+</span></span><span style="display:flex;"><span>        a <span style="color:#ff79c6">:=</span> graph.<span style="color:#50fa7b">Const</span>(g, []<span style="color:#8be9fd">float32</span>{<span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">2</span>, <span style="color:#bd93f9">3</span>})
+</span></span><span style="display:flex;"><span>        b <span style="color:#ff79c6">:=</span> graph.<span style="color:#50fa7b">Const</span>(g, []<span style="color:#8be9fd">float32</span>{<span style="color:#bd93f9">4</span>, <span style="color:#bd93f9">5</span>, <span style="color:#bd93f9">6</span>})
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">return</span> graph.<span style="color:#50fa7b">Add</span>(a, b)
+</span></span><span style="display:flex;"><span>    }).<span style="color:#50fa7b">Call</span>()
+</span></span><span style="display:flex;"><span>    fmt.<span style="color:#50fa7b">Println</span>(result) <span style="color:#6272a4">// Tensor[float32: 3] = [5 7 9]</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Run it:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>go run main.go
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Tensor[float32: 3] = [5 7 9]</span>
+</span></span></code></pre></div><p>If you see the tensor output, GoMLX is installed and working correctly.</p>
+<h2 id="gpu-support-nvidia">GPU support (NVIDIA)</h2>
+<p>To enable GPU acceleration, install the CUDA backend:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>go get github.com/gomlx/gomlx/backends/cuda@latest
+</span></span></code></pre></div><p>Then import it as a side-effect in your <code>main.go</code>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#ff79c6">import</span> (
+</span></span><span style="display:flex;"><span>    _ <span style="color:#f1fa8c">&#34;github.com/gomlx/gomlx/backends/cuda&#34;</span> <span style="color:#6272a4">// registers CUDA backend</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f1fa8c">&#34;github.com/gomlx/gomlx/backends&#34;</span>
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">main</span>() {
+</span></span><span style="display:flex;"><span>    manager <span style="color:#ff79c6">:=</span> backends.<span style="color:#50fa7b">New</span>() <span style="color:#6272a4">// automatically uses GPU if available</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// ...</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div>
+
+<div class="callout callout--note" role="note">
+  <span class="callout-icon" aria-hidden="true">📝</span>
+  <div>GoMLX selects the best available backend automatically: GPU &gt; CPU. You can force a specific backend with <code>backends.NewWithName(&quot;cpu&quot;)</code> or <code>backends.NewWithName(&quot;cuda&quot;)</code>.</div>
+</div>
+
+<h2 id="running-examples-with-gonb-jupyter-for-go">Running examples with Gonb (Jupyter for Go)</h2>
+<p>Many GoMLX examples are written as Gonb notebooks — the Go equivalent of Jupyter. To run them locally:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6272a4"># Install Gonb</span>
+</span></span><span style="display:flex;"><span>go install github.com/janpfeifer/gonb@latest
+</span></span><span style="display:flex;"><span>gonb --install
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Launch JupyterLab</span>
+</span></span><span style="display:flex;"><span>jupyter lab
+</span></span></code></pre></div><p>Then open any <code>.ipynb</code> file from the <a href="https://github.com/gomlx/gomlx/tree/main/examples">examples directory</a> in JupyterLab.</p>
+
+
+<div class="callout callout--tip" role="note">
+  <span class="callout-icon" aria-hidden="true">💡</span>
+  <div>All examples also have an &ldquo;Open in Colab&rdquo; link if you prefer not to set up Jupyter locally.</div>
+</div>
+
+<h2 id="troubleshooting">Troubleshooting</h2>
+<p><strong><code>cgo: C compiler not found</code></strong>
+Install gcc: <code>sudo apt install build-essential</code> (Ubuntu) or <code>xcode-select --install</code> (macOS).</p>
+<p><strong><code>undefined: backends.New</code></strong>
+Make sure you are on Go 1.21+. Run <code>go version</code> to confirm.</p>
+<p><strong><code>CUDA backend not found</code></strong>
+Verify CUDA 12 is installed with <code>nvcc --version</code>. The CUDA toolkit must be on your <code>PATH</code>.</p>
+<p><strong>Build is very slow on first run</strong>
+This is normal — XLA is being compiled. Subsequent builds use the cache and are fast.</p>
+</div>
+    
+    <div class="last-updated">Last updated April 13, 2026</div>
+    
+    <nav class="docs-pagination" aria-label="Page navigation">
+      
+      <a href="/docs/overview/" class="pagination-card pagination-card--prev">
+        <div class="dir">← Previous</div><div class="title">What is GoMLX?</div>
+      </a>
+      
+      
+    </nav>
+  </article>
+
+  <aside class="docs-toc" aria-label="On this page">
+    <div class="docs-toc-title">On this page</div>
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#requirements">Requirements</a></li>
+    <li><a href="#install-via-go-get">Install via go get</a></li>
+    <li><a href="#verify-the-installation">Verify the installation</a></li>
+    <li><a href="#gpu-support-nvidia">GPU support (NVIDIA)</a></li>
+    <li><a href="#running-examples-with-gonb-jupyter-for-go">Running examples with Gonb (Jupyter for Go)</a></li>
+    <li><a href="#troubleshooting">Troubleshooting</a></li>
+  </ul>
+</nav>
+  </aside>
+</div>
+
+  </main>
+  <footer class="site-footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="/" class="nav-logo" aria-label="GoMLX home">
+          <svg class="logo-mark" width="24" height="24" viewBox="0 0 28 28" fill="none">
+            <rect width="28" height="28" rx="7" fill="var(--accent)"/>
+            <path d="M7 14L11 10L14 13L17 9L21 14" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M7 19L11 15L14 18L17 14L21 19" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/>
+          </svg>
+          <span class="nav-wordmark">GoMLX</span>
+        </a>
+        <p>Machine learning for Go.<br>XLA-accelerated. No Python.</p>
+      </div>
+
+      <div class="footer-links">
+        <div class="footer-col">
+          <h4>Learn</h4>
+          <ul>
+            <li><a href="/docs/installation/">Installation</a></li>
+            <li><a href="/docs/core-concepts/">Core concepts</a></li>
+            <li><a href="/docs/training-loops/">Training loops</a></li>
+            <li><a href="/docs/backends/">Backends</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Examples</h4>
+          <ul>
+            <li><a href="/examples/mnist/">MNIST classifier</a></li>
+            <li><a href="/examples/cifar/">CIFAR-10 ResNet</a></li>
+            <li><a href="/examples/transformer/">Transformer</a></li>
+            <li><a href="/examples/rl-cartpole/">CartPole DQN</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Community</h4>
+          <ul>
+            <li><a href="https://github.com/gomlx/gomlx" target="_blank" rel="noopener">GitHub</a></li>
+            <li><a href="https://gophers.slack.com/channels/gomlx" target="_blank" rel="noopener">Slack #gomlx</a></li>
+            <li><a href="/community/contributing/">Contributing</a></li>
+            <li><a href="/community/changelog/">Changelog</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>GoMLX is open source, licensed under Apache 2.0. Built with ♥ by Jan Pfeifer and contributors.</p>
+      <p>Documentation site contributed by the GoMLX community.</p>
+    </div>
+  </div>
+</footer>
+
+  
+  
+  <script src="/js/main.js"></script>
+  
+</body>
+</html>

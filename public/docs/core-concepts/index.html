@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Core Concepts — GoMLX</title>
+  <meta name="description" content="XLA-accelerated machine learning for Go. No Python. Full static typing. Production-ready.">
+  <meta property="og:title" content="Core Concepts">
+  <meta property="og:description" content="XLA-accelerated machine learning for Go. No Python. Full static typing. Production-ready.">
+  <link rel="canonical" href="http://localhost:1313/docs/core-concepts/">
+
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+
+  
+  <link rel="stylesheet" href="/css/main.css">
+  
+    
+    <link rel="stylesheet" href="/css/docs.css">
+  
+
+  
+  <link rel="icon" type="image/svg+xml" href="/img/favicon.svg">
+</head>
+<body>
+  <nav class="site-nav" id="site-nav">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo" aria-label="GoMLX home">
+      <svg class="logo-mark" width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="28" height="28" rx="7" fill="var(--accent)"/>
+        <path d="M7 14L11 10L14 13L17 9L21 14" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M7 19L11 15L14 18L17 14L21 19" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/>
+      </svg>
+      <span class="nav-wordmark">GoMLX</span>
+      <span class="nav-version">v0.17</span>
+    </a>
+
+    <ul class="nav-links" role="list">
+      
+      <li>
+        <a href="/docs/installation/" class="nav-link">
+          Get Started
+        </a>
+      </li>
+      
+      <li>
+        <a href="/docs/" class="nav-link">
+          Docs
+        </a>
+      </li>
+      
+      <li>
+        <a href="/examples/" class="nav-link">
+          Examples
+        </a>
+      </li>
+      
+      <li>
+        <a href="/community/" class="nav-link">
+          Community
+        </a>
+      </li>
+      
+    </ul>
+
+    <div class="nav-actions">
+      <button class="nav-search-trigger" id="search-trigger" aria-label="Search">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="6.5" cy="6.5" r="4" stroke="currentColor" stroke-width="1.5"/><path d="M10 10L13.5 13.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <span>Search</span>
+        <kbd>⌘K</kbd>
+      </button>
+
+      <a href="https://github.com/gomlx/gomlx" class="nav-github" target="_blank" rel="noopener" aria-label="GitHub">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+      </a>
+
+      <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+        <svg class="icon-sun" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="3" stroke="currentColor" stroke-width="1.5"/><path d="M8 1v2M8 13v2M1 8h2M13 8h2M3.05 3.05l1.41 1.41M11.54 11.54l1.41 1.41M3.05 12.95l1.41-1.41M11.54 4.46l1.41-1.41" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <svg class="icon-moon" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M13.5 9.5A6 6 0 016.5 2.5a6.002 6.002 0 000 11A6 6 0 0013.5 9.5z" stroke="currentColor" stroke-width="1.5"/></svg>
+      </button>
+
+      <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+  <main>
+    
+<div class="docs-layout">
+  <aside class="docs-sidebar" role="navigation" aria-label="Documentation navigation">
+    
+    <div class="sidebar-section">
+      <div class="sidebar-section-title">Get Started</div>
+      
+      <a href="/docs/installation/" class="sidebar-link">Installation</a>
+      
+      <a href="/docs/quick-tutorial/" class="sidebar-link">Quick tutorial</a>
+      
+      <a href="/docs/core-concepts/" class="sidebar-link is-active">Core concepts</a>
+      
+      <a href="/docs/first-model/" class="sidebar-link">Your first model</a>
+      
+    </div>
+    
+    <div class="sidebar-section">
+      <div class="sidebar-section-title">Reference</div>
+      
+      <a href="/docs/graph-execution/" class="sidebar-link">Graph execution</a>
+      
+      <a href="/docs/layers/" class="sidebar-link">Layers API</a>
+      
+      <a href="/docs/training-loops/" class="sidebar-link">Training loops</a>
+      
+      <a href="/docs/optimizers/" class="sidebar-link">Optimizers</a>
+      
+      <a href="/docs/losses/" class="sidebar-link">Losses</a>
+      
+      <a href="/docs/backends/" class="sidebar-link">Backends</a>
+      
+      <a href="/docs/plots-metrics/" class="sidebar-link">Plots &amp; metrics</a>
+      
+    </div>
+    
+    <div class="sidebar-section">
+      <div class="sidebar-section-title">Guides</div>
+      
+      <a href="/docs/datasets/" class="sidebar-link">Working with datasets</a>
+      
+      <a href="/docs/checkpoints/" class="sidebar-link">Saving &amp; loading models</a>
+      
+      <a href="/docs/custom-layers/" class="sidebar-link">Custom layers</a>
+      
+      <a href="/docs/debugging/" class="sidebar-link">Debugging &amp; NaN detection</a>
+      
+      <a href="/docs/performance/" class="sidebar-link">Performance tuning</a>
+      
+    </div>
+    
+    
+    
+    
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+    
+    <div class="sidebar-section">
+      <div class="sidebar-section-title">From upstream</div>
+      
+      <a href="/examples/mnist/" class="sidebar-link">MNIST Classifier</a>
+      
+      <a href="/docs/overview/" class="sidebar-link">What is GoMLX?</a>
+      
+      <a href="/docs/changelog/" class="sidebar-link">CHANGELOG</a>
+      
+      <a href="/docs/todo/" class="sidebar-link">TODO</a>
+      
+      <a href="/docs/developing/" class="sidebar-link">Developing</a>
+      
+      <a href="/docs/dotgeneral-performance/" class="sidebar-link">Dotgeneral Performance</a>
+      
+      <a href="/docs/error-handling/" class="sidebar-link">Error Handling</a>
+      
+    </div>
+    
+  </aside>
+
+  <article class="docs-content">
+    <nav class="docs-breadcrumb" aria-label="Breadcrumb">
+      <a href="/">Home</a><span>›</span>
+      <a href="/docs/">Documentation</a><span>›</span>
+      <span>Core Concepts</span>
+    </nav>
+    
+    <header class="docs-header">
+      <h1>Core Concepts</h1>
+      <p class="lead">Understand the three building blocks of every GoMLX program: the backend manager, computation graphs, and the context.</p>
+    </header>
+    <div class="docs-body"><h2 id="overview">Overview</h2>
+<p>GoMLX is built on three layered abstractions. Understanding them makes every other part of the library click:</p>
+<ol>
+<li><strong>Manager</strong> — the connection to a hardware backend (CPU, GPU, TPU)</li>
+<li><strong>Graph</strong> — a computation graph that you define as a pure Go function</li>
+<li><strong>Context</strong> — a store for named, typed model parameters (weights)</li>
+</ol>
+<p>You can use just the manager and graph for mathematical computing, or add the context to build full trainable models.</p>
+<hr>
+<h2 id="the-manager">The Manager</h2>
+<p>The manager connects your Go process to a hardware backend. Create one at program startup and reuse it everywhere:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#ff79c6">import</span> <span style="color:#f1fa8c">&#34;github.com/gomlx/gomlx/backends&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>manager <span style="color:#ff79c6">:=</span> backends.<span style="color:#50fa7b">New</span>() <span style="color:#6272a4">// auto-selects best available backend</span>
+</span></span></code></pre></div><p>The manager owns the device memory, compiles graphs to native code, and manages data transfer between host and device. One manager per process is the typical pattern.</p>
+
+
+<div class="callout callout--note" role="note">
+  <span class="callout-icon" aria-hidden="true">📝</span>
+  <div><code>backends.New()</code> selects the best available backend in order: CUDA GPU → Metal (Apple) → CPU. To pin a specific backend, use <code>backends.NewWithName(&quot;cpu&quot;)</code>.</div>
+</div>
+
+<hr>
+<h2 id="computation-graphs">Computation Graphs</h2>
+<p>A <strong>graph</strong> is a pure function that describes a computation in terms of <code>*graph.Node</code> values. GoMLX traces this function once, compiles it to XLA HLO, and produces an executable that runs entirely on the device.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#6272a4">// Define a graph function — just a Go function returning nodes</span>
+</span></span><span style="display:flex;"><span>addFn <span style="color:#ff79c6">:=</span> graph.<span style="color:#50fa7b">Compile</span>(manager, <span style="color:#8be9fd;font-style:italic">func</span>(g <span style="color:#ff79c6">*</span>graph.Graph) <span style="color:#ff79c6">*</span>graph.Node {
+</span></span><span style="display:flex;"><span>    a <span style="color:#ff79c6">:=</span> graph.<span style="color:#50fa7b">Parameter</span>(g, <span style="color:#f1fa8c">&#34;a&#34;</span>, shapes.<span style="color:#50fa7b">Make</span>(dtypes.Float32, <span style="color:#bd93f9">4</span>))
+</span></span><span style="display:flex;"><span>    b <span style="color:#ff79c6">:=</span> graph.<span style="color:#50fa7b">Parameter</span>(g, <span style="color:#f1fa8c">&#34;b&#34;</span>, shapes.<span style="color:#50fa7b">Make</span>(dtypes.Float32, <span style="color:#bd93f9">4</span>))
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">return</span> graph.<span style="color:#50fa7b">Add</span>(a, b)
+</span></span><span style="display:flex;"><span>})
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">// Execute it — inputs move to device, result moves back</span>
+</span></span><span style="display:flex;"><span>result <span style="color:#ff79c6">:=</span> addFn.<span style="color:#50fa7b">Call</span>(tensorA, tensorB)
+</span></span></code></pre></div><h3 id="why-graphs">Why graphs?</h3>
+<p>This design gives XLA visibility over the entire computation so it can apply aggressive optimizations: operator fusion, memory layout selection, and loop unrolling — automatically.</p>
+<p>Your Go code never runs on the GPU. Only the <em>compiled graph</em> runs there. This is the same design used by JAX and TensorFlow&rsquo;s <code>tf.function</code>.</p>
+<h3 id="nodes-are-values-not-tensors">Nodes are values, not tensors</h3>
+<p>Inside a graph function, <code>*graph.Node</code> represents a future value. You cannot inspect its contents during graph construction — only after calling <code>.Call()</code>. Operations on nodes describe the graph structure.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#6272a4">// This is graph construction — no computation happens here</span>
+</span></span><span style="display:flex;"><span>x <span style="color:#ff79c6">:=</span> graph.<span style="color:#50fa7b">Parameter</span>(g, <span style="color:#f1fa8c">&#34;x&#34;</span>, shapes.<span style="color:#50fa7b">Make</span>(dtypes.Float32, <span style="color:#bd93f9">3</span>))
+</span></span><span style="display:flex;"><span>y <span style="color:#ff79c6">:=</span> graph.<span style="color:#50fa7b">Mul</span>(x, graph.<span style="color:#50fa7b">Const</span>(g, <span style="color:#8be9fd;font-style:italic">float32</span>(<span style="color:#bd93f9">2.0</span>)))
+</span></span><span style="display:flex;"><span>z <span style="color:#ff79c6">:=</span> graph.<span style="color:#50fa7b">ReduceSum</span>(y, <span style="color:#bd93f9">0</span>) <span style="color:#6272a4">// sum all elements</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">// This executes the compiled graph on-device</span>
+</span></span><span style="display:flex;"><span>result <span style="color:#ff79c6">:=</span> compiledFn.<span style="color:#50fa7b">Call</span>(xTensor) <span style="color:#6272a4">// returns a *tensors.Tensor</span>
+</span></span><span style="display:flex;"><span>fmt.<span style="color:#50fa7b">Println</span>(result.<span style="color:#50fa7b">Value</span>()) <span style="color:#6272a4">// []float32{...}</span>
+</span></span></code></pre></div><hr>
+<h2 id="shapes-and-dtypes">Shapes and Dtypes</h2>
+<p>Every node has a <strong>shape</strong>: a list of dimension sizes, plus a dtype. GoMLX checks shape compatibility at graph construction time — mismatches are caught before any computation runs.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#6272a4">// Shape: [batch, height, width, channels]</span>
+</span></span><span style="display:flex;"><span>imgShape <span style="color:#ff79c6">:=</span> shapes.<span style="color:#50fa7b">Make</span>(dtypes.Float32, <span style="color:#bd93f9">32</span>, <span style="color:#bd93f9">224</span>, <span style="color:#bd93f9">224</span>, <span style="color:#bd93f9">3</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">// Scalar</span>
+</span></span><span style="display:flex;"><span>scalarShape <span style="color:#ff79c6">:=</span> shapes.<span style="color:#50fa7b">Make</span>(dtypes.Float64) <span style="color:#6272a4">// no dimensions</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">// Check shape at construction</span>
+</span></span><span style="display:flex;"><span>x <span style="color:#ff79c6">:=</span> graph.<span style="color:#50fa7b">Parameter</span>(g, <span style="color:#f1fa8c">&#34;x&#34;</span>, imgShape)
+</span></span><span style="display:flex;"><span>fmt.<span style="color:#50fa7b">Println</span>(x.<span style="color:#50fa7b">Shape</span>()) <span style="color:#6272a4">// Float32[32, 224, 224, 3]</span>
+</span></span></code></pre></div><p>Common dtypes: <code>dtypes.Float32</code>, <code>dtypes.Float64</code>, <code>dtypes.Int32</code>, <code>dtypes.Int64</code>, <code>dtypes.Bool</code>.</p>
+<hr>
+<h2 id="the-context">The Context</h2>
+<p>The <strong>context</strong> is a hierarchical store for model parameters. Think of it as the model&rsquo;s named weight dictionary, with Go&rsquo;s type safety built in.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#ff79c6">import</span> <span style="color:#f1fa8c">&#34;github.com/gomlx/gomlx/ml/context&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>ctx <span style="color:#ff79c6">:=</span> context.<span style="color:#50fa7b">New</span>()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">// Inside a graph function, variables are created or retrieved by name</span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">denseLayer</span>(ctx <span style="color:#ff79c6">*</span>context.Context, x <span style="color:#ff79c6">*</span>graph.Node, units <span style="color:#8be9fd">int</span>) <span style="color:#ff79c6">*</span>graph.Node {
+</span></span><span style="display:flex;"><span>    w <span style="color:#ff79c6">:=</span> ctx.<span style="color:#50fa7b">WithInitializer</span>(initializers.GlorotUniform).
+</span></span><span style="display:flex;"><span>        <span style="color:#50fa7b">VariableWithShape</span>(<span style="color:#f1fa8c">&#34;weights&#34;</span>, shapes.<span style="color:#50fa7b">Make</span>(dtypes.Float32, x.<span style="color:#50fa7b">Shape</span>().<span style="color:#50fa7b">Dim</span>(<span style="color:#ff79c6">-</span><span style="color:#bd93f9">1</span>), units))
+</span></span><span style="display:flex;"><span>    b <span style="color:#ff79c6">:=</span> ctx.<span style="color:#50fa7b">VariableWithShape</span>(<span style="color:#f1fa8c">&#34;bias&#34;</span>, shapes.<span style="color:#50fa7b">Make</span>(dtypes.Float32, units))
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">return</span> graph.<span style="color:#50fa7b">Add</span>(graph.<span style="color:#50fa7b">MatMul</span>(x, w.<span style="color:#50fa7b">ValueGraph</span>(x.<span style="color:#50fa7b">Graph</span>())), b.<span style="color:#50fa7b">ValueGraph</span>(x.<span style="color:#50fa7b">Graph</span>()))
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="scoping">Scoping</h3>
+<p>Use <code>ctx.In(&quot;name&quot;)</code> to create named sub-scopes, which keeps weight names unique across layers:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-go" data-lang="go"><span style="display:flex;"><span>x = <span style="color:#50fa7b">denseLayer</span>(ctx.<span style="color:#50fa7b">In</span>(<span style="color:#f1fa8c">&#34;layer1&#34;</span>), x, <span style="color:#bd93f9">128</span>) <span style="color:#6272a4">// weights stored at &#34;layer1/weights&#34;</span>
+</span></span><span style="display:flex;"><span>x = <span style="color:#50fa7b">denseLayer</span>(ctx.<span style="color:#50fa7b">In</span>(<span style="color:#f1fa8c">&#34;layer2&#34;</span>), x, <span style="color:#bd93f9">64</span>)  <span style="color:#6272a4">// weights stored at &#34;layer2/weights&#34;</span>
+</span></span></code></pre></div><h3 id="checkpointing">Checkpointing</h3>
+<p>The context can serialize all its variables to disk and restore them:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-go" data-lang="go"><span style="display:flex;"><span>checkpoint <span style="color:#ff79c6">:=</span> checkpoints.<span style="color:#50fa7b">Build</span>(ctx).<span style="color:#50fa7b">Dir</span>(<span style="color:#f1fa8c">&#34;/tmp/my-model&#34;</span>).<span style="color:#50fa7b">Done</span>()
+</span></span><span style="display:flex;"><span>checkpoint.<span style="color:#50fa7b">Save</span>()   <span style="color:#6272a4">// saves all variables to disk</span>
+</span></span><span style="display:flex;"><span>checkpoint.<span style="color:#50fa7b">Restore</span>() <span style="color:#6272a4">// restores from the latest checkpoint</span>
+</span></span></code></pre></div><hr>
+<h2 id="putting-it-together">Putting it together</h2>
+<p>Here is the minimal skeleton of a trainable GoMLX program:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">main</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// 1. Connect to hardware</span>
+</span></span><span style="display:flex;"><span>    manager <span style="color:#ff79c6">:=</span> backends.<span style="color:#50fa7b">New</span>()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// 2. Create a context to hold weights</span>
+</span></span><span style="display:flex;"><span>    ctx <span style="color:#ff79c6">:=</span> context.<span style="color:#50fa7b">New</span>()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// 3. Define your model as a graph function</span>
+</span></span><span style="display:flex;"><span>    trainer <span style="color:#ff79c6">:=</span> train.<span style="color:#50fa7b">NewTrainer</span>(manager, ctx, myModelFn,
+</span></span><span style="display:flex;"><span>        losses.SparseCategoricalCrossEntropyLogits,
+</span></span><span style="display:flex;"><span>        optimizers.<span style="color:#50fa7b">Adam</span>(),
+</span></span><span style="display:flex;"><span>    )
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// 4. Run the training loop</span>
+</span></span><span style="display:flex;"><span>    loop <span style="color:#ff79c6">:=</span> train.<span style="color:#50fa7b">NewLoop</span>(trainer)
+</span></span><span style="display:flex;"><span>    loop.<span style="color:#50fa7b">RunSteps</span>(trainDataset, <span style="color:#bd93f9">10_000</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Each of these pieces — manager, graph, context, trainer — is independently replaceable. You can swap the optimizer, the backend, or the loss function without touching the rest.</p>
+</div>
+    
+    <div class="last-updated">Last updated April 13, 2026</div>
+    
+    <nav class="docs-pagination" aria-label="Page navigation">
+      
+      <a href="/docs/changelog/" class="pagination-card pagination-card--prev">
+        <div class="dir">← Previous</div><div class="title">CHANGELOG</div>
+      </a>
+      
+      
+      <a href="/docs/overview/" class="pagination-card pagination-card--next">
+        <div class="dir">Next →</div><div class="title">What is GoMLX?</div>
+      </a>
+      
+    </nav>
+  </article>
+
+  <aside class="docs-toc" aria-label="On this page">
+    <div class="docs-toc-title">On this page</div>
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#overview">Overview</a></li>
+    <li><a href="#the-manager">The Manager</a></li>
+    <li><a href="#computation-graphs">Computation Graphs</a>
+      <ul>
+        <li><a href="#why-graphs">Why graphs?</a></li>
+        <li><a href="#nodes-are-values-not-tensors">Nodes are values, not tensors</a></li>
+      </ul>
+    </li>
+    <li><a href="#shapes-and-dtypes">Shapes and Dtypes</a></li>
+    <li><a href="#the-context">The Context</a>
+      <ul>
+        <li><a href="#scoping">Scoping</a></li>
+        <li><a href="#checkpointing">Checkpointing</a></li>
+      </ul>
+    </li>
+    <li><a href="#putting-it-together">Putting it together</a></li>
+  </ul>
+</nav>
+  </aside>
+</div>
+
+  </main>
+  <footer class="site-footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="/" class="nav-logo" aria-label="GoMLX home">
+          <svg class="logo-mark" width="24" height="24" viewBox="0 0 28 28" fill="none">
+            <rect width="28" height="28" rx="7" fill="var(--accent)"/>
+            <path d="M7 14L11 10L14 13L17 9L21 14" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M7 19L11 15L14 18L17 14L21 19" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/>
+          </svg>
+          <span class="nav-wordmark">GoMLX</span>
+        </a>
+        <p>Machine learning for Go.<br>XLA-accelerated. No Python.</p>
+      </div>
+
+      <div class="footer-links">
+        <div class="footer-col">
+          <h4>Learn</h4>
+          <ul>
+            <li><a href="/docs/installation/">Installation</a></li>
+            <li><a href="/docs/core-concepts/">Core concepts</a></li>
+            <li><a href="/docs/training-loops/">Training loops</a></li>
+            <li><a href="/docs/backends/">Backends</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Examples</h4>
+          <ul>
+            <li><a href="/examples/mnist/">MNIST classifier</a></li>
+            <li><a href="/examples/cifar/">CIFAR-10 ResNet</a></li>
+            <li><a href="/examples/transformer/">Transformer</a></li>
+            <li><a href="/examples/rl-cartpole/">CartPole DQN</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Community</h4>
+          <ul>
+            <li><a href="https://github.com/gomlx/gomlx" target="_blank" rel="noopener">GitHub</a></li>
+            <li><a href="https://gophers.slack.com/channels/gomlx" target="_blank" rel="noopener">Slack #gomlx</a></li>
+            <li><a href="/community/contributing/">Contributing</a></li>
+            <li><a href="/community/changelog/">Changelog</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>GoMLX is open source, licensed under Apache 2.0. Built with ♥ by Jan Pfeifer and contributors.</p>
+      <p>Documentation site contributed by the GoMLX community.</p>
+    </div>
+  </div>
+</footer>
+
+  
+  
+  <script src="/js/main.js"></script>
+  
+</body>
+</html>

@@ -12,7 +12,7 @@
     {{ $curated := slice }}
     {{ range .Site.Data.docsnav }}{{ range .pages }}{{ $curated = $curated | append .url }}{{ end }}{{ end }}
     {{ $uncurated := slice }}
-    {{ range $.Site.RegularPagesRecursive }}
+    {{ range site.RegularPages }}
       {{ if not (in $curated .RelPermalink) }}{{ $uncurated = $uncurated | append . }}{{ end }}
     {{ end }}
     {{ if $uncurated }}

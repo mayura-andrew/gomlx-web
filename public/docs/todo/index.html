@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TODO — GoMLX</title>
+  <meta name="description" content="XLA-accelerated machine learning for Go. No Python. Full static typing. Production-ready.">
+  <meta property="og:title" content="TODO">
+  <meta property="og:description" content="XLA-accelerated machine learning for Go. No Python. Full static typing. Production-ready.">
+  <link rel="canonical" href="http://localhost:1313/docs/todo/">
+
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+
+  
+  <link rel="stylesheet" href="/css/main.css">
+  
+    
+    <link rel="stylesheet" href="/css/docs.css">
+  
+
+  
+  <link rel="icon" type="image/svg+xml" href="/img/favicon.svg">
+</head>
+<body>
+  <nav class="site-nav" id="site-nav">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo" aria-label="GoMLX home">
+      <svg class="logo-mark" width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="28" height="28" rx="7" fill="var(--accent)"/>
+        <path d="M7 14L11 10L14 13L17 9L21 14" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M7 19L11 15L14 18L17 14L21 19" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/>
+      </svg>
+      <span class="nav-wordmark">GoMLX</span>
+      <span class="nav-version">v0.17</span>
+    </a>
+
+    <ul class="nav-links" role="list">
+      
+      <li>
+        <a href="/docs/installation/" class="nav-link">
+          Get Started
+        </a>
+      </li>
+      
+      <li>
+        <a href="/docs/" class="nav-link">
+          Docs
+        </a>
+      </li>
+      
+      <li>
+        <a href="/examples/" class="nav-link">
+          Examples
+        </a>
+      </li>
+      
+      <li>
+        <a href="/community/" class="nav-link">
+          Community
+        </a>
+      </li>
+      
+    </ul>
+
+    <div class="nav-actions">
+      <button class="nav-search-trigger" id="search-trigger" aria-label="Search">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="6.5" cy="6.5" r="4" stroke="currentColor" stroke-width="1.5"/><path d="M10 10L13.5 13.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <span>Search</span>
+        <kbd>⌘K</kbd>
+      </button>
+
+      <a href="https://github.com/gomlx/gomlx" class="nav-github" target="_blank" rel="noopener" aria-label="GitHub">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+      </a>
+
+      <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+        <svg class="icon-sun" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="3" stroke="currentColor" stroke-width="1.5"/><path d="M8 1v2M8 13v2M1 8h2M13 8h2M3.05 3.05l1.41 1.41M11.54 11.54l1.41 1.41M3.05 12.95l1.41-1.41M11.54 4.46l1.41-1.41" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <svg class="icon-moon" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M13.5 9.5A6 6 0 016.5 2.5a6.002 6.002 0 000 11A6 6 0 0013.5 9.5z" stroke="currentColor" stroke-width="1.5"/></svg>
+      </button>
+
+      <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+  <main>
+    
+<div class="docs-layout">
+  <aside class="docs-sidebar" role="navigation" aria-label="Documentation navigation">
+    
+    <div class="sidebar-section">
+      <div class="sidebar-section-title">Get Started</div>
+      
+      <a href="/docs/installation/" class="sidebar-link">Installation</a>
+      
+      <a href="/docs/quick-tutorial/" class="sidebar-link">Quick tutorial</a>
+      
+      <a href="/docs/core-concepts/" class="sidebar-link">Core concepts</a>
+      
+      <a href="/docs/first-model/" class="sidebar-link">Your first model</a>
+      
+    </div>
+    
+    <div class="sidebar-section">
+      <div class="sidebar-section-title">Reference</div>
+      
+      <a href="/docs/graph-execution/" class="sidebar-link">Graph execution</a>
+      
+      <a href="/docs/layers/" class="sidebar-link">Layers API</a>
+      
+      <a href="/docs/training-loops/" class="sidebar-link">Training loops</a>
+      
+      <a href="/docs/optimizers/" class="sidebar-link">Optimizers</a>
+      
+      <a href="/docs/losses/" class="sidebar-link">Losses</a>
+      
+      <a href="/docs/backends/" class="sidebar-link">Backends</a>
+      
+      <a href="/docs/plots-metrics/" class="sidebar-link">Plots &amp; metrics</a>
+      
+    </div>
+    
+    <div class="sidebar-section">
+      <div class="sidebar-section-title">Guides</div>
+      
+      <a href="/docs/datasets/" class="sidebar-link">Working with datasets</a>
+      
+      <a href="/docs/checkpoints/" class="sidebar-link">Saving &amp; loading models</a>
+      
+      <a href="/docs/custom-layers/" class="sidebar-link">Custom layers</a>
+      
+      <a href="/docs/debugging/" class="sidebar-link">Debugging &amp; NaN detection</a>
+      
+      <a href="/docs/performance/" class="sidebar-link">Performance tuning</a>
+      
+    </div>
+    
+    
+    
+    
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+    
+    <div class="sidebar-section">
+      <div class="sidebar-section-title">From upstream</div>
+      
+      <a href="/examples/mnist/" class="sidebar-link">MNIST Classifier</a>
+      
+      <a href="/docs/overview/" class="sidebar-link">What is GoMLX?</a>
+      
+      <a href="/docs/changelog/" class="sidebar-link">CHANGELOG</a>
+      
+      <a href="/docs/todo/" class="sidebar-link is-active">TODO</a>
+      
+      <a href="/docs/developing/" class="sidebar-link">Developing</a>
+      
+      <a href="/docs/dotgeneral-performance/" class="sidebar-link">Dotgeneral Performance</a>
+      
+      <a href="/docs/error-handling/" class="sidebar-link">Error Handling</a>
+      
+    </div>
+    
+  </aside>
+
+  <article class="docs-content">
+    <nav class="docs-breadcrumb" aria-label="Breadcrumb">
+      <a href="/">Home</a><span>›</span>
+      <a href="/docs/">Documentation</a><span>›</span>
+      <span>TODO</span>
+    </nav>
+    
+    <div class="source-banner">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+      Synced from <a href="https://github.com/gomlx/gomlx/blob/main/docs/TODO.md" target="_blank" rel="noopener">gomlx/gomlx</a>. Found an error? Edit it there.
+    </div>
+    
+    <header class="docs-header">
+      <h1>TODO</h1>
+      
+    </header>
+    <div class="docs-body"><h1 id="gomlx-roadmap--ownership">GoMLX Roadmap &amp; Ownership</h1>
+<p>This document tracks feature development, ownership, and priorities.</p>
+<hr>
+<h2 id="status-legend">Status Legend</h2>
+<ul>
+<li><code>idea</code> – not scoped yet</li>
+<li><code>ready</code> – clearly defined, free to claim</li>
+<li><code>in_progress</code> – actively worked on</li>
+<li><code>blocked</code> – waiting on dependency</li>
+<li><code>done</code> – completed</li>
+</ul>
+<h2 id="priority-legend">Priority Legend</h2>
+<ul>
+<li><code>P0</code> – critical / ecosystem enabling</li>
+<li><code>P1</code> – important feature expansion</li>
+<li><code>P2</code> – nice to have / exploratory</li>
+</ul>
+<hr>
+<h1 id="modeling">Modeling</h1>
+<hr>
+<h2 id="model-1-huggingface-transformer-import-safetensors-direct">[MODEL-1] HuggingFace Transformer Import (safetensors direct)</h2>
+<ul>
+<li><strong>DRI:</strong> <em>unassigned</em></li>
+<li><strong>Status:</strong> <code>ready</code></li>
+<li><strong>Priority:</strong> <code>P0</code></li>
+<li><strong>Area:</strong> <code>pkg/ml/model/transformer</code></li>
+<li><strong>Depends on:</strong> GRAPH-1</li>
+<li><strong>Description:</strong> Import generic transformer architectures directly from safetensors without ONNX.</li>
+<li><strong>Definition of Done:</strong>
+<ul>
+<li>Load at least 2 transformer families (e.g., GPT-style, BERT-style)</li>
+<li>Weights load successfully from safetensors</li>
+<li>Minimal documentation of supported architecture subset</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="model-2-text-generation-example-hf-transformer--prompt">[MODEL-2] Text Generation Example (HF Transformer + Prompt)</h2>
+<ul>
+<li><strong>DRI:</strong> <em>unassigned</em></li>
+<li><strong>Status:</strong> <code>ready</code></li>
+<li><strong>Priority:</strong> <code>P1</code></li>
+<li><strong>Depends on:</strong> MODEL-1</li>
+<li><strong>Description:</strong> Provide example generator using imported transformer model.</li>
+<li><strong>Definition of Done:</strong>
+<ul>
+<li><code>examples/transformer_generate</code></li>
+<li>Prompt → generated output</li>
+<li>Reproducible with seed</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="model-3-onnx-import-coverage-expansion">[MODEL-3] ONNX Import Coverage Expansion</h2>
+<ul>
+<li><strong>DRI:</strong> <em>unassigned</em></li>
+<li><strong>Status:</strong> <code>ready</code></li>
+<li><strong>Priority:</strong> <code>P1</code></li>
+<li><strong>Repo:</strong> ONNX-GoMLX</li>
+<li><strong>Description:</strong> Improve op coverage for ONNX graph import.</li>
+<li><strong>Definition of Done:</strong>
+<ul>
+<li>Continous: there will always be another model to import, untill all ops are covered.</li>
+<li>Per contribution:
+<ul>
+<li>Tests for ops; Example when a new model gets to work.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="model-4-new-layers--optimizers--losses">[MODEL-4] New Layers / Optimizers / Losses</h2>
+<ul>
+<li><strong>DRI:</strong> <em>unassigned</em></li>
+<li><strong>Status:</strong> idea</li>
+<li><strong>Priority:</strong> P1</li>
+<li><strong>Description:</strong> Add recent ML layers, optimizers, regularizers.</li>
+<li><strong>Definition of Done:</strong>
+<ul>
+<li>Continuous: there will always be new papers.</li>
+<li>For each new contribution:
+<ul>
+<li>Tests and benchmark example. Bonus if a notebook.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="model-5-gnn-layer-support">[MODEL-5] GNN Layer Support</h2>
+<ul>
+<li><strong>DRI:</strong> <em>unassigned</em></li>
+<li><strong>Status:</strong> idea</li>
+<li><strong>Priority:</strong> P2</li>
+<li><strong>Description:</strong> Add Graph Neural Network layer abstraction.</li>
+<li><strong>Definition of Done:</strong>
+<ul>
+<li>Basic message-passing GNN</li>
+<li>Example on sample dataset</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="model-6-gradient-checkpointing">[MODEL-6] Gradient Checkpointing</h2>
+<ul>
+<li><strong>DRI:</strong> <em>unassigned</em></li>
+<li><strong>Status:</strong> idea</li>
+<li><strong>Priority:</strong> P2</li>
+<li><strong>Description:</strong> Reduce memory usage during training.</li>
+<li><strong>Definition of Done:</strong>
+<ul>
+<li>Memory usage reduced in benchmark</li>
+<li>Same convergence behavior</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="model-7-jacobian-support-non-scalar-gradients">[MODEL-7] Jacobian Support (non-scalar gradients)</h2>
+<ul>
+<li><strong>DRI:</strong> <em>unassigned</em></li>
+<li><strong>Status:</strong> ready</li>
+<li><strong>Priority:</strong> P2</li>
+<li><strong>Description:</strong> Support gradients wrt vector/tensor outputs.</li>
+<li><strong>Definition of Done:</strong>
+<ul>
+<li>API to compute Jacobian</li>
+<li>Unit tests with analytic comparison</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h1 id="graph">Graph</h1>
+<hr>
+<h2 id="graph-1-dynamic-shapes-input-dependent-fixed-rank">[GRAPH-1] Dynamic Shapes (Input-Dependent, Fixed Rank)</h2>
+<ul>
+<li><strong>DRI:</strong> <em>unassigned</em></li>
+<li><strong>Status:</strong> in_progress</li>
+<li><strong>Priority:</strong> P0</li>
+<li><strong>Target:</strong> v0.28.0</li>
+<li><strong>Links:</strong> PR #306</li>
+<li><strong>Definition of Done:</strong>
+<ul>
+<li>Input-dependent shapes supported</li>
+<li>Full shape inference test coverage</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="graph-2-data-dependent-shapes-fixed-rank">[GRAPH-2] Data-Dependent Shapes (Fixed Rank)</h2>
+<ul>
+<li><strong>DRI:</strong> <em>unassigned</em></li>
+<li><strong>Status:</strong> idea</li>
+<li><strong>Priority:</strong> P1</li>
+<li><strong>Depends on:</strong> GRAPH-1</li>
+<li><strong>Definition of Done:</strong>
+<ul>
+<li>Runtime shape propagation works</li>
+<li>Fallback for unsupported cases</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="graph-3-symbolic-shapes-named-axes">[GRAPH-3] Symbolic Shapes (Named Axes)</h2>
+<ul>
+<li><strong>DRI:</strong> <em>unassigned</em></li>
+<li><strong>Status:</strong> ready</li>
+<li><strong>Priority:</strong> P0</li>
+<li><strong>Target:</strong> v0.28.0</li>
+<li><strong>Depends on:</strong> GRAPH-1</li>
+<li><strong>Definition of Done:</strong>
+<ul>
+<li>Named axis abstraction</li>
+<li>Symbolic inference working in transformer example</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h1 id="backends">Backends</h1>
+<hr>
+<h2 id="backend-2-simplego-backend--simd-support-go-126">[BACKEND-2] SimpleGo Backend – SIMD Support (Go 1.26+)</h2>
+<ul>
+<li><strong>DRI:</strong> <em>unassigned</em></li>
+<li><strong>Status:</strong> <code>in-progress</code></li>
+<li><strong>Priority:</strong> <code>P0</code></li>
+<li><strong>Target:</strong> v0.28.0</li>
+<li><strong>Depends on:</strong> Go 1.26, go-highway</li>
+<li><strong>Definition of Done:</strong>
+<ul>
+<li>Supporting AVX-2, AVX-512 and Arm64 NEON (with C/Assembly tranliteration).</li>
+<li>Benchmark comparison</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="backend-3-onnx-export-api">[BACKEND-3] ONNX Export API</h2>
+<ul>
+<li><strong>DRI:</strong> <em>unassigned</em></li>
+<li><strong>Status:</strong> idea</li>
+<li><strong>Priority:</strong> P1</li>
+<li><strong>Description:</strong> Save GoMLX graph as ONNX model.</li>
+<li><strong>Definition of Done:</strong>
+<ul>
+<li><code>Save()</code> API for the ONNX backend.</li>
+<li>Model validated with ONNX runtime</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="backend-4-webglwebnn-wasm-backend">[BACKEND-4] WebGL/WebNN WASM Backend</h2>
+<ul>
+<li><strong>DRI:</strong> <em>unassigned</em></li>
+<li><strong>Status:</strong> idea</li>
+<li><strong>Priority:</strong> P2</li>
+<li><strong>Definition of Done:</strong>
+<ul>
+<li>Proof-of-concept inference in browser</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="backend-5-llamacpp-backend-purego--yzma">[BACKEND-5] llama.cpp Backend (purego / yzma)</h2>
+<ul>
+<li><strong>DRI:</strong> <em>unassigned</em></li>
+<li><strong>Status:</strong> idea</li>
+<li><strong>Priority:</strong> P2</li>
+<li><strong>Link:</strong> <a href="https://github.com/hybridgroup/yzma/">https://github.com/hybridgroup/yzma/</a></li>
+<li><strong>Definition of Done:</strong>
+<ul>
+<li>Load llama.cpp model</li>
+<li>Inference parity with reference</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h1 id="infrastructure">Infrastructure</h1>
+<hr>
+<h2 id="infra-1-inference-only-distribution-mode">[INFRA-1] Inference-Only Distribution Mode</h2>
+<ul>
+<li><strong>DRI:</strong> <em>unassigned</em></li>
+<li><strong>Status:</strong> idea</li>
+<li><strong>Priority:</strong> P1</li>
+<li><strong>Definition of Done:</strong>
+<ul>
+<li>Backend-only load mode</li>
+<li>Load pre-exported model</li>
+<li>Minimal example</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="infra-2-distributed-training-validation">[INFRA-2] Distributed Training Validation</h2>
+<ul>
+<li><strong>DRI:</strong> <em>unassigned</em></li>
+<li><strong>Status:</strong> blocked</li>
+<li><strong>Priority:</strong> P0</li>
+<li><strong>Definition of Done:</strong>
+<ul>
+<li>Multi-node test example</li>
+<li>Stability verification</li>
+<li>Documentation</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h1 id="api-improvements">API Improvements</h1>
+<hr>
+<h2 id="api-1-replace-context-with-plain-go-struct--annotations">[API-1] Replace Context with Plain Go Struct + Annotations</h2>
+<ul>
+<li><strong>DRI:</strong> <em>unassigned</em></li>
+<li><strong>Status:</strong> idea</li>
+<li><strong>Priority:</strong> P1</li>
+<li><strong>Description:</strong> Replace Context object with struct-based annotated config.</li>
+<li><strong>Definition of Done:</strong>
+<ul>
+<li>RFC document</li>
+<li>Reflection-based prototype</li>
+<li>Migration example</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h1 id="maintenance">Maintenance</h1>
+<hr>
+<h2 id="maint-1-code-cleanup--refactoring-pass">[MAINT-1] Code Cleanup &amp; Refactoring Pass</h2>
+<ul>
+<li><strong>DRI:</strong> <em>unassigned</em></li>
+<li><strong>Status:</strong> ready</li>
+<li><strong>Priority:</strong> P2</li>
+<li><strong>Definition of Done:</strong>
+<ul>
+<li>Remove deprecated APIs</li>
+<li>Improve test coverage</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h1 id="priority-overview">Priority Overview</h1>
+<h2 id="p0-critical">P0 (Critical)</h2>
+<ul>
+<li>MODEL-1</li>
+<li>MODEL-2</li>
+<li>GRAPH-1</li>
+<li>GRAPH-3</li>
+<li>INFRA-2</li>
+</ul>
+<h2 id="p1-important">P1 (Important)</h2>
+<ul>
+<li>MODEL-3</li>
+<li>MODEL-4</li>
+<li>MODEL-6</li>
+<li>MODEL-7</li>
+<li>BACKEND-2</li>
+<li>BACKEND-3</li>
+<li>BACKEND-5</li>
+<li>INFRA-1</li>
+<li>API-1</li>
+</ul>
+<h2 id="p2-exploratory">P2 (Exploratory)</h2>
+<ul>
+<li>MODEL-5</li>
+<li>BACKEND-4</li>
+<li>BACKEND-6</li>
+<li>MAINT-1</li>
+</ul>
+</div>
+    
+    <div class="last-updated">Last updated April 13, 2026</div>
+    
+    <nav class="docs-pagination" aria-label="Page navigation">
+      
+      <a href="/docs/debugging/" class="pagination-card pagination-card--prev">
+        <div class="dir">← Previous</div><div class="title">Debugging</div>
+      </a>
+      
+      
+      <a href="/docs/changelog/" class="pagination-card pagination-card--next">
+        <div class="dir">Next →</div><div class="title">CHANGELOG</div>
+      </a>
+      
+    </nav>
+  </article>
+
+  <aside class="docs-toc" aria-label="On this page">
+    <div class="docs-toc-title">On this page</div>
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#status-legend">Status Legend</a></li>
+    <li><a href="#priority-legend">Priority Legend</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#model-1-huggingface-transformer-import-safetensors-direct">[MODEL-1] HuggingFace Transformer Import (safetensors direct)</a></li>
+    <li><a href="#model-2-text-generation-example-hf-transformer--prompt">[MODEL-2] Text Generation Example (HF Transformer + Prompt)</a></li>
+    <li><a href="#model-3-onnx-import-coverage-expansion">[MODEL-3] ONNX Import Coverage Expansion</a></li>
+    <li><a href="#model-4-new-layers--optimizers--losses">[MODEL-4] New Layers / Optimizers / Losses</a></li>
+    <li><a href="#model-5-gnn-layer-support">[MODEL-5] GNN Layer Support</a></li>
+    <li><a href="#model-6-gradient-checkpointing">[MODEL-6] Gradient Checkpointing</a></li>
+    <li><a href="#model-7-jacobian-support-non-scalar-gradients">[MODEL-7] Jacobian Support (non-scalar gradients)</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#graph-1-dynamic-shapes-input-dependent-fixed-rank">[GRAPH-1] Dynamic Shapes (Input-Dependent, Fixed Rank)</a></li>
+    <li><a href="#graph-2-data-dependent-shapes-fixed-rank">[GRAPH-2] Data-Dependent Shapes (Fixed Rank)</a></li>
+    <li><a href="#graph-3-symbolic-shapes-named-axes">[GRAPH-3] Symbolic Shapes (Named Axes)</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#backend-2-simplego-backend--simd-support-go-126">[BACKEND-2] SimpleGo Backend – SIMD Support (Go 1.26+)</a></li>
+    <li><a href="#backend-3-onnx-export-api">[BACKEND-3] ONNX Export API</a></li>
+    <li><a href="#backend-4-webglwebnn-wasm-backend">[BACKEND-4] WebGL/WebNN WASM Backend</a></li>
+    <li><a href="#backend-5-llamacpp-backend-purego--yzma">[BACKEND-5] llama.cpp Backend (purego / yzma)</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#infra-1-inference-only-distribution-mode">[INFRA-1] Inference-Only Distribution Mode</a></li>
+    <li><a href="#infra-2-distributed-training-validation">[INFRA-2] Distributed Training Validation</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#api-1-replace-context-with-plain-go-struct--annotations">[API-1] Replace Context with Plain Go Struct + Annotations</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#maint-1-code-cleanup--refactoring-pass">[MAINT-1] Code Cleanup &amp; Refactoring Pass</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#p0-critical">P0 (Critical)</a></li>
+    <li><a href="#p1-important">P1 (Important)</a></li>
+    <li><a href="#p2-exploratory">P2 (Exploratory)</a></li>
+  </ul>
+</nav>
+  </aside>
+</div>
+
+  </main>
+  <footer class="site-footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="/" class="nav-logo" aria-label="GoMLX home">
+          <svg class="logo-mark" width="24" height="24" viewBox="0 0 28 28" fill="none">
+            <rect width="28" height="28" rx="7" fill="var(--accent)"/>
+            <path d="M7 14L11 10L14 13L17 9L21 14" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M7 19L11 15L14 18L17 14L21 19" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/>
+          </svg>
+          <span class="nav-wordmark">GoMLX</span>
+        </a>
+        <p>Machine learning for Go.<br>XLA-accelerated. No Python.</p>
+      </div>
+
+      <div class="footer-links">
+        <div class="footer-col">
+          <h4>Learn</h4>
+          <ul>
+            <li><a href="/docs/installation/">Installation</a></li>
+            <li><a href="/docs/core-concepts/">Core concepts</a></li>
+            <li><a href="/docs/training-loops/">Training loops</a></li>
+            <li><a href="/docs/backends/">Backends</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Examples</h4>
+          <ul>
+            <li><a href="/examples/mnist/">MNIST classifier</a></li>
+            <li><a href="/examples/cifar/">CIFAR-10 ResNet</a></li>
+            <li><a href="/examples/transformer/">Transformer</a></li>
+            <li><a href="/examples/rl-cartpole/">CartPole DQN</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Community</h4>
+          <ul>
+            <li><a href="https://github.com/gomlx/gomlx" target="_blank" rel="noopener">GitHub</a></li>
+            <li><a href="https://gophers.slack.com/channels/gomlx" target="_blank" rel="noopener">Slack #gomlx</a></li>
+            <li><a href="/community/contributing/">Contributing</a></li>
+            <li><a href="/community/changelog/">Changelog</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>GoMLX is open source, licensed under Apache 2.0. Built with ♥ by Jan Pfeifer and contributors.</p>
+      <p>Documentation site contributed by the GoMLX community.</p>
+    </div>
+  </div>
+</footer>
+
+  
+  
+  <script src="/js/main.js"></script>
+  
+</body>
+</html>

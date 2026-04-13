@@ -1,0 +1,16 @@
+{{ define "main" }}
+<div class="container" style="padding: 40px 28px;">
+  <header class="docs-header">
+    <h1>{{ .Title }}</h1>
+    {{ with .Params.lead }}<p class="lead">{{ . }}</p>{{ end }}
+  </header>
+  <div class="docs-body">
+    {{ .Content }}
+    <ul>
+      {{ range .Pages }}
+      <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+      {{ end }}
+    </ul>
+  </div>
+</div>
+{{ end }}

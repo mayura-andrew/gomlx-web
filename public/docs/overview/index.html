@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>What is GoMLX? — GoMLX</title>
+  <meta name="description" content="XLA-accelerated machine learning for Go. No Python. Full static typing. Production-ready.">
+  <meta property="og:title" content="What is GoMLX?">
+  <meta property="og:description" content="XLA-accelerated machine learning for Go. No Python. Full static typing. Production-ready.">
+  <link rel="canonical" href="http://localhost:1313/docs/overview/">
+
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+
+  
+  <link rel="stylesheet" href="/css/main.css">
+  
+    
+    <link rel="stylesheet" href="/css/docs.css">
+  
+
+  
+  <link rel="icon" type="image/svg+xml" href="/img/favicon.svg">
+</head>
+<body>
+  <nav class="site-nav" id="site-nav">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo" aria-label="GoMLX home">
+      <svg class="logo-mark" width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="28" height="28" rx="7" fill="var(--accent)"/>
+        <path d="M7 14L11 10L14 13L17 9L21 14" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M7 19L11 15L14 18L17 14L21 19" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/>
+      </svg>
+      <span class="nav-wordmark">GoMLX</span>
+      <span class="nav-version">v0.17</span>
+    </a>
+
+    <ul class="nav-links" role="list">
+      
+      <li>
+        <a href="/docs/installation/" class="nav-link">
+          Get Started
+        </a>
+      </li>
+      
+      <li>
+        <a href="/docs/" class="nav-link">
+          Docs
+        </a>
+      </li>
+      
+      <li>
+        <a href="/examples/" class="nav-link">
+          Examples
+        </a>
+      </li>
+      
+      <li>
+        <a href="/community/" class="nav-link">
+          Community
+        </a>
+      </li>
+      
+    </ul>
+
+    <div class="nav-actions">
+      <button class="nav-search-trigger" id="search-trigger" aria-label="Search">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="6.5" cy="6.5" r="4" stroke="currentColor" stroke-width="1.5"/><path d="M10 10L13.5 13.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <span>Search</span>
+        <kbd>⌘K</kbd>
+      </button>
+
+      <a href="https://github.com/gomlx/gomlx" class="nav-github" target="_blank" rel="noopener" aria-label="GitHub">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+      </a>
+
+      <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+        <svg class="icon-sun" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="3" stroke="currentColor" stroke-width="1.5"/><path d="M8 1v2M8 13v2M1 8h2M13 8h2M3.05 3.05l1.41 1.41M11.54 11.54l1.41 1.41M3.05 12.95l1.41-1.41M11.54 4.46l1.41-1.41" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <svg class="icon-moon" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M13.5 9.5A6 6 0 016.5 2.5a6.002 6.002 0 000 11A6 6 0 0013.5 9.5z" stroke="currentColor" stroke-width="1.5"/></svg>
+      </button>
+
+      <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+  <main>
+    
+<div class="docs-layout">
+  <aside class="docs-sidebar" role="navigation" aria-label="Documentation navigation">
+    
+    <div class="sidebar-section">
+      <div class="sidebar-section-title">Get Started</div>
+      
+      <a href="/docs/installation/" class="sidebar-link">Installation</a>
+      
+      <a href="/docs/quick-tutorial/" class="sidebar-link">Quick tutorial</a>
+      
+      <a href="/docs/core-concepts/" class="sidebar-link">Core concepts</a>
+      
+      <a href="/docs/first-model/" class="sidebar-link">Your first model</a>
+      
+    </div>
+    
+    <div class="sidebar-section">
+      <div class="sidebar-section-title">Reference</div>
+      
+      <a href="/docs/graph-execution/" class="sidebar-link">Graph execution</a>
+      
+      <a href="/docs/layers/" class="sidebar-link">Layers API</a>
+      
+      <a href="/docs/training-loops/" class="sidebar-link">Training loops</a>
+      
+      <a href="/docs/optimizers/" class="sidebar-link">Optimizers</a>
+      
+      <a href="/docs/losses/" class="sidebar-link">Losses</a>
+      
+      <a href="/docs/backends/" class="sidebar-link">Backends</a>
+      
+      <a href="/docs/plots-metrics/" class="sidebar-link">Plots &amp; metrics</a>
+      
+    </div>
+    
+    <div class="sidebar-section">
+      <div class="sidebar-section-title">Guides</div>
+      
+      <a href="/docs/datasets/" class="sidebar-link">Working with datasets</a>
+      
+      <a href="/docs/checkpoints/" class="sidebar-link">Saving &amp; loading models</a>
+      
+      <a href="/docs/custom-layers/" class="sidebar-link">Custom layers</a>
+      
+      <a href="/docs/debugging/" class="sidebar-link">Debugging &amp; NaN detection</a>
+      
+      <a href="/docs/performance/" class="sidebar-link">Performance tuning</a>
+      
+    </div>
+    
+    
+    
+    
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+    
+    <div class="sidebar-section">
+      <div class="sidebar-section-title">From upstream</div>
+      
+      <a href="/examples/mnist/" class="sidebar-link">MNIST Classifier</a>
+      
+      <a href="/docs/overview/" class="sidebar-link is-active">What is GoMLX?</a>
+      
+      <a href="/docs/changelog/" class="sidebar-link">CHANGELOG</a>
+      
+      <a href="/docs/todo/" class="sidebar-link">TODO</a>
+      
+      <a href="/docs/developing/" class="sidebar-link">Developing</a>
+      
+      <a href="/docs/dotgeneral-performance/" class="sidebar-link">Dotgeneral Performance</a>
+      
+      <a href="/docs/error-handling/" class="sidebar-link">Error Handling</a>
+      
+    </div>
+    
+  </aside>
+
+  <article class="docs-content">
+    <nav class="docs-breadcrumb" aria-label="Breadcrumb">
+      <a href="/">Home</a><span>›</span>
+      <a href="/docs/">Documentation</a><span>›</span>
+      <span>What is GoMLX?</span>
+    </nav>
+    
+    <div class="source-banner">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+      Synced from <a href="https://github.com/gomlx/gomlx/blob/main/README.md" target="_blank" rel="noopener">gomlx/gomlx</a>. Found an error? Edit it there.
+    </div>
+    
+    <header class="docs-header">
+      <h1>What is GoMLX?</h1>
+      
+    </header>
+    <div class="docs-body"><h1 id="gomlx-an-accelerated-ml-and-math-framework"><strong><em>GoMLX</em></strong>, an Accelerated ML and Math Framework</h1>
+<p><a href="https://pkg.go.dev/github.com/gomlx/gomlx?tab=doc"><img src="https://img.shields.io/badge/go.dev-reference-007d9c?logo=go&amp;logoColor=white" alt="GoDev"></a>
+<a href="https://github.com/gomlx/gomlx/blob/main/LICENSE"><img src="https://img.shields.io/github/license/gomlx/gomlx" alt="GitHub"></a>
+<a href="https://goreportcard.com/report/github.com/gomlx/gomlx"><img src="https://goreportcard.com/badge/github.com/gomlx/gomlx" alt="Go Report Card"></a>
+<a href="https://github.com/gomlx/gomlx/actions/workflows/linux_amd64_tests.yaml"><img src="https://github.com/gomlx/gomlx/actions/workflows/linux_amd64_tests.yaml/badge.svg" alt="Linux/amd64 Tests"></a>
+<a href="https://github.com/gomlx/gomlx/actions/workflows/linux_arm64_tests.yaml"><img src="https://github.com/gomlx/gomlx/actions/workflows/linux_arm64_tests.yaml/badge.svg" alt="Linux/arm64 Tests"></a>
+<a href="https://github.com/gomlx/gomlx/actions/workflows/darwin_tests.yaml"><img src="https://github.com/gomlx/gomlx/actions/workflows/darwin_tests.yaml/badge.svg" alt="Darwin/arm64 Tests"></a>
+<a href="https://github.com/gomlx/gomlx/actions/workflows/windows_amd64_tests.yaml"><img src="https://github.com/gomlx/gomlx/actions/workflows/windows_amd64_tests.yaml/badge.svg" alt="Windows/amd64 Tests"></a>
+<img src="https://img.shields.io/badge/Coverage-71.4%25-yellow" alt="Coverage">
+<a href="https://app.slack.com/client/T029RQSE6/C08TX33BX6U"><img src="https://img.shields.io/badge/Slack-GoMLX-purple.svg?logo=slack" alt="Slack"></a>
+<a href="https://github.com/sponsors/gomlx"><img src="https://img.shields.io/badge/Sponsor-gomlx-white?logo=github&amp;style=flat-square" alt="Sponsor gomlx"></a></p>
+<h2 id="-about-gomlx">📖 About <strong><em>GoMLX</em></strong></h2>
+<img align="right" src="docs/gomlx_gopher2.png" alt="GoMLX Gopher" width="220px"/>
+<p><strong>GoMLX</strong> is an easy-to-use set of Machine Learning and generic math libraries and tools.
+It can be seen as a <strong>PyTorch/Jax/TensorFlow for Go</strong>.</p>
+<p>It can be used to train, fine-tune, modify, and combine machine learning models.
+It provides all the tools to make that work easy: from a complete set of differentiable operators,
+all the way to UItools to plot metrics while training in a notebook.</p>
+<p>It runs almost everywhere Go runs, using a pure Go backend.
+It runs even in the browser with WASM (<a href="https://janpfeifer.github.io/hiveGo/www/hive/">see demo created with GoMLX</a>).
+Likely, it will work in embedded devices as well (see <a href="https://github.com/usbarmory/tamago">Tamago</a>).</p>
+<p>It also supports a very optimized backend engine based on <a href="https://github.com/openxla/xla">OpenXLA</a>
+that uses just-in-time compilation to CPU, GPUs (Nvidia, and likely AMD ROCm, Intel, Macs) and Google&rsquo;s TPUs.
+It also supports modern distributed execution (<strong>new, still being actively improved</strong>) for multi-TPU or multi-GPU
+using XLA Shardy, an evolution of the <a href="https://arxiv.org/abs/2105.04663">GSPMD distribution</a>).</p>
+<p>It&rsquo;s the same engine that powers Google&rsquo;s <a href="https://github.com/google/jax">Jax</a>,
+<a href="https://tensorflow.org/">TensorFlow</a> and <a href="https://docs.pytorch.org/xla/master/learn/xla-overview.html">Pytorch/XLA</a>,
+and it has the same speed in many cases.
+Use this backend to train large models or with large datasets.</p>
+<blockquote>
+<p>[!Tip]</p>
+<ul>
+<li>See our 🎓 <a href="https://gomlx.github.io/gomlx/notebooks/tutorial.html"><strong>tutorial</strong></a> 🎓</li>
+<li>See <em>Eli Bendersky</em>&rsquo;s blog post <a href="https://eli.thegreenplace.net/2024/gomlx-ml-in-go-without-python/">&ldquo;GoMLX: ML in Go without Python&rdquo;</a>,
+(a bit outdated, but still useful)</li>
+<li>A <a href="https://gomlx.github.io/gomlx/notebooks/dogsvscats.html">guided example for Kaggle Dogs Vs Cats</a>.</li>
+<li>A simple <a href="https://docs.google.com/presentation/d/1QWp_N9_7_n7gQKePHfmb5AFFBXnN6DTqjpWxNC0Ecpk/edit?usp=sharing">GoMLX slide deck</a> with small sample code.</li>
+</ul>
+</blockquote>
+<div>
+<p>It was developed to be a full-featured ML platform for Go, productionizable and easily to experiment with ML ideas
+—see Long-Term Goals below.</p>
+<p>It strives to be <strong>simple to read and reason about</strong>, leading the user to a correct and transparent mental model
+of what is going on (no surprises)—aligned with Go philosophy.
+At the cost of more typing (more verbose) at times.</p>
+<p>It is also incredibly flexible and easy to extend and try non-conventional ideas: use it to experiment with new
+optimizer ideas, complex regularizers, funky multitasking, etc.</p>
+<p>Documentation is kept up to date (if it is not well-documented, it is as if the code is not there),
+and error messages are useful (always with a stack-trace) and try to make it easy to solve issues.</p>
+</div>
+<h2 id="-overview">🗺️ Overview</h2>
+<p><strong>GoMLX</strong> is a full-featured ML framework, supporting various well-known ML components<br>
+from the bottom to the top of the stack. But it is still only a slice of what a major ML library/framework should provide
+(like TensorFlow, Jax, or PyTorch).</p>
+<h3 id="examples-developed-using-gomlx">Examples developed using GoMLX</h3>
+<ul>
+<li><strong>🚀 NEW 🚀</strong> <a href="https://github.com/gomlx/go-huggingface/tree/main/examples/kalmgemma3">KaLM-Gema3 12B parameters</a>: Tecent&rsquo;s top-ranked sentence encoder
+for RAGs, using <a href="https://github.com/gomlx/go-huggingface/">go-huggingface</a> to load the model and tokenizer, and <strong>GoMLX</strong> to execute it.</li>
+<li><strong>🚀 NEW 🚀</strong> <a href="https://github.com/gomlx/gomlx/tree/main/examples/gemma3">Gemma 3 270M</a>: Demonstrates ONNX-converted
+text generation (LLM) using the <a href="https://huggingface.co/onnx-community/gemma-3-270m-it-ONNX">onnx-community/gemma-3-270m-it-ONNX</a>
+model with GoMLX.
+It uses the <a href="https://github.com/gomlx/onnx-gomlx"><code>gomlx/onnx-gomlx</code></a> package to convert the model, and <a href="https://github.com/gomlx/go-huggingface"><code>gomlx/go-huggingface</code></a> to download the model and run the   * <strong>🚀 NEW 🚀</strong> <a href="https://github.com/gomlx/gomlx/tree/main/examples/gpt2">GPT-2</a>: Demonstrates text generation using the
+the new (experimental) transformer and generator packages.
+tokenizer.</li>
+<li><strong>🚀 NEW 🚀</strong> <a href="https://github.com/gomlx/gomlx/tree/main/examples/BERT-base-NER">BERT-base-NER</a>: A BERT-base model fine-tuned
+for Named Entity Recognition. It&rsquo;s also a ONNX-converted model from <a href="https://huggingface.co/dslim/bert-base-NER">dslim/bert-base-NER model</a> from HuggingFace.</li>
+</ul>
+<ul>
+<li><strong>🚀 NEW 🚀</strong> <a href="https://github.com/gomlx/gomlx/tree/main/examples/mxbai-rerank">MixedBread Reranker v1</a>: A cross-encoder reranking
+example, see <a href="https://huggingface.co/mixedbread-ai/mxbai-rerank-base-v1">HuggingFace MixedBread Reranker v1 page</a>.
+It uses the <a href="https://github.com/gomlx/onnx-gomlx"><code>gomlx/onnx-gomlx</code></a> package to convert the model, and <a href="https://github.com/gomlx/go-huggingface"><code>gomlx/go-huggingface</code></a> to download the model and run the tokenizer.</li>
+</ul>
+<ul>
+<li><a href="https://gomlx.github.io/gomlx/notebooks/uci-adult.html">Adult/Census model</a>;</li>
+<li><a href="https://gomlx.github.io/gomlx/notebooks/kan_shapes.html">How do KANs learn ?</a>;</li>
+<li><a href="https://gomlx.github.io/gomlx/notebooks/cifar.html">Cifar-10 demo</a>;</li>
+<li><a href="https://github.com/gomlx/gomlx/tree/main/examples/mnist">MNIST demo (library and command-line only)</a></li>
+<li><a href="https://gomlx.github.io/gomlx/notebooks/dogsvscats.html">Dogs &amp; Cats classifier demo</a>;</li>
+<li><a href="https://gomlx.github.io/gomlx/notebooks/imdb.html">IMDB Movie Review demo</a>;</li>
+<li><a href="examples/oxfordflowers102/OxfordFlowers102_Diffusion.ipynb">Diffusion model for Oxford Flowers 102 dataset (generates random flowers)</a>;
+<ul>
+<li><a href="https://gomlx.github.io/gomlx/notebooks/flow_matching.html">Flow Matching Study Notebook</a> based on Meta&rsquo;s <a href="https://ai.meta.com/research/publications/flow-matching-guide-and-code/">&ldquo;Flow Matching Guide and Code&rdquo;</a>.</li>
+</ul>
+</li>
+<li><a href="examples/ogbnmag/ogbn-mag.ipynb">GNN model for OGBN-MAG (experimental)</a>.</li>
+<li>Last, a trivial <a href="https://github.com/gomlx/gomlx/blob/main/examples/linear/linear.go">synthetic linear model</a>, for those curious to see a barebones simple model.</li>
+<li>Neural Style Transfer 10-year Celebration: <a href="https://github.com/janpfeifer/styletransfer/blob/main/demo.ipynb">see a demo written using GoMLX</a> of the <a href="https://arxiv.org/abs/1508.06576">original paper</a>.</li>
+<li><a href="https://github.com/gomlx/gomlx/blob/main/ml/train/losses/triplet.go">Triplet Losses</a>: various negative sampling strategies as well as various distance metrics.</li>
+<li><a href="https://github.com/janpfeifer/hiveGo/">AlphaZero AI for the game of Hive</a>: it uses a trivial GNN to evaluate
+positions on the board. It includes a <a href="https://janpfeifer.github.io/hiveGo/www/hive/">WASM demo (runs GoMLX in the browser!)</a> and a command-line UI to test your skills!</li>
+</ul>
+<h3 id="backends">Backends</h3>
+<p>GoMLX is a friendly &ldquo;intermediary ML API&rdquo;, that hosts a common API and a library of ML layers and such. But per-se it doesn&rsquo;t execute any computation: it relies on different backends to compile and execute the computation on very different hardware.</p>
+<p>There is a common backend interface (currently in <code>github.com/gomlx/gomlx/backends</code>, but it will soon go to its own repo), and 3 different implementations:</p>
+<ol>
+<li><strong><code>xla</code></strong>: <a href="https://github.com/openxla/xla">OpenXLA</a> backend for CPUs, GPUs, and TPUs. State-of-the-art as these things go, but only static-shape.
+For linux/amd64, linux/arm64 (CPU) and darwin/arm64 (CPU) for now. Using the <a href="https://github.com/gomlx/go-xla">go-xla</a> Go version of the APIs.</li>
+<li><strong><code>go</code></strong>: a pure Go backend (no C/C++ dependencies): slower but very portable (compiles to WASM/Windows/etc.):
+<ul>
+<li>SIMD support is underway (see <a href="https://github.com/golang/go/issues/73787">SIMD for Go</a> and under-development <a href="https://github.com/ajroetker/go-highway">go-highway</a>);</li>
+<li><strong>🚀 NEW 🚀</strong>: added support for some <strong>fused operations</strong> and for some types of quantization, greatly improving performance
+in some cases.</li>
+<li>See also <a href="https://janpfeifer.github.io/hiveGo/www/hive/">GoMLX compiled to WASM to power the AI for a game of Hive</a></li>
+<li>Dynamic shape support planned (maybe mid-2026).</li>
+</ul>
+</li>
+<li><strong>🚀 NEW 🚀</strong> <strong><a href="https://github.com/gomlx/go-darwinml">go-darwinml</a></strong>: Go bindings to Apple&rsquo;s CoreML supporting Metal acceleration, MLX, and any backend DarwinOS related.</li>
+</ol>
+<h3 id="highlights">Highlights</h3>
+<ul>
+<li>Converting ONNX models to GoMLX with <a href="https://github.com/gomlx/onnx-gomlx">onnx-gomlx</a>: both as an alternative for <code>onnxruntime</code> (leveraging XLA),
+but also to further fine-tune models. See also <a href="https://github.com/gomlx/go-huggingface">go-huggingface</a> to easily download ONNX model files from HuggingFace.</li>
+<li><a href="https://hub.docker.com/r/janpfeifer/gomlx_jupyterlab">Docker &ldquo;gomlx_jupyterlab&rdquo;</a> with integrated JupyterLab and <a href="https://github.com/janpfeifer/gonb">GoNB</a> (a Go kernel for Jupyter notebooks)</li>
+<li>Autodiff: automatic differentiation—only gradients for now, no jacobian.</li>
+<li>Context: automatic variable management for ML models.</li>
+<li>ML layers library with some of the most popular machine learning &ldquo;layers&rdquo;: FFN layers,</li>
+</ul>
+<blockquote>
+<p>This page is excerpted from the <a href="https://github.com/gomlx/gomlx">full README</a>. For complete documentation, browse the sections in the sidebar.</p>
+</blockquote>
+</div>
+    
+    <div class="last-updated">Last updated April 13, 2026</div>
+    
+    <nav class="docs-pagination" aria-label="Page navigation">
+      
+      <a href="/docs/core-concepts/" class="pagination-card pagination-card--prev">
+        <div class="dir">← Previous</div><div class="title">Core Concepts</div>
+      </a>
+      
+      
+      <a href="/docs/installation/" class="pagination-card pagination-card--next">
+        <div class="dir">Next →</div><div class="title">Installation</div>
+      </a>
+      
+    </nav>
+  </article>
+
+  <aside class="docs-toc" aria-label="On this page">
+    <div class="docs-toc-title">On this page</div>
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#-about-gomlx">📖 About <strong><em>GoMLX</em></strong></a></li>
+    <li><a href="#-overview">🗺️ Overview</a>
+      <ul>
+        <li><a href="#examples-developed-using-gomlx">Examples developed using GoMLX</a></li>
+        <li><a href="#backends">Backends</a></li>
+        <li><a href="#highlights">Highlights</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </aside>
+</div>
+
+  </main>
+  <footer class="site-footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="/" class="nav-logo" aria-label="GoMLX home">
+          <svg class="logo-mark" width="24" height="24" viewBox="0 0 28 28" fill="none">
+            <rect width="28" height="28" rx="7" fill="var(--accent)"/>
+            <path d="M7 14L11 10L14 13L17 9L21 14" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M7 19L11 15L14 18L17 14L21 19" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/>
+          </svg>
+          <span class="nav-wordmark">GoMLX</span>
+        </a>
+        <p>Machine learning for Go.<br>XLA-accelerated. No Python.</p>
+      </div>
+
+      <div class="footer-links">
+        <div class="footer-col">
+          <h4>Learn</h4>
+          <ul>
+            <li><a href="/docs/installation/">Installation</a></li>
+            <li><a href="/docs/core-concepts/">Core concepts</a></li>
+            <li><a href="/docs/training-loops/">Training loops</a></li>
+            <li><a href="/docs/backends/">Backends</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Examples</h4>
+          <ul>
+            <li><a href="/examples/mnist/">MNIST classifier</a></li>
+            <li><a href="/examples/cifar/">CIFAR-10 ResNet</a></li>
+            <li><a href="/examples/transformer/">Transformer</a></li>
+            <li><a href="/examples/rl-cartpole/">CartPole DQN</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Community</h4>
+          <ul>
+            <li><a href="https://github.com/gomlx/gomlx" target="_blank" rel="noopener">GitHub</a></li>
+            <li><a href="https://gophers.slack.com/channels/gomlx" target="_blank" rel="noopener">Slack #gomlx</a></li>
+            <li><a href="/community/contributing/">Contributing</a></li>
+            <li><a href="/community/changelog/">Changelog</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>GoMLX is open source, licensed under Apache 2.0. Built with ♥ by Jan Pfeifer and contributors.</p>
+      <p>Documentation site contributed by the GoMLX community.</p>
+    </div>
+  </div>
+</footer>
+
+  
+  
+  <script src="/js/main.js"></script>
+  
+</body>
+</html>

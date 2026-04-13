@@ -1,0 +1,3221 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dotgeneral Performance — GoMLX</title>
+  <meta name="description" content="XLA-accelerated machine learning for Go. No Python. Full static typing. Production-ready.">
+  <meta property="og:title" content="Dotgeneral Performance">
+  <meta property="og:description" content="XLA-accelerated machine learning for Go. No Python. Full static typing. Production-ready.">
+  <link rel="canonical" href="http://localhost:1313/docs/dotgeneral-performance/">
+
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+
+  
+  <link rel="stylesheet" href="/css/main.css">
+  
+    
+    <link rel="stylesheet" href="/css/docs.css">
+  
+
+  
+  <link rel="icon" type="image/svg+xml" href="/img/favicon.svg">
+</head>
+<body>
+  <nav class="site-nav" id="site-nav">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo" aria-label="GoMLX home">
+      <svg class="logo-mark" width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="28" height="28" rx="7" fill="var(--accent)"/>
+        <path d="M7 14L11 10L14 13L17 9L21 14" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M7 19L11 15L14 18L17 14L21 19" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/>
+      </svg>
+      <span class="nav-wordmark">GoMLX</span>
+      <span class="nav-version">v0.17</span>
+    </a>
+
+    <ul class="nav-links" role="list">
+      
+      <li>
+        <a href="/docs/installation/" class="nav-link">
+          Get Started
+        </a>
+      </li>
+      
+      <li>
+        <a href="/docs/" class="nav-link">
+          Docs
+        </a>
+      </li>
+      
+      <li>
+        <a href="/examples/" class="nav-link">
+          Examples
+        </a>
+      </li>
+      
+      <li>
+        <a href="/community/" class="nav-link">
+          Community
+        </a>
+      </li>
+      
+    </ul>
+
+    <div class="nav-actions">
+      <button class="nav-search-trigger" id="search-trigger" aria-label="Search">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="6.5" cy="6.5" r="4" stroke="currentColor" stroke-width="1.5"/><path d="M10 10L13.5 13.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <span>Search</span>
+        <kbd>⌘K</kbd>
+      </button>
+
+      <a href="https://github.com/gomlx/gomlx" class="nav-github" target="_blank" rel="noopener" aria-label="GitHub">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+      </a>
+
+      <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+        <svg class="icon-sun" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="3" stroke="currentColor" stroke-width="1.5"/><path d="M8 1v2M8 13v2M1 8h2M13 8h2M3.05 3.05l1.41 1.41M11.54 11.54l1.41 1.41M3.05 12.95l1.41-1.41M11.54 4.46l1.41-1.41" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <svg class="icon-moon" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M13.5 9.5A6 6 0 016.5 2.5a6.002 6.002 0 000 11A6 6 0 0013.5 9.5z" stroke="currentColor" stroke-width="1.5"/></svg>
+      </button>
+
+      <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+  <main>
+    
+<div class="docs-layout">
+  <aside class="docs-sidebar" role="navigation" aria-label="Documentation navigation">
+    
+    <div class="sidebar-section">
+      <div class="sidebar-section-title">Get Started</div>
+      
+      <a href="/docs/installation/" class="sidebar-link">Installation</a>
+      
+      <a href="/docs/quick-tutorial/" class="sidebar-link">Quick tutorial</a>
+      
+      <a href="/docs/core-concepts/" class="sidebar-link">Core concepts</a>
+      
+      <a href="/docs/first-model/" class="sidebar-link">Your first model</a>
+      
+    </div>
+    
+    <div class="sidebar-section">
+      <div class="sidebar-section-title">Reference</div>
+      
+      <a href="/docs/graph-execution/" class="sidebar-link">Graph execution</a>
+      
+      <a href="/docs/layers/" class="sidebar-link">Layers API</a>
+      
+      <a href="/docs/training-loops/" class="sidebar-link">Training loops</a>
+      
+      <a href="/docs/optimizers/" class="sidebar-link">Optimizers</a>
+      
+      <a href="/docs/losses/" class="sidebar-link">Losses</a>
+      
+      <a href="/docs/backends/" class="sidebar-link">Backends</a>
+      
+      <a href="/docs/plots-metrics/" class="sidebar-link">Plots &amp; metrics</a>
+      
+    </div>
+    
+    <div class="sidebar-section">
+      <div class="sidebar-section-title">Guides</div>
+      
+      <a href="/docs/datasets/" class="sidebar-link">Working with datasets</a>
+      
+      <a href="/docs/checkpoints/" class="sidebar-link">Saving &amp; loading models</a>
+      
+      <a href="/docs/custom-layers/" class="sidebar-link">Custom layers</a>
+      
+      <a href="/docs/debugging/" class="sidebar-link">Debugging &amp; NaN detection</a>
+      
+      <a href="/docs/performance/" class="sidebar-link">Performance tuning</a>
+      
+    </div>
+    
+    
+    
+    
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+    
+    <div class="sidebar-section">
+      <div class="sidebar-section-title">From upstream</div>
+      
+      <a href="/examples/mnist/" class="sidebar-link">MNIST Classifier</a>
+      
+      <a href="/docs/overview/" class="sidebar-link">What is GoMLX?</a>
+      
+      <a href="/docs/changelog/" class="sidebar-link">CHANGELOG</a>
+      
+      <a href="/docs/todo/" class="sidebar-link">TODO</a>
+      
+      <a href="/docs/developing/" class="sidebar-link">Developing</a>
+      
+      <a href="/docs/dotgeneral-performance/" class="sidebar-link is-active">Dotgeneral Performance</a>
+      
+      <a href="/docs/error-handling/" class="sidebar-link">Error Handling</a>
+      
+    </div>
+    
+  </aside>
+
+  <article class="docs-content">
+    <nav class="docs-breadcrumb" aria-label="Breadcrumb">
+      <a href="/">Home</a><span>›</span>
+      <a href="/docs/">Documentation</a><span>›</span>
+      <span>Dotgeneral Performance</span>
+    </nav>
+    
+    <div class="source-banner">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+      Synced from <a href="https://github.com/gomlx/gomlx/blob/main/docs/dotgeneral_performance.md" target="_blank" rel="noopener">gomlx/gomlx</a>. Found an error? Edit it there.
+    </div>
+    
+    <header class="docs-header">
+      <h1>Dotgeneral Performance</h1>
+      
+    </header>
+    <div class="docs-body"><p>This document is generated by running the <code>TestDotGeneral_PerformanceTable</code> test.
+To run it, from the root of the repository, run (for the simplego backend):</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">GOMLX_BACKEND</span><span style="color:#ff79c6">=</span>go go <span style="color:#8be9fd;font-style:italic">test</span> -tags<span style="color:#ff79c6">=</span>perf ./backends/simplego/ <span style="color:#f1fa8c">\
+</span></span></span><span style="display:flex;"><span>    -test.run<span style="color:#ff79c6">=</span>TestDotGeneral_PerformanceTable -test.v -test.count<span style="color:#ff79c6">=</span><span style="color:#bd93f9">1</span> <span style="color:#f1fa8c">\
+</span></span></span><span style="display:flex;"><span>    -markdown
+</span></span></code></pre></div><h2 id="results">Results</h2>
+<h3 id="backend-go--cpu-amd-9950x3d--2026-01-17-gotip---just-after-go126rc2-made-available">Backend: <code>go</code> / CPU AMD 9950X3D / 2026-01-17 (gotip -&gt; just after go1.26rc2 made available)</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">GOMLX_BACKEND</span><span style="color:#ff79c6">=</span>go go <span style="color:#8be9fd;font-style:italic">test</span> -tags<span style="color:#ff79c6">=</span>perf ./backends/simplego/ <span style="color:#f1fa8c">\
+</span></span></span><span style="display:flex;"><span>    -test.run<span style="color:#ff79c6">=</span>TestDotGeneral_PerformanceTable -test.v -test.count<span style="color:#ff79c6">=</span><span style="color:#bd93f9">1</span> <span style="color:#f1fa8c">\
+</span></span></span><span style="display:flex;"><span>    -markdown
+</span></span></code></pre></div><table>
+  <thead>
+      <tr>
+          <th style="text-align: left">Test Name</th>
+          <th style="text-align: left">LHS Dims</th>
+          <th style="text-align: left">RHS Dims</th>
+          <th style="text-align: left">DType</th>
+          <th style="text-align: left">BatchSize</th>
+          <th style="text-align: left">Time/Run</th>
+          <th style="text-align: left">Num Ops</th>
+          <th style="text-align: left">GOps/Sec</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: left"><code>NoBatch-Tiny</code></td>
+          <td style="text-align: left">{128, 4}</td>
+          <td style="text-align: left">{4, 1}</td>
+          <td style="text-align: left">Float32</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">3.52µs</td>
+          <td style="text-align: left">1,024</td>
+          <td style="text-align: left">0.3</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>NoBatch-Tiny</code></td>
+          <td style="text-align: left">{128, 4}</td>
+          <td style="text-align: left">{4, 1}</td>
+          <td style="text-align: left">Float64</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">3.50µs</td>
+          <td style="text-align: left">1,024</td>
+          <td style="text-align: left">0.3</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>NoBatch-Tiny</code></td>
+          <td style="text-align: left">{128, 4}</td>
+          <td style="text-align: left">{4, 1}</td>
+          <td style="text-align: left">BFloat16</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">3.71µs</td>
+          <td style="text-align: left">1,024</td>
+          <td style="text-align: left">0.3</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>NoBatch-Tiny</code></td>
+          <td style="text-align: left">{128, 4}</td>
+          <td style="text-align: left">{4, 1}</td>
+          <td style="text-align: left">Float16</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">5.17µs</td>
+          <td style="text-align: left">1,024</td>
+          <td style="text-align: left">0.2</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>NoBatch-Tiny-Norm</code></td>
+          <td style="text-align: left">{128, 4}</td>
+          <td style="text-align: left">{1, 4}</td>
+          <td style="text-align: left">Float32</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">3.88µs</td>
+          <td style="text-align: left">1,024</td>
+          <td style="text-align: left">0.3</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>NoBatch-Tiny-Norm</code></td>
+          <td style="text-align: left">{128, 4}</td>
+          <td style="text-align: left">{1, 4}</td>
+          <td style="text-align: left">Float64</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">3.92µs</td>
+          <td style="text-align: left">1,024</td>
+          <td style="text-align: left">0.3</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>NoBatch-Tiny-Norm</code></td>
+          <td style="text-align: left">{128, 4}</td>
+          <td style="text-align: left">{1, 4}</td>
+          <td style="text-align: left">BFloat16</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">4.21µs</td>
+          <td style="text-align: left">1,024</td>
+          <td style="text-align: left">0.2</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>NoBatch-Tiny-Norm</code></td>
+          <td style="text-align: left">{128, 4}</td>
+          <td style="text-align: left">{1, 4}</td>
+          <td style="text-align: left">Float16</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">5.81µs</td>
+          <td style="text-align: left">1,024</td>
+          <td style="text-align: left">0.2</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>NoBatch-Small</code></td>
+          <td style="text-align: left">{16, 128}</td>
+          <td style="text-align: left">{128, 32}</td>
+          <td style="text-align: left">Float32</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">26.51µs</td>
+          <td style="text-align: left">131,072</td>
+          <td style="text-align: left">4.9</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>NoBatch-Small</code></td>
+          <td style="text-align: left">{16, 128}</td>
+          <td style="text-align: left">{128, 32}</td>
+          <td style="text-align: left">Float64</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">27.08µs</td>
+          <td style="text-align: left">131,072</td>
+          <td style="text-align: left">4.8</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>NoBatch-Small</code></td>
+          <td style="text-align: left">{16, 128}</td>
+          <td style="text-align: left">{128, 32}</td>
+          <td style="text-align: left">BFloat16</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">44.36µs</td>
+          <td style="text-align: left">131,072</td>
+          <td style="text-align: left">3.0</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>NoBatch-Small</code></td>
+          <td style="text-align: left">{16, 128}</td>
+          <td style="text-align: left">{128, 32}</td>
+          <td style="text-align: left">Float16</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">141.16µs</td>
+          <td style="text-align: left">131,072</td>
+          <td style="text-align: left">0.9</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>NoBatch-Medium</code></td>
+          <td style="text-align: left">{128, 128}</td>
+          <td style="text-align: left">{128, 256}</td>
+          <td style="text-align: left">Float32</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">130.12µs</td>
+          <td style="text-align: left">8,388,608</td>
+          <td style="text-align: left">64.5</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>NoBatch-Medium</code></td>
+          <td style="text-align: left">{128, 128}</td>
+          <td style="text-align: left">{128, 256}</td>
+          <td style="text-align: left">Float64</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">296.33µs</td>
+          <td style="text-align: left">8,388,608</td>
+          <td style="text-align: left">28.3</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>NoBatch-Medium</code></td>
+          <td style="text-align: left">{128, 128}</td>
+          <td style="text-align: left">{128, 256}</td>
+          <td style="text-align: left">BFloat16</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">656.75µs</td>
+          <td style="text-align: left">8,388,608</td>
+          <td style="text-align: left">12.8</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>NoBatch-Medium</code></td>
+          <td style="text-align: left">{128, 128}</td>
+          <td style="text-align: left">{128, 256}</td>
+          <td style="text-align: left">Float16</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">1.58ms</td>
+          <td style="text-align: left">8,388,608</td>
+          <td style="text-align: left">5.3</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>NoBatch-Large</code></td>
+          <td style="text-align: left">{1536, 1920}</td>
+          <td style="text-align: left">{1920, 1024}</td>
+          <td style="text-align: left">Float32</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">17.76ms</td>
+          <td style="text-align: left">6,039,797,760</td>
+          <td style="text-align: left">340.2</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>NoBatch-Large</code></td>
+          <td style="text-align: left">{1536, 1920}</td>
+          <td style="text-align: left">{1920, 1024}</td>
+          <td style="text-align: left">Float64</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">50.29ms</td>
+          <td style="text-align: left">6,039,797,760</td>
+          <td style="text-align: left">120.1</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>NoBatch-Large</code></td>
+          <td style="text-align: left">{1536, 1920}</td>
+          <td style="text-align: left">{1920, 1024}</td>
+          <td style="text-align: left">BFloat16</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">124.82ms</td>
+          <td style="text-align: left">6,039,797,760</td>
+          <td style="text-align: left">48.4</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>NoBatch-Large</code></td>
+          <td style="text-align: left">{1536, 1920}</td>
+          <td style="text-align: left">{1920, 1024}</td>
+          <td style="text-align: left">Float16</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">413.90ms</td>
+          <td style="text-align: left">6,039,797,760</td>
+          <td style="text-align: left">14.6</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>R-Unbalanced-Cross</code></td>
+          <td style="text-align: left">{128}</td>
+          <td style="text-align: left">{128, 256}</td>
+          <td style="text-align: left">Float32</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">22.95µs</td>
+          <td style="text-align: left">65,536</td>
+          <td style="text-align: left">2.9</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>R-Unbalanced-Cross</code></td>
+          <td style="text-align: left">{128}</td>
+          <td style="text-align: left">{128, 256}</td>
+          <td style="text-align: left">Float64</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">29.16µs</td>
+          <td style="text-align: left">65,536</td>
+          <td style="text-align: left">2.2</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>R-Unbalanced-Cross</code></td>
+          <td style="text-align: left">{128}</td>
+          <td style="text-align: left">{128, 256}</td>
+          <td style="text-align: left">BFloat16</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">26.57µs</td>
+          <td style="text-align: left">65,536</td>
+          <td style="text-align: left">2.5</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>R-Unbalanced-Cross</code></td>
+          <td style="text-align: left">{128}</td>
+          <td style="text-align: left">{128, 256}</td>
+          <td style="text-align: left">Float16</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">73.04µs</td>
+          <td style="text-align: left">65,536</td>
+          <td style="text-align: left">0.9</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>L-Unbalanced-Cross</code></td>
+          <td style="text-align: left">{4096, 32}</td>
+          <td style="text-align: left">{32, 16}</td>
+          <td style="text-align: left">Float32</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">212.43µs</td>
+          <td style="text-align: left">4,194,304</td>
+          <td style="text-align: left">19.7</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>L-Unbalanced-Cross</code></td>
+          <td style="text-align: left">{4096, 32}</td>
+          <td style="text-align: left">{32, 16}</td>
+          <td style="text-align: left">Float64</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">367.21µs</td>
+          <td style="text-align: left">4,194,304</td>
+          <td style="text-align: left">11.4</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>L-Unbalanced-Cross</code></td>
+          <td style="text-align: left">{4096, 32}</td>
+          <td style="text-align: left">{32, 16}</td>
+          <td style="text-align: left">BFloat16</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">598.47µs</td>
+          <td style="text-align: left">4,194,304</td>
+          <td style="text-align: left">7.0</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>L-Unbalanced-Cross</code></td>
+          <td style="text-align: left">{4096, 32}</td>
+          <td style="text-align: left">{32, 16}</td>
+          <td style="text-align: left">Float16</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">1.23ms</td>
+          <td style="text-align: left">4,194,304</td>
+          <td style="text-align: left">3.4</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>LargeBatch-Tiny</code></td>
+          <td style="text-align: left">{1024, 128, 4}</td>
+          <td style="text-align: left">{1024, 4, 1}</td>
+          <td style="text-align: left">Float32</td>
+          <td style="text-align: left">1024</td>
+          <td style="text-align: left">128.69µs</td>
+          <td style="text-align: left">1,048,576</td>
+          <td style="text-align: left">8.1</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>LargeBatch-Tiny</code></td>
+          <td style="text-align: left">{1024, 128, 4}</td>
+          <td style="text-align: left">{1024, 4, 1}</td>
+          <td style="text-align: left">Float64</td>
+          <td style="text-align: left">1024</td>
+          <td style="text-align: left">134.52µs</td>
+          <td style="text-align: left">1,048,576</td>
+          <td style="text-align: left">7.8</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>LargeBatch-Tiny</code></td>
+          <td style="text-align: left">{1024, 128, 4}</td>
+          <td style="text-align: left">{1024, 4, 1}</td>
+          <td style="text-align: left">BFloat16</td>
+          <td style="text-align: left">1024</td>
+          <td style="text-align: left">202.00µs</td>
+          <td style="text-align: left">1,048,576</td>
+          <td style="text-align: left">5.2</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>LargeBatch-Tiny</code></td>
+          <td style="text-align: left">{1024, 128, 4}</td>
+          <td style="text-align: left">{1024, 4, 1}</td>
+          <td style="text-align: left">Float16</td>
+          <td style="text-align: left">1024</td>
+          <td style="text-align: left">411.85µs</td>
+          <td style="text-align: left">1,048,576</td>
+          <td style="text-align: left">2.5</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>LargeBatch-Small</code></td>
+          <td style="text-align: left">{256, 8, 32}</td>
+          <td style="text-align: left">{256, 32, 16}</td>
+          <td style="text-align: left">Float32</td>
+          <td style="text-align: left">256</td>
+          <td style="text-align: left">504.32µs</td>
+          <td style="text-align: left">2,097,152</td>
+          <td style="text-align: left">4.2</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>LargeBatch-Small</code></td>
+          <td style="text-align: left">{256, 8, 32}</td>
+          <td style="text-align: left">{256, 32, 16}</td>
+          <td style="text-align: left">Float64</td>
+          <td style="text-align: left">256</td>
+          <td style="text-align: left">522.36µs</td>
+          <td style="text-align: left">2,097,152</td>
+          <td style="text-align: left">4.0</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>LargeBatch-Small</code></td>
+          <td style="text-align: left">{256, 8, 32}</td>
+          <td style="text-align: left">{256, 32, 16}</td>
+          <td style="text-align: left">BFloat16</td>
+          <td style="text-align: left">256</td>
+          <td style="text-align: left">555.87µs</td>
+          <td style="text-align: left">2,097,152</td>
+          <td style="text-align: left">3.8</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>LargeBatch-Small</code></td>
+          <td style="text-align: left">{256, 8, 32}</td>
+          <td style="text-align: left">{256, 32, 16}</td>
+          <td style="text-align: left">Float16</td>
+          <td style="text-align: left">256</td>
+          <td style="text-align: left">740.62µs</td>
+          <td style="text-align: left">2,097,152</td>
+          <td style="text-align: left">2.8</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>LargeBatch-Medium</code></td>
+          <td style="text-align: left">{64, 64, 128}</td>
+          <td style="text-align: left">{64, 64, 128}</td>
+          <td style="text-align: left">Float32</td>
+          <td style="text-align: left">64</td>
+          <td style="text-align: left">947.11µs</td>
+          <td style="text-align: left">67,108,864</td>
+          <td style="text-align: left">70.9</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>LargeBatch-Medium</code></td>
+          <td style="text-align: left">{64, 64, 128}</td>
+          <td style="text-align: left">{64, 64, 128}</td>
+          <td style="text-align: left">Float64</td>
+          <td style="text-align: left">64</td>
+          <td style="text-align: left">963.56µs</td>
+          <td style="text-align: left">67,108,864</td>
+          <td style="text-align: left">69.6</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>LargeBatch-Medium</code></td>
+          <td style="text-align: left">{64, 64, 128}</td>
+          <td style="text-align: left">{64, 64, 128}</td>
+          <td style="text-align: left">BFloat16</td>
+          <td style="text-align: left">64</td>
+          <td style="text-align: left">1.92ms</td>
+          <td style="text-align: left">67,108,864</td>
+          <td style="text-align: left">34.9</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>LargeBatch-Medium</code></td>
+          <td style="text-align: left">{64, 64, 128}</td>
+          <td style="text-align: left">{64, 64, 128}</td>
+          <td style="text-align: left">Float16</td>
+          <td style="text-align: left">64</td>
+          <td style="text-align: left">5.60ms</td>
+          <td style="text-align: left">67,108,864</td>
+          <td style="text-align: left">12.0</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>Batched-Large</code></td>
+          <td style="text-align: left">{16, 1536, 1920}</td>
+          <td style="text-align: left">{16, 1920, 1024}</td>
+          <td style="text-align: left">Float32</td>
+          <td style="text-align: left">16</td>
+          <td style="text-align: left">240.61ms</td>
+          <td style="text-align: left">96,636,764,160</td>
+          <td style="text-align: left">401.6</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>Batched-Large</code></td>
+          <td style="text-align: left">{16, 1536, 1920}</td>
+          <td style="text-align: left">{16, 1920, 1024}</td>
+          <td style="text-align: left">Float64</td>
+          <td style="text-align: left">16</td>
+          <td style="text-align: left">791.46ms</td>
+          <td style="text-align: left">96,636,764,160</td>
+          <td style="text-align: left">122.1</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>Batched-Large</code></td>
+          <td style="text-align: left">{16, 1536, 1920}</td>
+          <td style="text-align: left">{16, 1920, 1024}</td>
+          <td style="text-align: left">BFloat16</td>
+          <td style="text-align: left">16</td>
+          <td style="text-align: left">1.87s</td>
+          <td style="text-align: left">96,636,764,160</td>
+          <td style="text-align: left">51.6</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>Batched-Large</code></td>
+          <td style="text-align: left">{16, 1536, 1920}</td>
+          <td style="text-align: left">{16, 1920, 1024}</td>
+          <td style="text-align: left">Float16</td>
+          <td style="text-align: left">16</td>
+          <td style="text-align: left">6.32s</td>
+          <td style="text-align: left">96,636,764,160</td>
+          <td style="text-align: left">15.3</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>KA-Batch-16-#1</code></td>
+          <td style="text-align: left">{16, 12, 13, 13}</td>
+          <td style="text-align: left">{16, 12, 13, 32}</td>
+          <td style="text-align: left">Float32</td>
+          <td style="text-align: left">192</td>
+          <td style="text-align: left">314.50µs</td>
+          <td style="text-align: left">2,076,672</td>
+          <td style="text-align: left">6.6</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>KA-Batch-16-#1</code></td>
+          <td style="text-align: left">{16, 12, 13, 13}</td>
+          <td style="text-align: left">{16, 12, 13, 32}</td>
+          <td style="text-align: left">Float64</td>
+          <td style="text-align: left">192</td>
+          <td style="text-align: left">313.41µs</td>
+          <td style="text-align: left">2,076,672</td>
+          <td style="text-align: left">6.6</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>KA-Batch-16-#1</code></td>
+          <td style="text-align: left">{16, 12, 13, 13}</td>
+          <td style="text-align: left">{16, 12, 13, 32}</td>
+          <td style="text-align: left">BFloat16</td>
+          <td style="text-align: left">192</td>
+          <td style="text-align: left">389.75µs</td>
+          <td style="text-align: left">2,076,672</td>
+          <td style="text-align: left">5.3</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>KA-Batch-16-#1</code></td>
+          <td style="text-align: left">{16, 12, 13, 13}</td>
+          <td style="text-align: left">{16, 12, 13, 32}</td>
+          <td style="text-align: left">Float16</td>
+          <td style="text-align: left">192</td>
+          <td style="text-align: left">607.23µs</td>
+          <td style="text-align: left">2,076,672</td>
+          <td style="text-align: left">3.4</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>KA-Batch-16-#2</code></td>
+          <td style="text-align: left">{16, 12, 13, 32}</td>
+          <td style="text-align: left">{16, 12, 32, 13}</td>
+          <td style="text-align: left">Float32</td>
+          <td style="text-align: left">192</td>
+          <td style="text-align: left">323.64µs</td>
+          <td style="text-align: left">2,076,672</td>
+          <td style="text-align: left">6.4</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>KA-Batch-16-#2</code></td>
+          <td style="text-align: left">{16, 12, 13, 32}</td>
+          <td style="text-align: left">{16, 12, 32, 13}</td>
+          <td style="text-align: left">Float64</td>
+          <td style="text-align: left">192</td>
+          <td style="text-align: left">341.99µs</td>
+          <td style="text-align: left">2,076,672</td>
+          <td style="text-align: left">6.1</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>KA-Batch-16-#2</code></td>
+          <td style="text-align: left">{16, 12, 13, 32}</td>
+          <td style="text-align: left">{16, 12, 32, 13}</td>
+          <td style="text-align: left">BFloat16</td>
+          <td style="text-align: left">192</td>
+          <td style="text-align: left">386.01µs</td>
+          <td style="text-align: left">2,076,672</td>
+          <td style="text-align: left">5.4</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>KA-Batch-16-#2</code></td>
+          <td style="text-align: left">{16, 12, 13, 32}</td>
+          <td style="text-align: left">{16, 12, 32, 13}</td>
+          <td style="text-align: left">Float16</td>
+          <td style="text-align: left">192</td>
+          <td style="text-align: left">564.37µs</td>
+          <td style="text-align: left">2,076,672</td>
+          <td style="text-align: left">3.7</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>KA-Batch-16-#3</code></td>
+          <td style="text-align: left">{16, 13, 1536}</td>
+          <td style="text-align: left">{1536, 384}</td>
+          <td style="text-align: left">Float32</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">2.62ms</td>
+          <td style="text-align: left">245,366,784</td>
+          <td style="text-align: left">93.7</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>KA-Batch-16-#3</code></td>
+          <td style="text-align: left">{16, 13, 1536}</td>
+          <td style="text-align: left">{1536, 384}</td>
+          <td style="text-align: left">Float64</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">4.91ms</td>
+          <td style="text-align: left">245,366,784</td>
+          <td style="text-align: left">49.9</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>KA-Batch-16-#3</code></td>
+          <td style="text-align: left">{16, 13, 1536}</td>
+          <td style="text-align: left">{1536, 384}</td>
+          <td style="text-align: left">BFloat16</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">9.18ms</td>
+          <td style="text-align: left">245,366,784</td>
+          <td style="text-align: left">26.7</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>KA-Batch-16-#3</code></td>
+          <td style="text-align: left">{16, 13, 1536}</td>
+          <td style="text-align: left">{1536, 384}</td>
+          <td style="text-align: left">Float16</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">25.54ms</td>
+          <td style="text-align: left">245,366,784</td>
+          <td style="text-align: left">9.6</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>KA-Batch-16-#4</code></td>
+          <td style="text-align: left">{16, 13, 384}</td>
+          <td style="text-align: left">{384, 1536}</td>
+          <td style="text-align: left">Float32</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">2.18ms</td>
+          <td style="text-align: left">245,366,784</td>
+          <td style="text-align: left">112.3</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>KA-Batch-16-#4</code></td>
+          <td style="text-align: left">{16, 13, 384}</td>
+          <td style="text-align: left">{384, 1536}</td>
+          <td style="text-align: left">Float64</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">4.08ms</td>
+          <td style="text-align: left">245,366,784</td>
+          <td style="text-align: left">60.1</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>KA-Batch-16-#4</code></td>
+          <td style="text-align: left">{16, 13, 384}</td>
+          <td style="text-align: left">{384, 1536}</td>
+          <td style="text-align: left">BFloat16</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">7.41ms</td>
+          <td style="text-align: left">245,366,784</td>
+          <td style="text-align: left">33.1</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>KA-Batch-16-#4</code></td>
+          <td style="text-align: left">{16, 13, 384}</td>
+          <td style="text-align: left">{384, 1536}</td>
+          <td style="text-align: left">Float16</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">20.73ms</td>
+          <td style="text-align: left">245,366,784</td>
+          <td style="text-align: left">11.8</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>KA-Batch-16-#5</code></td>
+          <td style="text-align: left">{16, 13, 384}</td>
+          <td style="text-align: left">{384, 384}</td>
+          <td style="text-align: left">Float32</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">698.36µs</td>
+          <td style="text-align: left">61,341,696</td>
+          <td style="text-align: left">87.8</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>KA-Batch-16-#5</code></td>
+          <td style="text-align: left">{16, 13, 384}</td>
+          <td style="text-align: left">{384, 384}</td>
+          <td style="text-align: left">Float64</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">1.35ms</td>
+          <td style="text-align: left">61,341,696</td>
+          <td style="text-align: left">45.5</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>KA-Batch-16-#5</code></td>
+          <td style="text-align: left">{16, 13, 384}</td>
+          <td style="text-align: left">{384, 384}</td>
+          <td style="text-align: left">BFloat16</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">2.40ms</td>
+          <td style="text-align: left">61,341,696</td>
+          <td style="text-align: left">25.6</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>KA-Batch-16-#5</code></td>
+          <td style="text-align: left">{16, 13, 384}</td>
+          <td style="text-align: left">{384, 384}</td>
+          <td style="text-align: left">Float16</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">6.58ms</td>
+          <td style="text-align: left">61,341,696</td>
+          <td style="text-align: left">9.3</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>adult-#1</code></td>
+          <td style="text-align: left">{128, 4}</td>
+          <td style="text-align: left">{4, 1}</td>
+          <td style="text-align: left">Float32</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">3.73µs</td>
+          <td style="text-align: left">1,024</td>
+          <td style="text-align: left">0.3</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>adult-#1</code></td>
+          <td style="text-align: left">{128, 4}</td>
+          <td style="text-align: left">{4, 1}</td>
+          <td style="text-align: left">Float64</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">3.88µs</td>
+          <td style="text-align: left">1,024</td>
+          <td style="text-align: left">0.3</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>adult-#1</code></td>
+          <td style="text-align: left">{128, 4}</td>
+          <td style="text-align: left">{4, 1}</td>
+          <td style="text-align: left">BFloat16</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">3.89µs</td>
+          <td style="text-align: left">1,024</td>
+          <td style="text-align: left">0.3</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>adult-#1</code></td>
+          <td style="text-align: left">{128, 4}</td>
+          <td style="text-align: left">{4, 1}</td>
+          <td style="text-align: left">Float16</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">5.20µs</td>
+          <td style="text-align: left">1,024</td>
+          <td style="text-align: left">0.2</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>adult-#2</code></td>
+          <td style="text-align: left">{128, 69}</td>
+          <td style="text-align: left">{69, 4}</td>
+          <td style="text-align: left">Float32</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">16.52µs</td>
+          <td style="text-align: left">70,656</td>
+          <td style="text-align: left">4.3</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>adult-#2</code></td>
+          <td style="text-align: left">{128, 69}</td>
+          <td style="text-align: left">{69, 4}</td>
+          <td style="text-align: left">Float64</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">16.44µs</td>
+          <td style="text-align: left">70,656</td>
+          <td style="text-align: left">4.3</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>adult-#2</code></td>
+          <td style="text-align: left">{128, 69}</td>
+          <td style="text-align: left">{69, 4}</td>
+          <td style="text-align: left">BFloat16</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">26.20µs</td>
+          <td style="text-align: left">70,656</td>
+          <td style="text-align: left">2.7</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>adult-#2</code></td>
+          <td style="text-align: left">{128, 69}</td>
+          <td style="text-align: left">{69, 4}</td>
+          <td style="text-align: left">Float16</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">83.93µs</td>
+          <td style="text-align: left">70,656</td>
+          <td style="text-align: left">0.8</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>adult-#3</code></td>
+          <td style="text-align: left">{25, 4}</td>
+          <td style="text-align: left">{4, 1}</td>
+          <td style="text-align: left">Float32</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">3.54µs</td>
+          <td style="text-align: left">200</td>
+          <td style="text-align: left">0.1</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>adult-#3</code></td>
+          <td style="text-align: left">{25, 4}</td>
+          <td style="text-align: left">{4, 1}</td>
+          <td style="text-align: left">Float64</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">3.52µs</td>
+          <td style="text-align: left">200</td>
+          <td style="text-align: left">0.1</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>adult-#3</code></td>
+          <td style="text-align: left">{25, 4}</td>
+          <td style="text-align: left">{4, 1}</td>
+          <td style="text-align: left">BFloat16</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">3.50µs</td>
+          <td style="text-align: left">200</td>
+          <td style="text-align: left">0.1</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>adult-#3</code></td>
+          <td style="text-align: left">{25, 4}</td>
+          <td style="text-align: left">{4, 1}</td>
+          <td style="text-align: left">Float16</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">3.69µs</td>
+          <td style="text-align: left">200</td>
+          <td style="text-align: left">0.1</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>adult-#4</code></td>
+          <td style="text-align: left">{25, 69}</td>
+          <td style="text-align: left">{69, 4}</td>
+          <td style="text-align: left">Float32</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">6.41µs</td>
+          <td style="text-align: left">13,800</td>
+          <td style="text-align: left">2.2</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>adult-#4</code></td>
+          <td style="text-align: left">{25, 69}</td>
+          <td style="text-align: left">{69, 4}</td>
+          <td style="text-align: left">Float64</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">6.44µs</td>
+          <td style="text-align: left">13,800</td>
+          <td style="text-align: left">2.1</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>adult-#4</code></td>
+          <td style="text-align: left">{25, 69}</td>
+          <td style="text-align: left">{69, 4}</td>
+          <td style="text-align: left">BFloat16</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">8.41µs</td>
+          <td style="text-align: left">13,800</td>
+          <td style="text-align: left">1.6</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>adult-#4</code></td>
+          <td style="text-align: left">{25, 69}</td>
+          <td style="text-align: left">{69, 4}</td>
+          <td style="text-align: left">Float16</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">19.84µs</td>
+          <td style="text-align: left">13,800</td>
+          <td style="text-align: left">0.7</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>adult-#5</code></td>
+          <td style="text-align: left">{49, 4}</td>
+          <td style="text-align: left">{4, 1}</td>
+          <td style="text-align: left">Float32</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">3.46µs</td>
+          <td style="text-align: left">392</td>
+          <td style="text-align: left">0.1</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>adult-#5</code></td>
+          <td style="text-align: left">{49, 4}</td>
+          <td style="text-align: left">{4, 1}</td>
+          <td style="text-align: left">Float64</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">3.51µs</td>
+          <td style="text-align: left">392</td>
+          <td style="text-align: left">0.1</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>adult-#5</code></td>
+          <td style="text-align: left">{49, 4}</td>
+          <td style="text-align: left">{4, 1}</td>
+          <td style="text-align: left">BFloat16</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">3.50µs</td>
+          <td style="text-align: left">392</td>
+          <td style="text-align: left">0.1</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>adult-#5</code></td>
+          <td style="text-align: left">{49, 4}</td>
+          <td style="text-align: left">{4, 1}</td>
+          <td style="text-align: left">Float16</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">3.97µs</td>
+          <td style="text-align: left">392</td>
+          <td style="text-align: left">0.1</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>adult-#6</code></td>
+          <td style="text-align: left">{49, 69}</td>
+          <td style="text-align: left">{69, 4}</td>
+          <td style="text-align: left">Float32</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">8.69µs</td>
+          <td style="text-align: left">27,048</td>
+          <td style="text-align: left">3.1</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>adult-#6</code></td>
+          <td style="text-align: left">{49, 69}</td>
+          <td style="text-align: left">{69, 4}</td>
+          <td style="text-align: left">Float64</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">8.66µs</td>
+          <td style="text-align: left">27,048</td>
+          <td style="text-align: left">3.1</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>adult-#6</code></td>
+          <td style="text-align: left">{49, 69}</td>
+          <td style="text-align: left">{69, 4}</td>
+          <td style="text-align: left">BFloat16</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">12.57µs</td>
+          <td style="text-align: left">27,048</td>
+          <td style="text-align: left">2.2</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>adult-#6</code></td>
+          <td style="text-align: left">{49, 69}</td>
+          <td style="text-align: left">{69, 4}</td>
+          <td style="text-align: left">Float16</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">34.48µs</td>
+          <td style="text-align: left">27,048</td>
+          <td style="text-align: left">0.8</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>adult-#6-Normalized</code></td>
+          <td style="text-align: left">{49, 69}</td>
+          <td style="text-align: left">{4, 69}</td>
+          <td style="text-align: left">Float32</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">9.06µs</td>
+          <td style="text-align: left">27,048</td>
+          <td style="text-align: left">3.0</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>adult-#6-Normalized</code></td>
+          <td style="text-align: left">{49, 69}</td>
+          <td style="text-align: left">{4, 69}</td>
+          <td style="text-align: left">Float64</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">9.51µs</td>
+          <td style="text-align: left">27,048</td>
+          <td style="text-align: left">2.8</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>adult-#6-Normalized</code></td>
+          <td style="text-align: left">{49, 69}</td>
+          <td style="text-align: left">{4, 69}</td>
+          <td style="text-align: left">BFloat16</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">15.33µs</td>
+          <td style="text-align: left">27,048</td>
+          <td style="text-align: left">1.8</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>adult-#6-Normalized</code></td>
+          <td style="text-align: left">{49, 69}</td>
+          <td style="text-align: left">{4, 69}</td>
+          <td style="text-align: left">Float16</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">35.70µs</td>
+          <td style="text-align: left">27,048</td>
+          <td style="text-align: left">0.8</td>
+      </tr>
+  </tbody>
+</table>
+<p>With the experimental SIMD enabled for AVX-512 we get the following updates:</p>
+<table>
+  <thead>
+      <tr>
+          <th style="text-align: left">Test Name</th>
+          <th style="text-align: left">LHS Dims</th>
+          <th style="text-align: left">RHS Dims</th>
+          <th style="text-align: left">DType</th>
+          <th style="text-align: left">BatchSize</th>
+          <th style="text-align: left">Time/Run</th>
+          <th style="text-align: left">Num Ops</th>
+          <th style="text-align: left">GOps/Sec</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: left"><code>NoBatch-Medium</code></td>
+          <td style="text-align: left">{128, 128}</td>
+          <td style="text-align: left">{128, 256}</td>
+          <td style="text-align: left">Float32</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">9.07µs</td>
+          <td style="text-align: left">8,388,608</td>
+          <td style="text-align: left">924.5</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>NoBatch-Large</code></td>
+          <td style="text-align: left">{1536, 1920}</td>
+          <td style="text-align: left">{1920, 1024}</td>
+          <td style="text-align: left">Float32</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">2.95ms</td>
+          <td style="text-align: left">6,039,797,760</td>
+          <td style="text-align: left">2045.5</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>L-Unbalanced-Cross</code></td>
+          <td style="text-align: left">{4096, 32}</td>
+          <td style="text-align: left">{32, 16}</td>
+          <td style="text-align: left">Float32</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">11.31µs</td>
+          <td style="text-align: left">4,194,304</td>
+          <td style="text-align: left">370.8</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>LargeBatch-Tiny</code></td>
+          <td style="text-align: left">{1024, 128, 4}</td>
+          <td style="text-align: left">{1024, 4, 1}</td>
+          <td style="text-align: left">Float32</td>
+          <td style="text-align: left">1024</td>
+          <td style="text-align: left">806.62µs</td>
+          <td style="text-align: left">1,048,576</td>
+          <td style="text-align: left">1.3</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>LargeBatch-Small</code></td>
+          <td style="text-align: left">{256, 8, 32}</td>
+          <td style="text-align: left">{256, 32, 16}</td>
+          <td style="text-align: left">Float32</td>
+          <td style="text-align: left">256</td>
+          <td style="text-align: left">171.54µs</td>
+          <td style="text-align: left">2,097,152</td>
+          <td style="text-align: left">12.2</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>Batched-Large</code></td>
+          <td style="text-align: left">{16, 1536, 1920}</td>
+          <td style="text-align: left">{16, 1920, 1024}</td>
+          <td style="text-align: left">Float32</td>
+          <td style="text-align: left">16</td>
+          <td style="text-align: left">48.60ms</td>
+          <td style="text-align: left">96,636,764,160</td>
+          <td style="text-align: left">1988.3</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>KA-Batch-16-#1</code></td>
+          <td style="text-align: left">{16, 12, 13, 13}</td>
+          <td style="text-align: left">{16, 12, 13, 32}</td>
+          <td style="text-align: left">Float32</td>
+          <td style="text-align: left">192</td>
+          <td style="text-align: left">113.87µs</td>
+          <td style="text-align: left">2,076,672</td>
+          <td style="text-align: left">18.2</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>KA-Batch-16-#2</code></td>
+          <td style="text-align: left">{16, 12, 13, 32}</td>
+          <td style="text-align: left">{16, 12, 32, 13}</td>
+          <td style="text-align: left">Float32</td>
+          <td style="text-align: left">192</td>
+          <td style="text-align: left">138.35µs</td>
+          <td style="text-align: left">2,076,672</td>
+          <td style="text-align: left">15.0</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="backend-xlacpu-cpu-amd-9950x3d--2026-01-07--pjrt-plugin-v0834-see-pjrt-cpu-binaries">Backend: <code>xla:cpu</code>/ CPU AMD 9950X3D / 2026-01-07 / PJRT Plugin v0.83.4 (see <a href="https://github.com/gomlx/pjrt-cpu-binaries/">pjrt-cpu-binaries</a>)</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">GOMLX_BACKEND</span><span style="color:#ff79c6">=</span>xla:cpu go <span style="color:#8be9fd;font-style:italic">test</span> -tags<span style="color:#ff79c6">=</span>perf ./backends/simplego/ <span style="color:#f1fa8c">\
+</span></span></span><span style="display:flex;"><span>    -test.run<span style="color:#ff79c6">=</span>TestDotGeneral_PerformanceTable -test.v -test.count<span style="color:#ff79c6">=</span><span style="color:#bd93f9">1</span> <span style="color:#f1fa8c">\
+</span></span></span><span style="display:flex;"><span>    -markdown
+</span></span></code></pre></div><table>
+  <thead>
+      <tr>
+          <th style="text-align: left">Test Name</th>
+          <th style="text-align: left">LHS Dims</th>
+          <th style="text-align: left">RHS Dims</th>
+          <th style="text-align: left">DType</th>
+          <th style="text-align: left">BatchSize</th>
+          <th style="text-align: left">Time/Run</th>
+          <th style="text-align: left">Num Ops</th>
+          <th style="text-align: left">GOps/Sec</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: left"><code>NoBatch-Tiny</code></td>
+          <td style="text-align: left">{128, 4}</td>
+          <td style="text-align: left">{4, 1}</td>
+          <td style="text-align: left">Float32</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">4.62µs</td>
+          <td style="text-align: left">1,024</td>
+          <td style="text-align: left">0.2</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>NoBatch-Tiny</code></td>
+          <td style="text-align: left">{128, 4}</td>
+          <td style="text-align: left">{4, 1}</td>
+          <td style="text-align: left">Float64</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">4.58µs</td>
+          <td style="text-align: left">1,024</td>
+          <td style="text-align: left">0.2</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>NoBatch-Tiny</code></td>
+          <td style="text-align: left">{128, 4}</td>
+          <td style="text-align: left">{4, 1}</td>
+          <td style="text-align: left">BFloat16</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">4.83µs</td>
+          <td style="text-align: left">1,024</td>
+          <td style="text-align: left">0.2</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>NoBatch-Tiny</code></td>
+          <td style="text-align: left">{128, 4}</td>
+          <td style="text-align: left">{4, 1}</td>
+          <td style="text-align: left">Float16</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">5.12µs</td>
+          <td style="text-align: left">1,024</td>
+          <td style="text-align: left">0.2</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>NoBatch-Tiny-Norm</code></td>
+          <td style="text-align: left">{128, 4}</td>
+          <td style="text-align: left">{1, 4}</td>
+          <td style="text-align: left">Float32</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">4.55µs</td>
+          <td style="text-align: left">1,024</td>
+          <td style="text-align: left">0.2</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>NoBatch-Tiny-Norm</code></td>
+          <td style="text-align: left">{128, 4}</td>
+          <td style="text-align: left">{1, 4}</td>
+          <td style="text-align: left">Float64</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">4.20µs</td>
+          <td style="text-align: left">1,024</td>
+          <td style="text-align: left">0.2</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>NoBatch-Tiny-Norm</code></td>
+          <td style="text-align: left">{128, 4}</td>
+          <td style="text-align: left">{1, 4}</td>
+          <td style="text-align: left">BFloat16</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">4.51µs</td>
+          <td style="text-align: left">1,024</td>
+          <td style="text-align: left">0.2</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>NoBatch-Tiny-Norm</code></td>
+          <td style="text-align: left">{128, 4}</td>
+          <td style="text-align: left">{1, 4}</td>
+          <td style="text-align: left">Float16</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">4.46µs</td>
+          <td style="text-align: left">1,024</td>
+          <td style="text-align: left">0.2</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>NoBatch-Small</code></td>
+          <td style="text-align: left">{16, 128}</td>
+          <td style="text-align: left">{128, 32}</td>
+          <td style="text-align: left">Float32</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">5.48µs</td>
+          <td style="text-align: left">131,072</td>
+          <td style="text-align: left">23.9</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>NoBatch-Small</code></td>
+          <td style="text-align: left">{16, 128}</td>
+          <td style="text-align: left">{128, 32}</td>
+          <td style="text-align: left">Float64</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">9.63µs</td>
+          <td style="text-align: left">131,072</td>
+          <td style="text-align: left">13.6</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>NoBatch-Small</code></td>
+          <td style="text-align: left">{16, 128}</td>
+          <td style="text-align: left">{128, 32}</td>
+          <td style="text-align: left">BFloat16</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">6.25µs</td>
+          <td style="text-align: left">131,072</td>
+          <td style="text-align: left">21.0</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>NoBatch-Small</code></td>
+          <td style="text-align: left">{16, 128}</td>
+          <td style="text-align: left">{128, 32}</td>
+          <td style="text-align: left">Float16</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">6.39µs</td>
+          <td style="text-align: left">131,072</td>
+          <td style="text-align: left">20.5</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>NoBatch-Medium</code></td>
+          <td style="text-align: left">{128, 128}</td>
+          <td style="text-align: left">{128, 256}</td>
+          <td style="text-align: left">Float32</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">31.59µs</td>
+          <td style="text-align: left">8,388,608</td>
+          <td style="text-align: left">265.5</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>NoBatch-Medium</code></td>
+          <td style="text-align: left">{128, 128}</td>
+          <td style="text-align: left">{128, 256}</td>
+          <td style="text-align: left">Float64</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">70.09µs</td>
+          <td style="text-align: left">8,388,608</td>
+          <td style="text-align: left">119.7</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>NoBatch-Medium</code></td>
+          <td style="text-align: left">{128, 128}</td>
+          <td style="text-align: left">{128, 256}</td>
+          <td style="text-align: left">BFloat16</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">35.01µs</td>
+          <td style="text-align: left">8,388,608</td>
+          <td style="text-align: left">239.6</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>NoBatch-Medium</code></td>
+          <td style="text-align: left">{128, 128}</td>
+          <td style="text-align: left">{128, 256}</td>
+          <td style="text-align: left">Float16</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">35.33µs</td>
+          <td style="text-align: left">8,388,608</td>
+          <td style="text-align: left">237.5</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>NoBatch-Large</code></td>
+          <td style="text-align: left">{1536, 1920}</td>
+          <td style="text-align: left">{1920, 1024}</td>
+          <td style="text-align: left">Float32</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">1.75ms</td>
+          <td style="text-align: left">6,039,797,760</td>
+          <td style="text-align: left">3456.4</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>NoBatch-Large</code></td>
+          <td style="text-align: left">{1536, 1920}</td>
+          <td style="text-align: left">{1920, 1024}</td>
+          <td style="text-align: left">Float64</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">16.79ms</td>
+          <td style="text-align: left">6,039,797,760</td>
+          <td style="text-align: left">359.8</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>NoBatch-Large</code></td>
+          <td style="text-align: left">{1536, 1920}</td>
+          <td style="text-align: left">{1920, 1024}</td>
+          <td style="text-align: left">BFloat16</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">2.83ms</td>
+          <td style="text-align: left">6,039,797,760</td>
+          <td style="text-align: left">2134.5</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>NoBatch-Large</code></td>
+          <td style="text-align: left">{1536, 1920}</td>
+          <td style="text-align: left">{1920, 1024}</td>
+          <td style="text-align: left">Float16</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">2.77ms</td>
+          <td style="text-align: left">6,039,797,760</td>
+          <td style="text-align: left">2184.4</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>R-Unbalanced-Cross</code></td>
+          <td style="text-align: left">{128}</td>
+          <td style="text-align: left">{128, 256}</td>
+          <td style="text-align: left">Float32</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">6.14µs</td>
+          <td style="text-align: left">65,536</td>
+          <td style="text-align: left">10.7</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>R-Unbalanced-Cross</code></td>
+          <td style="text-align: left">{128}</td>
+          <td style="text-align: left">{128, 256}</td>
+          <td style="text-align: left">Float64</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">6.17µs</td>
+          <td style="text-align: left">65,536</td>
+          <td style="text-align: left">10.6</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>R-Unbalanced-Cross</code></td>
+          <td style="text-align: left">{128}</td>
+          <td style="text-align: left">{128, 256}</td>
+          <td style="text-align: left">BFloat16</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">11.15µs</td>
+          <td style="text-align: left">65,536</td>
+          <td style="text-align: left">5.9</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>R-Unbalanced-Cross</code></td>
+          <td style="text-align: left">{128}</td>
+          <td style="text-align: left">{128, 256}</td>
+          <td style="text-align: left">Float16</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">11.87µs</td>
+          <td style="text-align: left">65,536</td>
+          <td style="text-align: left">5.5</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>L-Unbalanced-Cross</code></td>
+          <td style="text-align: left">{4096, 32}</td>
+          <td style="text-align: left">{32, 16}</td>
+          <td style="text-align: left">Float32</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">15.05µs</td>
+          <td style="text-align: left">4,194,304</td>
+          <td style="text-align: left">278.7</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>L-Unbalanced-Cross</code></td>
+          <td style="text-align: left">{4096, 32}</td>
+          <td style="text-align: left">{32, 16}</td>
+          <td style="text-align: left">Float64</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">81.84µs</td>
+          <td style="text-align: left">4,194,304</td>
+          <td style="text-align: left">51.3</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>L-Unbalanced-Cross</code></td>
+          <td style="text-align: left">{4096, 32}</td>
+          <td style="text-align: left">{32, 16}</td>
+          <td style="text-align: left">BFloat16</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">49.63µs</td>
+          <td style="text-align: left">4,194,304</td>
+          <td style="text-align: left">84.5</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>L-Unbalanced-Cross</code></td>
+          <td style="text-align: left">{4096, 32}</td>
+          <td style="text-align: left">{32, 16}</td>
+          <td style="text-align: left">Float16</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">39.84µs</td>
+          <td style="text-align: left">4,194,304</td>
+          <td style="text-align: left">105.3</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>LargeBatch-Tiny</code></td>
+          <td style="text-align: left">{1024, 128, 4}</td>
+          <td style="text-align: left">{1024, 4, 1}</td>
+          <td style="text-align: left">Float32</td>
+          <td style="text-align: left">1024</td>
+          <td style="text-align: left">121.14µs</td>
+          <td style="text-align: left">1,048,576</td>
+          <td style="text-align: left">8.7</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>LargeBatch-Tiny</code></td>
+          <td style="text-align: left">{1024, 128, 4}</td>
+          <td style="text-align: left">{1024, 4, 1}</td>
+          <td style="text-align: left">Float64</td>
+          <td style="text-align: left">1024</td>
+          <td style="text-align: left">67.71µs</td>
+          <td style="text-align: left">1,048,576</td>
+          <td style="text-align: left">15.5</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>LargeBatch-Tiny</code></td>
+          <td style="text-align: left">{1024, 128, 4}</td>
+          <td style="text-align: left">{1024, 4, 1}</td>
+          <td style="text-align: left">BFloat16</td>
+          <td style="text-align: left">1024</td>
+          <td style="text-align: left">140.54µs</td>
+          <td style="text-align: left">1,048,576</td>
+          <td style="text-align: left">7.5</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>LargeBatch-Tiny</code></td>
+          <td style="text-align: left">{1024, 128, 4}</td>
+          <td style="text-align: left">{1024, 4, 1}</td>
+          <td style="text-align: left">Float16</td>
+          <td style="text-align: left">1024</td>
+          <td style="text-align: left">135.41µs</td>
+          <td style="text-align: left">1,048,576</td>
+          <td style="text-align: left">7.7</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>LargeBatch-Small</code></td>
+          <td style="text-align: left">{256, 8, 32}</td>
+          <td style="text-align: left">{256, 32, 16}</td>
+          <td style="text-align: left">Float32</td>
+          <td style="text-align: left">256</td>
+          <td style="text-align: left">27.18µs</td>
+          <td style="text-align: left">2,097,152</td>
+          <td style="text-align: left">77.2</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>LargeBatch-Small</code></td>
+          <td style="text-align: left">{256, 8, 32}</td>
+          <td style="text-align: left">{256, 32, 16}</td>
+          <td style="text-align: left">Float64</td>
+          <td style="text-align: left">256</td>
+          <td style="text-align: left">123.81µs</td>
+          <td style="text-align: left">2,097,152</td>
+          <td style="text-align: left">16.9</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>LargeBatch-Small</code></td>
+          <td style="text-align: left">{256, 8, 32}</td>
+          <td style="text-align: left">{256, 32, 16}</td>
+          <td style="text-align: left">BFloat16</td>
+          <td style="text-align: left">256</td>
+          <td style="text-align: left">61.14µs</td>
+          <td style="text-align: left">2,097,152</td>
+          <td style="text-align: left">34.3</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>LargeBatch-Small</code></td>
+          <td style="text-align: left">{256, 8, 32}</td>
+          <td style="text-align: left">{256, 32, 16}</td>
+          <td style="text-align: left">Float16</td>
+          <td style="text-align: left">256</td>
+          <td style="text-align: left">64.62µs</td>
+          <td style="text-align: left">2,097,152</td>
+          <td style="text-align: left">32.5</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>LargeBatch-Medium</code></td>
+          <td style="text-align: left">{64, 64, 128}</td>
+          <td style="text-align: left">{64, 64, 128}</td>
+          <td style="text-align: left">Float32</td>
+          <td style="text-align: left">64</td>
+          <td style="text-align: left">59.80µs</td>
+          <td style="text-align: left">67,108,864</td>
+          <td style="text-align: left">1122.2</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>LargeBatch-Medium</code></td>
+          <td style="text-align: left">{64, 64, 128}</td>
+          <td style="text-align: left">{64, 64, 128}</td>
+          <td style="text-align: left">Float64</td>
+          <td style="text-align: left">64</td>
+          <td style="text-align: left">849.47µs</td>
+          <td style="text-align: left">67,108,864</td>
+          <td style="text-align: left">79.0</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>LargeBatch-Medium</code></td>
+          <td style="text-align: left">{64, 64, 128}</td>
+          <td style="text-align: left">{64, 64, 128}</td>
+          <td style="text-align: left">BFloat16</td>
+          <td style="text-align: left">64</td>
+          <td style="text-align: left">119.78µs</td>
+          <td style="text-align: left">67,108,864</td>
+          <td style="text-align: left">560.3</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>LargeBatch-Medium</code></td>
+          <td style="text-align: left">{64, 64, 128}</td>
+          <td style="text-align: left">{64, 64, 128}</td>
+          <td style="text-align: left">Float16</td>
+          <td style="text-align: left">64</td>
+          <td style="text-align: left">123.86µs</td>
+          <td style="text-align: left">67,108,864</td>
+          <td style="text-align: left">541.8</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>Batched-Large</code></td>
+          <td style="text-align: left">{16, 1536, 1920}</td>
+          <td style="text-align: left">{16, 1920, 1024}</td>
+          <td style="text-align: left">Float32</td>
+          <td style="text-align: left">16</td>
+          <td style="text-align: left">51.30ms</td>
+          <td style="text-align: left">96,636,764,160</td>
+          <td style="text-align: left">1883.7</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>Batched-Large</code></td>
+          <td style="text-align: left">{16, 1536, 1920}</td>
+          <td style="text-align: left">{16, 1920, 1024}</td>
+          <td style="text-align: left">Float64</td>
+          <td style="text-align: left">16</td>
+          <td style="text-align: left">220.27ms</td>
+          <td style="text-align: left">96,636,764,160</td>
+          <td style="text-align: left">438.7</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>Batched-Large</code></td>
+          <td style="text-align: left">{16, 1536, 1920}</td>
+          <td style="text-align: left">{16, 1920, 1024}</td>
+          <td style="text-align: left">BFloat16</td>
+          <td style="text-align: left">16</td>
+          <td style="text-align: left">72.52ms</td>
+          <td style="text-align: left">96,636,764,160</td>
+          <td style="text-align: left">1332.6</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>Batched-Large</code></td>
+          <td style="text-align: left">{16, 1536, 1920}</td>
+          <td style="text-align: left">{16, 1920, 1024}</td>
+          <td style="text-align: left">Float16</td>
+          <td style="text-align: left">16</td>
+          <td style="text-align: left">71.93ms</td>
+          <td style="text-align: left">96,636,764,160</td>
+          <td style="text-align: left">1343.6</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>KA-Batch-16-#1</code></td>
+          <td style="text-align: left">{16, 12, 13, 13}</td>
+          <td style="text-align: left">{16, 12, 13, 32}</td>
+          <td style="text-align: left">Float32</td>
+          <td style="text-align: left">192</td>
+          <td style="text-align: left">13.93µs</td>
+          <td style="text-align: left">2,076,672</td>
+          <td style="text-align: left">149.0</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>KA-Batch-16-#1</code></td>
+          <td style="text-align: left">{16, 12, 13, 13}</td>
+          <td style="text-align: left">{16, 12, 13, 32}</td>
+          <td style="text-align: left">Float64</td>
+          <td style="text-align: left">192</td>
+          <td style="text-align: left">118.63µs</td>
+          <td style="text-align: left">2,076,672</td>
+          <td style="text-align: left">17.5</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>KA-Batch-16-#1</code></td>
+          <td style="text-align: left">{16, 12, 13, 13}</td>
+          <td style="text-align: left">{16, 12, 13, 32}</td>
+          <td style="text-align: left">BFloat16</td>
+          <td style="text-align: left">192</td>
+          <td style="text-align: left">63.88µs</td>
+          <td style="text-align: left">2,076,672</td>
+          <td style="text-align: left">32.5</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>KA-Batch-16-#1</code></td>
+          <td style="text-align: left">{16, 12, 13, 13}</td>
+          <td style="text-align: left">{16, 12, 13, 32}</td>
+          <td style="text-align: left">Float16</td>
+          <td style="text-align: left">192</td>
+          <td style="text-align: left">47.36µs</td>
+          <td style="text-align: left">2,076,672</td>
+          <td style="text-align: left">43.9</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>KA-Batch-16-#2</code></td>
+          <td style="text-align: left">{16, 12, 13, 32}</td>
+          <td style="text-align: left">{16, 12, 32, 13}</td>
+          <td style="text-align: left">Float32</td>
+          <td style="text-align: left">192</td>
+          <td style="text-align: left">48.02µs</td>
+          <td style="text-align: left">2,076,672</td>
+          <td style="text-align: left">43.2</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>KA-Batch-16-#2</code></td>
+          <td style="text-align: left">{16, 12, 13, 32}</td>
+          <td style="text-align: left">{16, 12, 32, 13}</td>
+          <td style="text-align: left">Float64</td>
+          <td style="text-align: left">192</td>
+          <td style="text-align: left">121.54µs</td>
+          <td style="text-align: left">2,076,672</td>
+          <td style="text-align: left">17.1</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>KA-Batch-16-#2</code></td>
+          <td style="text-align: left">{16, 12, 13, 32}</td>
+          <td style="text-align: left">{16, 12, 32, 13}</td>
+          <td style="text-align: left">BFloat16</td>
+          <td style="text-align: left">192</td>
+          <td style="text-align: left">81.54µs</td>
+          <td style="text-align: left">2,076,672</td>
+          <td style="text-align: left">25.5</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>KA-Batch-16-#2</code></td>
+          <td style="text-align: left">{16, 12, 13, 32}</td>
+          <td style="text-align: left">{16, 12, 32, 13}</td>
+          <td style="text-align: left">Float16</td>
+          <td style="text-align: left">192</td>
+          <td style="text-align: left">82.65µs</td>
+          <td style="text-align: left">2,076,672</td>
+          <td style="text-align: left">25.1</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>KA-Batch-16-#3</code></td>
+          <td style="text-align: left">{16, 13, 1536}</td>
+          <td style="text-align: left">{1536, 384}</td>
+          <td style="text-align: left">Float32</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">228.54µs</td>
+          <td style="text-align: left">245,366,784</td>
+          <td style="text-align: left">1073.6</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>KA-Batch-16-#3</code></td>
+          <td style="text-align: left">{16, 13, 1536}</td>
+          <td style="text-align: left">{1536, 384}</td>
+          <td style="text-align: left">Float64</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">882.13µs</td>
+          <td style="text-align: left">245,366,784</td>
+          <td style="text-align: left">278.2</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>KA-Batch-16-#3</code></td>
+          <td style="text-align: left">{16, 13, 1536}</td>
+          <td style="text-align: left">{1536, 384}</td>
+          <td style="text-align: left">BFloat16</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">374.36µs</td>
+          <td style="text-align: left">245,366,784</td>
+          <td style="text-align: left">655.4</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>KA-Batch-16-#3</code></td>
+          <td style="text-align: left">{16, 13, 1536}</td>
+          <td style="text-align: left">{1536, 384}</td>
+          <td style="text-align: left">Float16</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">371.05µs</td>
+          <td style="text-align: left">245,366,784</td>
+          <td style="text-align: left">661.3</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>KA-Batch-16-#4</code></td>
+          <td style="text-align: left">{16, 13, 384}</td>
+          <td style="text-align: left">{384, 1536}</td>
+          <td style="text-align: left">Float32</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">147.57µs</td>
+          <td style="text-align: left">245,366,784</td>
+          <td style="text-align: left">1662.7</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>KA-Batch-16-#4</code></td>
+          <td style="text-align: left">{16, 13, 384}</td>
+          <td style="text-align: left">{384, 1536}</td>
+          <td style="text-align: left">Float64</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">881.09µs</td>
+          <td style="text-align: left">245,366,784</td>
+          <td style="text-align: left">278.5</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>KA-Batch-16-#4</code></td>
+          <td style="text-align: left">{16, 13, 384}</td>
+          <td style="text-align: left">{384, 1536}</td>
+          <td style="text-align: left">BFloat16</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">282.59µs</td>
+          <td style="text-align: left">245,366,784</td>
+          <td style="text-align: left">868.3</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>KA-Batch-16-#4</code></td>
+          <td style="text-align: left">{16, 13, 384}</td>
+          <td style="text-align: left">{384, 1536}</td>
+          <td style="text-align: left">Float16</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">279.47µs</td>
+          <td style="text-align: left">245,366,784</td>
+          <td style="text-align: left">878.0</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>KA-Batch-16-#5</code></td>
+          <td style="text-align: left">{16, 13, 384}</td>
+          <td style="text-align: left">{384, 384}</td>
+          <td style="text-align: left">Float32</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">67.69µs</td>
+          <td style="text-align: left">61,341,696</td>
+          <td style="text-align: left">906.3</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>KA-Batch-16-#5</code></td>
+          <td style="text-align: left">{16, 13, 384}</td>
+          <td style="text-align: left">{384, 384}</td>
+          <td style="text-align: left">Float64</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">282.96µs</td>
+          <td style="text-align: left">61,341,696</td>
+          <td style="text-align: left">216.8</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>KA-Batch-16-#5</code></td>
+          <td style="text-align: left">{16, 13, 384}</td>
+          <td style="text-align: left">{384, 384}</td>
+          <td style="text-align: left">BFloat16</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">112.21µs</td>
+          <td style="text-align: left">61,341,696</td>
+          <td style="text-align: left">546.7</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>KA-Batch-16-#5</code></td>
+          <td style="text-align: left">{16, 13, 384}</td>
+          <td style="text-align: left">{384, 384}</td>
+          <td style="text-align: left">Float16</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">117.72µs</td>
+          <td style="text-align: left">61,341,696</td>
+          <td style="text-align: left">521.1</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>adult-#1</code></td>
+          <td style="text-align: left">{128, 4}</td>
+          <td style="text-align: left">{4, 1}</td>
+          <td style="text-align: left">Float32</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">4.72µs</td>
+          <td style="text-align: left">1,024</td>
+          <td style="text-align: left">0.2</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>adult-#1</code></td>
+          <td style="text-align: left">{128, 4}</td>
+          <td style="text-align: left">{4, 1}</td>
+          <td style="text-align: left">Float64</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">4.24µs</td>
+          <td style="text-align: left">1,024</td>
+          <td style="text-align: left">0.2</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>adult-#1</code></td>
+          <td style="text-align: left">{128, 4}</td>
+          <td style="text-align: left">{4, 1}</td>
+          <td style="text-align: left">BFloat16</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">4.27µs</td>
+          <td style="text-align: left">1,024</td>
+          <td style="text-align: left">0.2</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>adult-#1</code></td>
+          <td style="text-align: left">{128, 4}</td>
+          <td style="text-align: left">{4, 1}</td>
+          <td style="text-align: left">Float16</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">4.21µs</td>
+          <td style="text-align: left">1,024</td>
+          <td style="text-align: left">0.2</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>adult-#2</code></td>
+          <td style="text-align: left">{128, 69}</td>
+          <td style="text-align: left">{69, 4}</td>
+          <td style="text-align: left">Float32</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">5.98µs</td>
+          <td style="text-align: left">70,656</td>
+          <td style="text-align: left">11.8</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>adult-#2</code></td>
+          <td style="text-align: left">{128, 69}</td>
+          <td style="text-align: left">{69, 4}</td>
+          <td style="text-align: left">Float64</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">7.87µs</td>
+          <td style="text-align: left">70,656</td>
+          <td style="text-align: left">9.0</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>adult-#2</code></td>
+          <td style="text-align: left">{128, 69}</td>
+          <td style="text-align: left">{69, 4}</td>
+          <td style="text-align: left">BFloat16</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">6.34µs</td>
+          <td style="text-align: left">70,656</td>
+          <td style="text-align: left">11.1</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>adult-#2</code></td>
+          <td style="text-align: left">{128, 69}</td>
+          <td style="text-align: left">{69, 4}</td>
+          <td style="text-align: left">Float16</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">6.27µs</td>
+          <td style="text-align: left">70,656</td>
+          <td style="text-align: left">11.3</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>adult-#3</code></td>
+          <td style="text-align: left">{25, 4}</td>
+          <td style="text-align: left">{4, 1}</td>
+          <td style="text-align: left">Float32</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">2.28µs</td>
+          <td style="text-align: left">200</td>
+          <td style="text-align: left">0.1</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>adult-#3</code></td>
+          <td style="text-align: left">{25, 4}</td>
+          <td style="text-align: left">{4, 1}</td>
+          <td style="text-align: left">Float64</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">2.29µs</td>
+          <td style="text-align: left">200</td>
+          <td style="text-align: left">0.1</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>adult-#3</code></td>
+          <td style="text-align: left">{25, 4}</td>
+          <td style="text-align: left">{4, 1}</td>
+          <td style="text-align: left">BFloat16</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">2.32µs</td>
+          <td style="text-align: left">200</td>
+          <td style="text-align: left">0.1</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>adult-#3</code></td>
+          <td style="text-align: left">{25, 4}</td>
+          <td style="text-align: left">{4, 1}</td>
+          <td style="text-align: left">Float16</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">2.35µs</td>
+          <td style="text-align: left">200</td>
+          <td style="text-align: left">0.1</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>adult-#4</code></td>
+          <td style="text-align: left">{25, 69}</td>
+          <td style="text-align: left">{69, 4}</td>
+          <td style="text-align: left">Float32</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">5.63µs</td>
+          <td style="text-align: left">13,800</td>
+          <td style="text-align: left">2.5</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>adult-#4</code></td>
+          <td style="text-align: left">{25, 69}</td>
+          <td style="text-align: left">{69, 4}</td>
+          <td style="text-align: left">Float64</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">5.88µs</td>
+          <td style="text-align: left">13,800</td>
+          <td style="text-align: left">2.3</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>adult-#4</code></td>
+          <td style="text-align: left">{25, 69}</td>
+          <td style="text-align: left">{69, 4}</td>
+          <td style="text-align: left">BFloat16</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">5.90µs</td>
+          <td style="text-align: left">13,800</td>
+          <td style="text-align: left">2.3</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>adult-#4</code></td>
+          <td style="text-align: left">{25, 69}</td>
+          <td style="text-align: left">{69, 4}</td>
+          <td style="text-align: left">Float16</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">5.97µs</td>
+          <td style="text-align: left">13,800</td>
+          <td style="text-align: left">2.3</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>adult-#5</code></td>
+          <td style="text-align: left">{49, 4}</td>
+          <td style="text-align: left">{4, 1}</td>
+          <td style="text-align: left">Float32</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">2.33µs</td>
+          <td style="text-align: left">392</td>
+          <td style="text-align: left">0.2</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>adult-#5</code></td>
+          <td style="text-align: left">{49, 4}</td>
+          <td style="text-align: left">{4, 1}</td>
+          <td style="text-align: left">Float64</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">2.26µs</td>
+          <td style="text-align: left">392</td>
+          <td style="text-align: left">0.2</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>adult-#5</code></td>
+          <td style="text-align: left">{49, 4}</td>
+          <td style="text-align: left">{4, 1}</td>
+          <td style="text-align: left">BFloat16</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">2.34µs</td>
+          <td style="text-align: left">392</td>
+          <td style="text-align: left">0.2</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>adult-#5</code></td>
+          <td style="text-align: left">{49, 4}</td>
+          <td style="text-align: left">{4, 1}</td>
+          <td style="text-align: left">Float16</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">2.33µs</td>
+          <td style="text-align: left">392</td>
+          <td style="text-align: left">0.2</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>adult-#6</code></td>
+          <td style="text-align: left">{49, 69}</td>
+          <td style="text-align: left">{69, 4}</td>
+          <td style="text-align: left">Float32</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">5.87µs</td>
+          <td style="text-align: left">27,048</td>
+          <td style="text-align: left">4.6</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>adult-#6</code></td>
+          <td style="text-align: left">{49, 69}</td>
+          <td style="text-align: left">{69, 4}</td>
+          <td style="text-align: left">Float64</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">5.95µs</td>
+          <td style="text-align: left">27,048</td>
+          <td style="text-align: left">4.5</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>adult-#6</code></td>
+          <td style="text-align: left">{49, 69}</td>
+          <td style="text-align: left">{69, 4}</td>
+          <td style="text-align: left">BFloat16</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">6.26µs</td>
+          <td style="text-align: left">27,048</td>
+          <td style="text-align: left">4.3</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>adult-#6</code></td>
+          <td style="text-align: left">{49, 69}</td>
+          <td style="text-align: left">{69, 4}</td>
+          <td style="text-align: left">Float16</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">6.39µs</td>
+          <td style="text-align: left">27,048</td>
+          <td style="text-align: left">4.2</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>adult-#6-Normalized</code></td>
+          <td style="text-align: left">{49, 69}</td>
+          <td style="text-align: left">{4, 69}</td>
+          <td style="text-align: left">Float32</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">5.96µs</td>
+          <td style="text-align: left">27,048</td>
+          <td style="text-align: left">4.5</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>adult-#6-Normalized</code></td>
+          <td style="text-align: left">{49, 69}</td>
+          <td style="text-align: left">{4, 69}</td>
+          <td style="text-align: left">Float64</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">6.07µs</td>
+          <td style="text-align: left">27,048</td>
+          <td style="text-align: left">4.5</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>adult-#6-Normalized</code></td>
+          <td style="text-align: left">{49, 69}</td>
+          <td style="text-align: left">{4, 69}</td>
+          <td style="text-align: left">BFloat16</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">6.03µs</td>
+          <td style="text-align: left">27,048</td>
+          <td style="text-align: left">4.5</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>adult-#6-Normalized</code></td>
+          <td style="text-align: left">{49, 69}</td>
+          <td style="text-align: left">{4, 69}</td>
+          <td style="text-align: left">Float16</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">6.09µs</td>
+          <td style="text-align: left">27,048</td>
+          <td style="text-align: left">4.4</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="backend-xlacuda-gpu-rtx-5090--2026-01-07--pjrt-plugin-v081-jax-build">Backend: <code>xla:cuda</code>/ GPU RTX 5090 / 2026-01-07 / PJRT Plugin v0.81 (Jax-build)</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">GOMLX_BACKEND</span><span style="color:#ff79c6">=</span>xla:cuda go <span style="color:#8be9fd;font-style:italic">test</span> -tags<span style="color:#ff79c6">=</span>perf ./backends/simplego/ <span style="color:#f1fa8c">\
+</span></span></span><span style="display:flex;"><span>    -test.run<span style="color:#ff79c6">=</span>TestDotGeneral_PerformanceTable -test.v -test.count<span style="color:#ff79c6">=</span><span style="color:#bd93f9">1</span> <span style="color:#f1fa8c">\
+</span></span></span><span style="display:flex;"><span>    -markdown
+</span></span></code></pre></div><table>
+  <thead>
+      <tr>
+          <th style="text-align: left">Test Name</th>
+          <th style="text-align: left">LHS Dims</th>
+          <th style="text-align: left">RHS Dims</th>
+          <th style="text-align: left">DType</th>
+          <th style="text-align: left">BatchSize</th>
+          <th style="text-align: left">Time/Run</th>
+          <th style="text-align: left">Num Ops</th>
+          <th style="text-align: left">GOps/Sec</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: left"><code>NoBatch-Tiny</code></td>
+          <td style="text-align: left">{128, 4}</td>
+          <td style="text-align: left">{4, 1}</td>
+          <td style="text-align: left">Float32</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">17.53µs</td>
+          <td style="text-align: left">1,024</td>
+          <td style="text-align: left">0.1</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>NoBatch-Tiny</code></td>
+          <td style="text-align: left">{128, 4}</td>
+          <td style="text-align: left">{4, 1}</td>
+          <td style="text-align: left">Float64</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">16.42µs</td>
+          <td style="text-align: left">1,024</td>
+          <td style="text-align: left">0.1</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>NoBatch-Tiny</code></td>
+          <td style="text-align: left">{128, 4}</td>
+          <td style="text-align: left">{4, 1}</td>
+          <td style="text-align: left">BFloat16</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">15.72µs</td>
+          <td style="text-align: left">1,024</td>
+          <td style="text-align: left">0.1</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>NoBatch-Tiny</code></td>
+          <td style="text-align: left">{128, 4}</td>
+          <td style="text-align: left">{4, 1}</td>
+          <td style="text-align: left">Float16</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">14.97µs</td>
+          <td style="text-align: left">1,024</td>
+          <td style="text-align: left">0.1</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>NoBatch-Tiny-Norm</code></td>
+          <td style="text-align: left">{128, 4}</td>
+          <td style="text-align: left">{1, 4}</td>
+          <td style="text-align: left">Float32</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">13.44µs</td>
+          <td style="text-align: left">1,024</td>
+          <td style="text-align: left">0.1</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>NoBatch-Tiny-Norm</code></td>
+          <td style="text-align: left">{128, 4}</td>
+          <td style="text-align: left">{1, 4}</td>
+          <td style="text-align: left">Float64</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">17.53µs</td>
+          <td style="text-align: left">1,024</td>
+          <td style="text-align: left">0.1</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>NoBatch-Tiny-Norm</code></td>
+          <td style="text-align: left">{128, 4}</td>
+          <td style="text-align: left">{1, 4}</td>
+          <td style="text-align: left">BFloat16</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">26.20µs</td>
+          <td style="text-align: left">1,024</td>
+          <td style="text-align: left">0.0</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>NoBatch-Tiny-Norm</code></td>
+          <td style="text-align: left">{128, 4}</td>
+          <td style="text-align: left">{1, 4}</td>
+          <td style="text-align: left">Float16</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">15.92µs</td>
+          <td style="text-align: left">1,024</td>
+          <td style="text-align: left">0.1</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>NoBatch-Small</code></td>
+          <td style="text-align: left">{16, 128}</td>
+          <td style="text-align: left">{128, 32}</td>
+          <td style="text-align: left">Float32</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">27.23µs</td>
+          <td style="text-align: left">131,072</td>
+          <td style="text-align: left">4.8</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>NoBatch-Small</code></td>
+          <td style="text-align: left">{16, 128}</td>
+          <td style="text-align: left">{128, 32}</td>
+          <td style="text-align: left">Float64</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">60.17µs</td>
+          <td style="text-align: left">131,072</td>
+          <td style="text-align: left">2.2</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>NoBatch-Small</code></td>
+          <td style="text-align: left">{16, 128}</td>
+          <td style="text-align: left">{128, 32}</td>
+          <td style="text-align: left">BFloat16</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">32.50µs</td>
+          <td style="text-align: left">131,072</td>
+          <td style="text-align: left">4.0</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>NoBatch-Small</code></td>
+          <td style="text-align: left">{16, 128}</td>
+          <td style="text-align: left">{128, 32}</td>
+          <td style="text-align: left">Float16</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">23.79µs</td>
+          <td style="text-align: left">131,072</td>
+          <td style="text-align: left">5.5</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>NoBatch-Medium</code></td>
+          <td style="text-align: left">{128, 128}</td>
+          <td style="text-align: left">{128, 256}</td>
+          <td style="text-align: left">Float32</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">26.76µs</td>
+          <td style="text-align: left">8,388,608</td>
+          <td style="text-align: left">313.5</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>NoBatch-Medium</code></td>
+          <td style="text-align: left">{128, 128}</td>
+          <td style="text-align: left">{128, 256}</td>
+          <td style="text-align: left">Float64</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">60.90µs</td>
+          <td style="text-align: left">8,388,608</td>
+          <td style="text-align: left">137.7</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>NoBatch-Medium</code></td>
+          <td style="text-align: left">{128, 128}</td>
+          <td style="text-align: left">{128, 256}</td>
+          <td style="text-align: left">BFloat16</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">26.77µs</td>
+          <td style="text-align: left">8,388,608</td>
+          <td style="text-align: left">313.4</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>NoBatch-Medium</code></td>
+          <td style="text-align: left">{128, 128}</td>
+          <td style="text-align: left">{128, 256}</td>
+          <td style="text-align: left">Float16</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">26.01µs</td>
+          <td style="text-align: left">8,388,608</td>
+          <td style="text-align: left">322.5</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>NoBatch-Large</code></td>
+          <td style="text-align: left">{1536, 1920}</td>
+          <td style="text-align: left">{1920, 1024}</td>
+          <td style="text-align: left">Float32</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">121.00µs</td>
+          <td style="text-align: left">6,039,797,760</td>
+          <td style="text-align: left">49915.7</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>NoBatch-Large</code></td>
+          <td style="text-align: left">{1536, 1920}</td>
+          <td style="text-align: left">{1920, 1024}</td>
+          <td style="text-align: left">Float64</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">3.72ms</td>
+          <td style="text-align: left">6,039,797,760</td>
+          <td style="text-align: left">1624.6</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>NoBatch-Large</code></td>
+          <td style="text-align: left">{1536, 1920}</td>
+          <td style="text-align: left">{1920, 1024}</td>
+          <td style="text-align: left">BFloat16</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">91.86µs</td>
+          <td style="text-align: left">6,039,797,760</td>
+          <td style="text-align: left">65751.5</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>NoBatch-Large</code></td>
+          <td style="text-align: left">{1536, 1920}</td>
+          <td style="text-align: left">{1920, 1024}</td>
+          <td style="text-align: left">Float16</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">76.70µs</td>
+          <td style="text-align: left">6,039,797,760</td>
+          <td style="text-align: left">78741.6</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>R-Unbalanced-Cross</code></td>
+          <td style="text-align: left">{128}</td>
+          <td style="text-align: left">{128, 256}</td>
+          <td style="text-align: left">Float32</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">15.28µs</td>
+          <td style="text-align: left">65,536</td>
+          <td style="text-align: left">4.3</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>R-Unbalanced-Cross</code></td>
+          <td style="text-align: left">{128}</td>
+          <td style="text-align: left">{128, 256}</td>
+          <td style="text-align: left">Float64</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">84.30µs</td>
+          <td style="text-align: left">65,536</td>
+          <td style="text-align: left">0.8</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>R-Unbalanced-Cross</code></td>
+          <td style="text-align: left">{128}</td>
+          <td style="text-align: left">{128, 256}</td>
+          <td style="text-align: left">BFloat16</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">19.00µs</td>
+          <td style="text-align: left">65,536</td>
+          <td style="text-align: left">3.4</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>R-Unbalanced-Cross</code></td>
+          <td style="text-align: left">{128}</td>
+          <td style="text-align: left">{128, 256}</td>
+          <td style="text-align: left">Float16</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">18.36µs</td>
+          <td style="text-align: left">65,536</td>
+          <td style="text-align: left">3.6</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>L-Unbalanced-Cross</code></td>
+          <td style="text-align: left">{4096, 32}</td>
+          <td style="text-align: left">{32, 16}</td>
+          <td style="text-align: left">Float32</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">24.77µs</td>
+          <td style="text-align: left">4,194,304</td>
+          <td style="text-align: left">169.3</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>L-Unbalanced-Cross</code></td>
+          <td style="text-align: left">{4096, 32}</td>
+          <td style="text-align: left">{32, 16}</td>
+          <td style="text-align: left">Float64</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">41.32µs</td>
+          <td style="text-align: left">4,194,304</td>
+          <td style="text-align: left">101.5</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>L-Unbalanced-Cross</code></td>
+          <td style="text-align: left">{4096, 32}</td>
+          <td style="text-align: left">{32, 16}</td>
+          <td style="text-align: left">BFloat16</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">224.48µs</td>
+          <td style="text-align: left">4,194,304</td>
+          <td style="text-align: left">18.7</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>L-Unbalanced-Cross</code></td>
+          <td style="text-align: left">{4096, 32}</td>
+          <td style="text-align: left">{32, 16}</td>
+          <td style="text-align: left">Float16</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">19.41µs</td>
+          <td style="text-align: left">4,194,304</td>
+          <td style="text-align: left">216.1</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>LargeBatch-Tiny</code></td>
+          <td style="text-align: left">{1024, 128, 4}</td>
+          <td style="text-align: left">{1024, 4, 1}</td>
+          <td style="text-align: left">Float32</td>
+          <td style="text-align: left">1024</td>
+          <td style="text-align: left">14.82µs</td>
+          <td style="text-align: left">1,048,576</td>
+          <td style="text-align: left">70.8</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>LargeBatch-Tiny</code></td>
+          <td style="text-align: left">{1024, 128, 4}</td>
+          <td style="text-align: left">{1024, 4, 1}</td>
+          <td style="text-align: left">Float64</td>
+          <td style="text-align: left">1024</td>
+          <td style="text-align: left">27.46µs</td>
+          <td style="text-align: left">1,048,576</td>
+          <td style="text-align: left">38.2</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>LargeBatch-Tiny</code></td>
+          <td style="text-align: left">{1024, 128, 4}</td>
+          <td style="text-align: left">{1024, 4, 1}</td>
+          <td style="text-align: left">BFloat16</td>
+          <td style="text-align: left">1024</td>
+          <td style="text-align: left">14.84µs</td>
+          <td style="text-align: left">1,048,576</td>
+          <td style="text-align: left">70.6</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>LargeBatch-Tiny</code></td>
+          <td style="text-align: left">{1024, 128, 4}</td>
+          <td style="text-align: left">{1024, 4, 1}</td>
+          <td style="text-align: left">Float16</td>
+          <td style="text-align: left">1024</td>
+          <td style="text-align: left">13.19µs</td>
+          <td style="text-align: left">1,048,576</td>
+          <td style="text-align: left">79.5</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>LargeBatch-Small</code></td>
+          <td style="text-align: left">{256, 8, 32}</td>
+          <td style="text-align: left">{256, 32, 16}</td>
+          <td style="text-align: left">Float32</td>
+          <td style="text-align: left">256</td>
+          <td style="text-align: left">17.99µs</td>
+          <td style="text-align: left">2,097,152</td>
+          <td style="text-align: left">116.6</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>LargeBatch-Small</code></td>
+          <td style="text-align: left">{256, 8, 32}</td>
+          <td style="text-align: left">{256, 32, 16}</td>
+          <td style="text-align: left">Float64</td>
+          <td style="text-align: left">256</td>
+          <td style="text-align: left">29.11µs</td>
+          <td style="text-align: left">2,097,152</td>
+          <td style="text-align: left">72.0</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>LargeBatch-Small</code></td>
+          <td style="text-align: left">{256, 8, 32}</td>
+          <td style="text-align: left">{256, 32, 16}</td>
+          <td style="text-align: left">BFloat16</td>
+          <td style="text-align: left">256</td>
+          <td style="text-align: left">16.83µs</td>
+          <td style="text-align: left">2,097,152</td>
+          <td style="text-align: left">124.6</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>LargeBatch-Small</code></td>
+          <td style="text-align: left">{256, 8, 32}</td>
+          <td style="text-align: left">{256, 32, 16}</td>
+          <td style="text-align: left">Float16</td>
+          <td style="text-align: left">256</td>
+          <td style="text-align: left">13.51µs</td>
+          <td style="text-align: left">2,097,152</td>
+          <td style="text-align: left">155.3</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>LargeBatch-Medium</code></td>
+          <td style="text-align: left">{64, 64, 128}</td>
+          <td style="text-align: left">{64, 64, 128}</td>
+          <td style="text-align: left">Float32</td>
+          <td style="text-align: left">64</td>
+          <td style="text-align: left">28.59µs</td>
+          <td style="text-align: left">67,108,864</td>
+          <td style="text-align: left">2347.1</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>LargeBatch-Medium</code></td>
+          <td style="text-align: left">{64, 64, 128}</td>
+          <td style="text-align: left">{64, 64, 128}</td>
+          <td style="text-align: left">Float64</td>
+          <td style="text-align: left">64</td>
+          <td style="text-align: left">99.14µs</td>
+          <td style="text-align: left">67,108,864</td>
+          <td style="text-align: left">676.9</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>LargeBatch-Medium</code></td>
+          <td style="text-align: left">{64, 64, 128}</td>
+          <td style="text-align: left">{64, 64, 128}</td>
+          <td style="text-align: left">BFloat16</td>
+          <td style="text-align: left">64</td>
+          <td style="text-align: left">24.59µs</td>
+          <td style="text-align: left">67,108,864</td>
+          <td style="text-align: left">2728.7</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>LargeBatch-Medium</code></td>
+          <td style="text-align: left">{64, 64, 128}</td>
+          <td style="text-align: left">{64, 64, 128}</td>
+          <td style="text-align: left">Float16</td>
+          <td style="text-align: left">64</td>
+          <td style="text-align: left">25.75µs</td>
+          <td style="text-align: left">67,108,864</td>
+          <td style="text-align: left">2605.9</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>Batched-Large</code></td>
+          <td style="text-align: left">{16, 1536, 1920}</td>
+          <td style="text-align: left">{16, 1920, 1024}</td>
+          <td style="text-align: left">Float32</td>
+          <td style="text-align: left">16</td>
+          <td style="text-align: left">927.42µs</td>
+          <td style="text-align: left">96,636,764,160</td>
+          <td style="text-align: left">104199.5</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>Batched-Large</code></td>
+          <td style="text-align: left">{16, 1536, 1920}</td>
+          <td style="text-align: left">{16, 1920, 1024}</td>
+          <td style="text-align: left">Float64</td>
+          <td style="text-align: left">16</td>
+          <td style="text-align: left">57.21ms</td>
+          <td style="text-align: left">96,636,764,160</td>
+          <td style="text-align: left">1689.2</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>Batched-Large</code></td>
+          <td style="text-align: left">{16, 1536, 1920}</td>
+          <td style="text-align: left">{16, 1920, 1024}</td>
+          <td style="text-align: left">BFloat16</td>
+          <td style="text-align: left">16</td>
+          <td style="text-align: left">473.19µs</td>
+          <td style="text-align: left">96,636,764,160</td>
+          <td style="text-align: left">204223.6</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>Batched-Large</code></td>
+          <td style="text-align: left">{16, 1536, 1920}</td>
+          <td style="text-align: left">{16, 1920, 1024}</td>
+          <td style="text-align: left">Float16</td>
+          <td style="text-align: left">16</td>
+          <td style="text-align: left">476.39µs</td>
+          <td style="text-align: left">96,636,764,160</td>
+          <td style="text-align: left">202853.9</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>KA-Batch-16-#1</code></td>
+          <td style="text-align: left">{16, 12, 13, 13}</td>
+          <td style="text-align: left">{16, 12, 13, 32}</td>
+          <td style="text-align: left">Float32</td>
+          <td style="text-align: left">192</td>
+          <td style="text-align: left">29.05µs</td>
+          <td style="text-align: left">2,076,672</td>
+          <td style="text-align: left">71.5</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>KA-Batch-16-#1</code></td>
+          <td style="text-align: left">{16, 12, 13, 13}</td>
+          <td style="text-align: left">{16, 12, 13, 32}</td>
+          <td style="text-align: left">Float64</td>
+          <td style="text-align: left">192</td>
+          <td style="text-align: left">36.93µs</td>
+          <td style="text-align: left">2,076,672</td>
+          <td style="text-align: left">56.2</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>KA-Batch-16-#1</code></td>
+          <td style="text-align: left">{16, 12, 13, 13}</td>
+          <td style="text-align: left">{16, 12, 13, 32}</td>
+          <td style="text-align: left">BFloat16</td>
+          <td style="text-align: left">192</td>
+          <td style="text-align: left">18.15µs</td>
+          <td style="text-align: left">2,076,672</td>
+          <td style="text-align: left">114.4</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>KA-Batch-16-#1</code></td>
+          <td style="text-align: left">{16, 12, 13, 13}</td>
+          <td style="text-align: left">{16, 12, 13, 32}</td>
+          <td style="text-align: left">Float16</td>
+          <td style="text-align: left">192</td>
+          <td style="text-align: left">17.17µs</td>
+          <td style="text-align: left">2,076,672</td>
+          <td style="text-align: left">120.9</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>KA-Batch-16-#2</code></td>
+          <td style="text-align: left">{16, 12, 13, 32}</td>
+          <td style="text-align: left">{16, 12, 32, 13}</td>
+          <td style="text-align: left">Float32</td>
+          <td style="text-align: left">192</td>
+          <td style="text-align: left">23.30µs</td>
+          <td style="text-align: left">2,076,672</td>
+          <td style="text-align: left">89.1</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>KA-Batch-16-#2</code></td>
+          <td style="text-align: left">{16, 12, 13, 32}</td>
+          <td style="text-align: left">{16, 12, 32, 13}</td>
+          <td style="text-align: left">Float64</td>
+          <td style="text-align: left">192</td>
+          <td style="text-align: left">41.81µs</td>
+          <td style="text-align: left">2,076,672</td>
+          <td style="text-align: left">49.7</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>KA-Batch-16-#2</code></td>
+          <td style="text-align: left">{16, 12, 13, 32}</td>
+          <td style="text-align: left">{16, 12, 32, 13}</td>
+          <td style="text-align: left">BFloat16</td>
+          <td style="text-align: left">192</td>
+          <td style="text-align: left">18.89µs</td>
+          <td style="text-align: left">2,076,672</td>
+          <td style="text-align: left">109.9</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>KA-Batch-16-#2</code></td>
+          <td style="text-align: left">{16, 12, 13, 32}</td>
+          <td style="text-align: left">{16, 12, 32, 13}</td>
+          <td style="text-align: left">Float16</td>
+          <td style="text-align: left">192</td>
+          <td style="text-align: left">17.59µs</td>
+          <td style="text-align: left">2,076,672</td>
+          <td style="text-align: left">118.0</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>KA-Batch-16-#3</code></td>
+          <td style="text-align: left">{16, 13, 1536}</td>
+          <td style="text-align: left">{1536, 384}</td>
+          <td style="text-align: left">Float32</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">36.02µs</td>
+          <td style="text-align: left">245,366,784</td>
+          <td style="text-align: left">6812.3</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>KA-Batch-16-#3</code></td>
+          <td style="text-align: left">{16, 13, 1536}</td>
+          <td style="text-align: left">{1536, 384}</td>
+          <td style="text-align: left">Float64</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">374.37µs</td>
+          <td style="text-align: left">245,366,784</td>
+          <td style="text-align: left">655.4</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>KA-Batch-16-#3</code></td>
+          <td style="text-align: left">{16, 13, 1536}</td>
+          <td style="text-align: left">{1536, 384}</td>
+          <td style="text-align: left">BFloat16</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">39.73µs</td>
+          <td style="text-align: left">245,366,784</td>
+          <td style="text-align: left">6176.0</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>KA-Batch-16-#3</code></td>
+          <td style="text-align: left">{16, 13, 1536}</td>
+          <td style="text-align: left">{1536, 384}</td>
+          <td style="text-align: left">Float16</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">31.60µs</td>
+          <td style="text-align: left">245,366,784</td>
+          <td style="text-align: left">7764.8</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>KA-Batch-16-#4</code></td>
+          <td style="text-align: left">{16, 13, 384}</td>
+          <td style="text-align: left">{384, 1536}</td>
+          <td style="text-align: left">Float32</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">35.77µs</td>
+          <td style="text-align: left">245,366,784</td>
+          <td style="text-align: left">6858.6</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>KA-Batch-16-#4</code></td>
+          <td style="text-align: left">{16, 13, 384}</td>
+          <td style="text-align: left">{384, 1536}</td>
+          <td style="text-align: left">Float64</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">205.18µs</td>
+          <td style="text-align: left">245,366,784</td>
+          <td style="text-align: left">1195.8</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>KA-Batch-16-#4</code></td>
+          <td style="text-align: left">{16, 13, 384}</td>
+          <td style="text-align: left">{384, 1536}</td>
+          <td style="text-align: left">BFloat16</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">70.33µs</td>
+          <td style="text-align: left">245,366,784</td>
+          <td style="text-align: left">3488.8</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>KA-Batch-16-#4</code></td>
+          <td style="text-align: left">{16, 13, 384}</td>
+          <td style="text-align: left">{384, 1536}</td>
+          <td style="text-align: left">Float16</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">26.47µs</td>
+          <td style="text-align: left">245,366,784</td>
+          <td style="text-align: left">9268.2</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>KA-Batch-16-#5</code></td>
+          <td style="text-align: left">{16, 13, 384}</td>
+          <td style="text-align: left">{384, 384}</td>
+          <td style="text-align: left">Float32</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">86.77µs</td>
+          <td style="text-align: left">61,341,696</td>
+          <td style="text-align: left">707.0</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>KA-Batch-16-#5</code></td>
+          <td style="text-align: left">{16, 13, 384}</td>
+          <td style="text-align: left">{384, 384}</td>
+          <td style="text-align: left">Float64</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">114.17µs</td>
+          <td style="text-align: left">61,341,696</td>
+          <td style="text-align: left">537.3</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>KA-Batch-16-#5</code></td>
+          <td style="text-align: left">{16, 13, 384}</td>
+          <td style="text-align: left">{384, 384}</td>
+          <td style="text-align: left">BFloat16</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">26.20µs</td>
+          <td style="text-align: left">61,341,696</td>
+          <td style="text-align: left">2340.9</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>KA-Batch-16-#5</code></td>
+          <td style="text-align: left">{16, 13, 384}</td>
+          <td style="text-align: left">{384, 384}</td>
+          <td style="text-align: left">Float16</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">26.57µs</td>
+          <td style="text-align: left">61,341,696</td>
+          <td style="text-align: left">2309.1</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>adult-#1</code></td>
+          <td style="text-align: left">{128, 4}</td>
+          <td style="text-align: left">{4, 1}</td>
+          <td style="text-align: left">Float32</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">13.96µs</td>
+          <td style="text-align: left">1,024</td>
+          <td style="text-align: left">0.1</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>adult-#1</code></td>
+          <td style="text-align: left">{128, 4}</td>
+          <td style="text-align: left">{4, 1}</td>
+          <td style="text-align: left">Float64</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">14.06µs</td>
+          <td style="text-align: left">1,024</td>
+          <td style="text-align: left">0.1</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>adult-#1</code></td>
+          <td style="text-align: left">{128, 4}</td>
+          <td style="text-align: left">{4, 1}</td>
+          <td style="text-align: left">BFloat16</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">14.56µs</td>
+          <td style="text-align: left">1,024</td>
+          <td style="text-align: left">0.1</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>adult-#1</code></td>
+          <td style="text-align: left">{128, 4}</td>
+          <td style="text-align: left">{4, 1}</td>
+          <td style="text-align: left">Float16</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">15.22µs</td>
+          <td style="text-align: left">1,024</td>
+          <td style="text-align: left">0.1</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>adult-#2</code></td>
+          <td style="text-align: left">{128, 69}</td>
+          <td style="text-align: left">{69, 4}</td>
+          <td style="text-align: left">Float32</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">22.74µs</td>
+          <td style="text-align: left">70,656</td>
+          <td style="text-align: left">3.1</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>adult-#2</code></td>
+          <td style="text-align: left">{128, 69}</td>
+          <td style="text-align: left">{69, 4}</td>
+          <td style="text-align: left">Float64</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">46.36µs</td>
+          <td style="text-align: left">70,656</td>
+          <td style="text-align: left">1.5</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>adult-#2</code></td>
+          <td style="text-align: left">{128, 69}</td>
+          <td style="text-align: left">{69, 4}</td>
+          <td style="text-align: left">BFloat16</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">17.25µs</td>
+          <td style="text-align: left">70,656</td>
+          <td style="text-align: left">4.1</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>adult-#2</code></td>
+          <td style="text-align: left">{128, 69}</td>
+          <td style="text-align: left">{69, 4}</td>
+          <td style="text-align: left">Float16</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">22.23µs</td>
+          <td style="text-align: left">70,656</td>
+          <td style="text-align: left">3.2</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>adult-#3</code></td>
+          <td style="text-align: left">{25, 4}</td>
+          <td style="text-align: left">{4, 1}</td>
+          <td style="text-align: left">Float32</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">13.62µs</td>
+          <td style="text-align: left">200</td>
+          <td style="text-align: left">0.0</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>adult-#3</code></td>
+          <td style="text-align: left">{25, 4}</td>
+          <td style="text-align: left">{4, 1}</td>
+          <td style="text-align: left">Float64</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">16.46µs</td>
+          <td style="text-align: left">200</td>
+          <td style="text-align: left">0.0</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>adult-#3</code></td>
+          <td style="text-align: left">{25, 4}</td>
+          <td style="text-align: left">{4, 1}</td>
+          <td style="text-align: left">BFloat16</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">13.80µs</td>
+          <td style="text-align: left">200</td>
+          <td style="text-align: left">0.0</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>adult-#3</code></td>
+          <td style="text-align: left">{25, 4}</td>
+          <td style="text-align: left">{4, 1}</td>
+          <td style="text-align: left">Float16</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">13.51µs</td>
+          <td style="text-align: left">200</td>
+          <td style="text-align: left">0.0</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>adult-#4</code></td>
+          <td style="text-align: left">{25, 69}</td>
+          <td style="text-align: left">{69, 4}</td>
+          <td style="text-align: left">Float32</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">15.01µs</td>
+          <td style="text-align: left">13,800</td>
+          <td style="text-align: left">0.9</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>adult-#4</code></td>
+          <td style="text-align: left">{25, 69}</td>
+          <td style="text-align: left">{69, 4}</td>
+          <td style="text-align: left">Float64</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">49.26µs</td>
+          <td style="text-align: left">13,800</td>
+          <td style="text-align: left">0.3</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>adult-#4</code></td>
+          <td style="text-align: left">{25, 69}</td>
+          <td style="text-align: left">{69, 4}</td>
+          <td style="text-align: left">BFloat16</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">21.87µs</td>
+          <td style="text-align: left">13,800</td>
+          <td style="text-align: left">0.6</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>adult-#4</code></td>
+          <td style="text-align: left">{25, 69}</td>
+          <td style="text-align: left">{69, 4}</td>
+          <td style="text-align: left">Float16</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">17.55µs</td>
+          <td style="text-align: left">13,800</td>
+          <td style="text-align: left">0.8</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>adult-#5</code></td>
+          <td style="text-align: left">{49, 4}</td>
+          <td style="text-align: left">{4, 1}</td>
+          <td style="text-align: left">Float32</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">13.25µs</td>
+          <td style="text-align: left">392</td>
+          <td style="text-align: left">0.0</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>adult-#5</code></td>
+          <td style="text-align: left">{49, 4}</td>
+          <td style="text-align: left">{4, 1}</td>
+          <td style="text-align: left">Float64</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">15.64µs</td>
+          <td style="text-align: left">392</td>
+          <td style="text-align: left">0.0</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>adult-#5</code></td>
+          <td style="text-align: left">{49, 4}</td>
+          <td style="text-align: left">{4, 1}</td>
+          <td style="text-align: left">BFloat16</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">13.40µs</td>
+          <td style="text-align: left">392</td>
+          <td style="text-align: left">0.0</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>adult-#5</code></td>
+          <td style="text-align: left">{49, 4}</td>
+          <td style="text-align: left">{4, 1}</td>
+          <td style="text-align: left">Float16</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">13.97µs</td>
+          <td style="text-align: left">392</td>
+          <td style="text-align: left">0.0</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>adult-#6</code></td>
+          <td style="text-align: left">{49, 69}</td>
+          <td style="text-align: left">{69, 4}</td>
+          <td style="text-align: left">Float32</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">27.97µs</td>
+          <td style="text-align: left">27,048</td>
+          <td style="text-align: left">1.0</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>adult-#6</code></td>
+          <td style="text-align: left">{49, 69}</td>
+          <td style="text-align: left">{69, 4}</td>
+          <td style="text-align: left">Float64</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">46.09µs</td>
+          <td style="text-align: left">27,048</td>
+          <td style="text-align: left">0.6</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>adult-#6</code></td>
+          <td style="text-align: left">{49, 69}</td>
+          <td style="text-align: left">{69, 4}</td>
+          <td style="text-align: left">BFloat16</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">21.03µs</td>
+          <td style="text-align: left">27,048</td>
+          <td style="text-align: left">1.3</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>adult-#6</code></td>
+          <td style="text-align: left">{49, 69}</td>
+          <td style="text-align: left">{69, 4}</td>
+          <td style="text-align: left">Float16</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">19.12µs</td>
+          <td style="text-align: left">27,048</td>
+          <td style="text-align: left">1.4</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>adult-#6-Normalized</code></td>
+          <td style="text-align: left">{49, 69}</td>
+          <td style="text-align: left">{4, 69}</td>
+          <td style="text-align: left">Float32</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">15.79µs</td>
+          <td style="text-align: left">27,048</td>
+          <td style="text-align: left">1.7</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>adult-#6-Normalized</code></td>
+          <td style="text-align: left">{49, 69}</td>
+          <td style="text-align: left">{4, 69}</td>
+          <td style="text-align: left">Float64</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">49.39µs</td>
+          <td style="text-align: left">27,048</td>
+          <td style="text-align: left">0.5</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>adult-#6-Normalized</code></td>
+          <td style="text-align: left">{49, 69}</td>
+          <td style="text-align: left">{4, 69}</td>
+          <td style="text-align: left">BFloat16</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">15.07µs</td>
+          <td style="text-align: left">27,048</td>
+          <td style="text-align: left">1.8</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>adult-#6-Normalized</code></td>
+          <td style="text-align: left">{49, 69}</td>
+          <td style="text-align: left">{4, 69}</td>
+          <td style="text-align: left">Float16</td>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left">17.34µs</td>
+          <td style="text-align: left">27,048</td>
+          <td style="text-align: left">1.6</td>
+      </tr>
+  </tbody>
+</table>
+</div>
+    
+    <div class="last-updated">Last updated April 13, 2026</div>
+    
+    <nav class="docs-pagination" aria-label="Page navigation">
+      
+      <a href="/docs/error-handling/" class="pagination-card pagination-card--prev">
+        <div class="dir">← Previous</div><div class="title">Error Handling</div>
+      </a>
+      
+      
+      <a href="/docs/developing/" class="pagination-card pagination-card--next">
+        <div class="dir">Next →</div><div class="title">Developing</div>
+      </a>
+      
+    </nav>
+  </article>
+
+  <aside class="docs-toc" aria-label="On this page">
+    <div class="docs-toc-title">On this page</div>
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#results">Results</a>
+      <ul>
+        <li><a href="#backend-go--cpu-amd-9950x3d--2026-01-17-gotip---just-after-go126rc2-made-available">Backend: <code>go</code> / CPU AMD 9950X3D / 2026-01-17 (gotip -&gt; just after go1.26rc2 made available)</a></li>
+        <li><a href="#backend-xlacpu-cpu-amd-9950x3d--2026-01-07--pjrt-plugin-v0834-see-pjrt-cpu-binaries">Backend: <code>xla:cpu</code>/ CPU AMD 9950X3D / 2026-01-07 / PJRT Plugin v0.83.4 (see pjrt-cpu-binaries)</a></li>
+        <li><a href="#backend-xlacuda-gpu-rtx-5090--2026-01-07--pjrt-plugin-v081-jax-build">Backend: <code>xla:cuda</code>/ GPU RTX 5090 / 2026-01-07 / PJRT Plugin v0.81 (Jax-build)</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </aside>
+</div>
+
+  </main>
+  <footer class="site-footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="/" class="nav-logo" aria-label="GoMLX home">
+          <svg class="logo-mark" width="24" height="24" viewBox="0 0 28 28" fill="none">
+            <rect width="28" height="28" rx="7" fill="var(--accent)"/>
+            <path d="M7 14L11 10L14 13L17 9L21 14" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M7 19L11 15L14 18L17 14L21 19" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/>
+          </svg>
+          <span class="nav-wordmark">GoMLX</span>
+        </a>
+        <p>Machine learning for Go.<br>XLA-accelerated. No Python.</p>
+      </div>
+
+      <div class="footer-links">
+        <div class="footer-col">
+          <h4>Learn</h4>
+          <ul>
+            <li><a href="/docs/installation/">Installation</a></li>
+            <li><a href="/docs/core-concepts/">Core concepts</a></li>
+            <li><a href="/docs/training-loops/">Training loops</a></li>
+            <li><a href="/docs/backends/">Backends</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Examples</h4>
+          <ul>
+            <li><a href="/examples/mnist/">MNIST classifier</a></li>
+            <li><a href="/examples/cifar/">CIFAR-10 ResNet</a></li>
+            <li><a href="/examples/transformer/">Transformer</a></li>
+            <li><a href="/examples/rl-cartpole/">CartPole DQN</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Community</h4>
+          <ul>
+            <li><a href="https://github.com/gomlx/gomlx" target="_blank" rel="noopener">GitHub</a></li>
+            <li><a href="https://gophers.slack.com/channels/gomlx" target="_blank" rel="noopener">Slack #gomlx</a></li>
+            <li><a href="/community/contributing/">Contributing</a></li>
+            <li><a href="/community/changelog/">Changelog</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>GoMLX is open source, licensed under Apache 2.0. Built with ♥ by Jan Pfeifer and contributors.</p>
+      <p>Documentation site contributed by the GoMLX community.</p>
+    </div>
+  </div>
+</footer>
+
+  
+  
+  <script src="/js/main.js"></script>
+  
+</body>
+</html>
