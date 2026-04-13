@@ -46,7 +46,7 @@
         btn.querySelector('span') && (btn.textContent = 'Copied!');
         setTimeout(() => {
           btn.classList.remove('copied');
-          btn.innerHTML = `<img src="/img/copy.svg" class="svg-icon" alt="icon"> Copy`;
+          btn.innerHTML = `<img src="${window.GomlxBaseUrl}img/copy.svg" class="svg-icon" alt="icon"> Copy`;
         }, 2000);
       });
     });
@@ -61,7 +61,7 @@
 
     const btn = document.createElement('button');
     btn.className = 'code-copy-btn';
-    btn.innerHTML = `<img src="/img/copy-small.svg" class="svg-icon" alt="icon"> Copy`;
+    btn.innerHTML = `<img src="${window.GomlxBaseUrl}img/copy-small.svg" class="svg-icon" alt="icon"> Copy`;
     wrap.appendChild(btn);
 
     btn.addEventListener('click', () => {
@@ -69,7 +69,7 @@
         btn.textContent = 'Copied!';
         btn.classList.add('copied');
         setTimeout(() => {
-          btn.innerHTML = `<img src="/img/copy-small.svg" class="svg-icon" alt="icon"> Copy`;
+          btn.innerHTML = `<img src="${window.GomlxBaseUrl}img/copy-small.svg" class="svg-icon" alt="icon"> Copy`;
           btn.classList.remove('copied');
         }, 2000);
       });

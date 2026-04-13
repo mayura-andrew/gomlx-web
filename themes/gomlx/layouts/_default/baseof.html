@@ -8,7 +8,7 @@
   <meta property="og:title" content="{{ .Title }}">
   <meta property="og:description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}">
   <link rel="canonical" href="{{ .Permalink }}">
-  <link rel="icon" type="image/jpeg" href="/img/logo.jpeg">
+  <link rel="icon" type="image/jpeg" href="{{ "img/logo.jpeg" | relURL }}">
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -31,6 +31,7 @@
     {{ block "main" . }}{{ end }}
   </main>
   {{ partial "footer.html" . }}
+  <script>window.GomlxBaseUrl = "{{ "/" | relURL }}";</script>
   {{ $mainJs := resources.Get "js/main.js" }}
   {{ if $mainJs }}
   <script src="{{ $mainJs.RelPermalink }}"></script>
