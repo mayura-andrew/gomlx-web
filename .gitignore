@@ -1,0 +1,19 @@
+# Hugo generated files
+/public/
+/resources/_gen/
+.hugo_build.lock
+hugo_stats.json
+
+# Editor / System files
+.DS_Store
+.DS_Store?
+._*
+.vscode/
+.idea/
+*.swp
+*.core
+
+# Dependency directories (if using npm for Tailwind/PostCSS later)
+node_modules/
+package-lock.json
+yarn.lock

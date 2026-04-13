@@ -32,10 +32,6 @@
       <span>{{ .Title }}</span>
     </nav>
     {{ with .Params.source }}
-    <div class="source-banner">
-      {{ readFile "themes/gomlx/static/img/github-small.svg" | safeHTML }}
-      Synced from <a href="{{ . }}" target="_blank" rel="noopener">gomlx/gomlx</a>. Found an error? Edit it there.
-    </div>
     {{ end }}
     <header class="docs-header">
       <h1>{{ .Title }}</h1>
