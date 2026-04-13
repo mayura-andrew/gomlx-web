@@ -9,6 +9,7 @@
   <meta property="og:title" content="GoMLX — Machine Learning for Go">
   <meta property="og:description" content="XLA-accelerated machine learning for Go. No Python. Full static typing. Production-ready.">
   <link rel="canonical" href="http://localhost:1313/">
+  <link rel="icon" type="image/jpeg" href="/img/logo.jpeg">
 
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -26,13 +27,9 @@
   <nav class="site-nav" id="site-nav">
   <div class="nav-inner">
     <a href="/" class="nav-logo" aria-label="GoMLX home">
-      <svg class="logo-mark" width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect width="28" height="28" rx="7" fill="var(--accent)"/>
-        <path d="M7 14L11 10L14 13L17 9L21 14" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        <path d="M7 19L11 15L14 18L17 14L21 19" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/>
-      </svg>
+      <img src="/img/logo.jpeg" class="logo-mark" alt="GoMLX logo" width="28" height="28" style="border-radius: 7px; object-fit: cover;">
       <span class="nav-wordmark">GoMLX</span>
-      <span class="nav-version" id="gomlx-version" title="Latest Release">v0.17</span>
+      <span class="nav-version" id="gomlx-version" title="Latest Release">v0.27.2</span>
     </a>
 
     <ul class="nav-links" role="list">
@@ -118,8 +115,8 @@
       <em>at Go speed.</em>
     </h1>
     <p class="hero-subtitle">
-      GoMLX brings expressive, XLA-accelerated machine learning to the Go ecosystem —
-      no Python dependency, full static typing, production-ready from day one.
+      GoMLX is an easy-to-use ML and math framework — like PyTorch, Jax, or TensorFlow for Go.
+      No Python dependency, runs anywhere Go runs, with XLA-accelerated JIT compilation.
     </p>
     <div class="hero-ctas">
       <a href="/docs/installation/" class="btn btn-primary">
@@ -128,7 +125,7 @@
       </a>
       <a href="/examples/" class="btn btn-secondary">View examples</a>
     </div>
-    <p class="hero-meta">Runs on CPU · GPU · TPU via XLA &nbsp;·&nbsp; Apache 2.0 &nbsp;·&nbsp; Go 1.21+</p>
+    <p class="hero-meta">Runs on CPU · GPU · TPU via XLA &nbsp;·&nbsp; Apache 2.0 &nbsp;·&nbsp; Go 1.25+</p>
   </div>
 </section>
 
@@ -346,7 +343,7 @@ fmt.<span class="fn">Println</span>(result) <span class="c">// Tensor[float32: s
         <h2>Questions? Join the conversation.</h2>
         <p>Ask on the <strong>#gomlx</strong> Slack channel, open a GitHub issue, or contribute an example. The library is actively maintained and the community is growing.</p>
         <div class="community-links">
-          <a href="https://gophers.slack.com/channels/gomlx" class="btn btn-secondary" target="_blank" rel="noopener">
+          <a href="https://app.slack.com/client/T029RQSE6/C08TX33BX6U" class="btn btn-secondary" target="_blank" rel="noopener">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M5.042 15.165a2.528 2.528 0 01-2.52 2.523A2.528 2.528 0 010 15.165a2.527 2.527 0 012.522-2.52h2.52v2.52zm1.271 0a2.527 2.527 0 012.521-2.52 2.527 2.527 0 012.521 2.52v6.313A2.528 2.528 0 018.834 24a2.528 2.528 0 01-2.521-2.522v-6.313zM8.834 5.042a2.528 2.528 0 01-2.521-2.52A2.528 2.528 0 018.834 0a2.528 2.528 0 012.521 2.522v2.52H8.834zm0 1.271a2.528 2.528 0 012.521 2.521 2.528 2.528 0 01-2.521 2.521H2.522A2.528 2.528 0 010 8.834a2.528 2.528 0 012.522-2.521h6.312zm10.122 2.521a2.528 2.528 0 012.522-2.521A2.528 2.528 0 0124 8.834a2.528 2.528 0 01-2.522 2.521h-2.522V8.834zm-1.268 0a2.528 2.528 0 01-2.523 2.521 2.527 2.527 0 01-2.52-2.521V2.522A2.527 2.527 0 0115.165 0a2.528 2.528 0 012.523 2.522v6.312zm-2.523 10.122a2.528 2.528 0 012.523 2.522A2.528 2.528 0 0115.165 24a2.527 2.527 0 01-2.52-2.522v-2.522h2.52zm0-1.268a2.527 2.527 0 01-2.52-2.523 2.526 2.526 0 012.52-2.52h6.313A2.527 2.527 0 0124 15.165a2.528 2.528 0 01-2.522 2.523h-6.313z"/></svg>
             Join #gomlx on Slack
           </a>
@@ -385,11 +382,7 @@ fmt.<span class="fn">Println</span>(result) <span class="c">// Tensor[float32: s
     <div class="footer-inner">
       <div class="footer-brand">
         <a href="/" class="nav-logo" aria-label="GoMLX home">
-          <svg class="logo-mark" width="24" height="24" viewBox="0 0 28 28" fill="none">
-            <rect width="28" height="28" rx="7" fill="var(--accent)"/>
-            <path d="M7 14L11 10L14 13L17 9L21 14" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M7 19L11 15L14 18L17 14L21 19" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/>
-          </svg>
+          <img src="/img/logo.jpeg" class="logo-mark" alt="GoMLX logo" width="24" height="24" style="border-radius: 6px; object-fit: cover;">
           <span class="nav-wordmark">GoMLX</span>
         </a>
         <p>Machine learning for Go.<br>XLA-accelerated. No Python.</p>
@@ -418,7 +411,7 @@ fmt.<span class="fn">Println</span>(result) <span class="c">// Tensor[float32: s
           <h4>Community</h4>
           <ul>
             <li><a href="https://github.com/gomlx/gomlx" target="_blank" rel="noopener">GitHub</a></li>
-            <li><a href="https://gophers.slack.com/channels/gomlx" target="_blank" rel="noopener">Slack #gomlx</a></li>
+            <li><a href="https://app.slack.com/client/T029RQSE6/C08TX33BX6U" target="_blank" rel="noopener">Slack #gomlx</a></li>
             <li><a href="/community/contributing/">Contributing</a></li>
             <li><a href="/community/changelog/">Changelog</a></li>
           </ul>

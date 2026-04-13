@@ -1,11 +1,7 @@
 <nav class="site-nav" id="site-nav">
   <div class="nav-inner">
     <a href="/" class="nav-logo" aria-label="GoMLX home">
-      <svg class="logo-mark" width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect width="28" height="28" rx="7" fill="var(--accent)"/>
-        <path d="M7 14L11 10L14 13L17 9L21 14" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        <path d="M7 19L11 15L14 18L17 14L21 19" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/>
-      </svg>
+      <img src="/img/logo.jpeg" class="logo-mark" alt="GoMLX logo" width="28" height="28" style="border-radius: 7px; object-fit: cover;">
       <span class="nav-wordmark">GoMLX</span>
       <span class="nav-version" id="gomlx-version" title="Latest Release">{{ .Site.Params.version }}</span>
     </a>

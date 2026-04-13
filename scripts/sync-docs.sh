@@ -30,6 +30,24 @@ success() { echo -e "${GREEN}[done]${NC} $*"; }
 warn()    { echo -e "${YELLOW}[warn]${NC} $*"; }
 
 # ── Fetch file list from GitHub API ─────────────────────────────────────────
+
+HUGO_TOML="$(dirname "$0")/../hugo.toml"
+
+if [[ "$BRANCH" == "main" || "$BRANCH" == "master" ]]; then
+  info "Fetching latest GoMLX release version for hugo.toml..."
+  LATEST_VERSION=$(curl -fsSL "https://api.github.com/repos/${REPO}/releases/latest" | jq -r '.tag_name')
+  if [[ -n "$LATEST_VERSION" && "$LATEST_VERSION" != "null" ]]; then
+    info "Updating hugo.toml with version: $LATEST_VERSION"
+    sed -i.bak -E "s/version[ ]*=[ ]*\".*\"/version = \"${LATEST_VERSION}\"/" "$HUGO_TOML"
+  else
+    warn "Could not fetch latest release version. Keeping current version."
+  fi
+else
+  info "Updating hugo.toml with version: $BRANCH"
+  sed -i.bak -E "s/version[ ]*=[ ]*\".*\"/version = \"${BRANCH}\"/" "$HUGO_TOML"
+fi
+rm -f "${HUGO_TOML}.bak"
+
 info "Fetching file list from ${REPO}/docs (branch: ${BRANCH})..."
 FILES=$(curl -fsSL "${API_BASE}/contents/docs?ref=${BRANCH}" \
   -H "Accept: application/vnd.github.v3+json" \

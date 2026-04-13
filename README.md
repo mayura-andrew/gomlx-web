@@ -28,60 +28,6 @@ make dev
 
 ---
 
-## How docs syncing works
-
-The site does **not** store the documentation markdown directly. Instead, a sync script pulls the latest `.md` files from `github.com/gomlx/gomlx/docs/` and writes them into `content/docs/` with Hugo front matter automatically added.
-
-```
-gomlx/gomlx (upstream)
-  └── docs/
-      ├── context.md
-      ├── graph.md
-      ├── training.md
-      └── ...
-          │
-          │  scripts/sync-docs.sh
-          ▼
-gomlx-site (this repo)
-  └── content/docs/
-      ├── context.md      ← front matter injected
-      ├── graph.md
-      ├── training.md
-      └── overview.md     ← generated from root README
-```
-
-### Sync commands
-
-```bash
-# Sync from main branch (default)
-make sync
-
-# Sync from a specific release tag
-make sync-tag TAG=v0.17.0
-
-# Or run the script directly
-./scripts/sync-docs.sh v0.17.0
-```
-
-### What the sync script does
-
-1. Calls the GitHub API to list all `.md` files in `gomlx/gomlx/docs/`
-2. Downloads each file with `curl`
-3. Strips any leading `# Title` heading (Hugo renders the title itself)
-4. Prepends Hugo front matter (`title`, `section`, `weight`, `source`)
-5. Writes to `content/docs/<slug>.md`
-6. Also pulls the root `README.md` and creates `content/docs/overview.md`
-
-### Automatic sync (GitHub Actions)
-
-A GitHub Actions workflow (`.github/workflows/sync-and-deploy.yml`) runs daily and on every push. It:
-
-1. Syncs the latest docs from `gomlx/gomlx@main`
-2. Commits any changed files back to this repo
-3. Builds the Hugo site
-4. Deploys to GitHub Pages
-
----
 
 ## Site structure
 
@@ -116,23 +62,6 @@ gomlx-site/
 
 ---
 
-## Customizing the sidebar order
-
-The sidebar is driven by `data/docsnav.yaml`. Any synced page not listed there automatically appears under an "From upstream" section at the bottom.
-
-To promote a synced page into the curated nav, add it to `data/docsnav.yaml`:
-
-```yaml
-- title: Reference
-  pages:
-    - name: Graph execution
-      url: /docs/graph/          # matches the synced slug
-    - name: Context & variables
-      url: /docs/context/
-```
-
----
-
 ## Contributing
 
 This site is a community contribution to GoMLX. If you find a documentation error:
@@ -140,4 +69,3 @@ This site is a community contribution to GoMLX. If you find a documentation erro
 - **In a synced page** — open a PR on [gomlx/gomlx](https://github.com/gomlx/gomlx) (the sync will pick it up)
 - **In a hand-written page or the site itself** — open a PR on this repo
 
-Questions? Join `#gomlx` on the [Gophers Slack](https://gophers.slack.com).

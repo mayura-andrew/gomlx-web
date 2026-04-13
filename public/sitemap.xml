@@ -5,9 +5,6 @@
     <loc>http://localhost:1313/docs/installation/</loc>
     <lastmod>2026-04-13T23:24:05+05:30</lastmod>
   </url><url>
-    <loc>http://localhost:1313/examples/mnist/</loc>
-    <lastmod>2026-04-13T23:24:05+05:30</lastmod>
-  </url><url>
     <loc>http://localhost:1313/docs/overview/</loc>
     <lastmod>2026-04-13T23:24:05+05:30</lastmod>
   </url><url>
@@ -33,23 +30,19 @@
     <lastmod>2026-04-13T23:24:05+05:30</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/beginner/</loc>
-    <lastmod>2026-04-13T23:24:05+05:30</lastmod>
   </url><url>
     <loc>http://localhost:1313/categories/</loc>
+  </url><url>
+    <loc>http://localhost:1313/community/</loc>
   </url><url>
     <loc>http://localhost:1313/docs/</loc>
     <lastmod>2026-04-13T23:59:36+05:30</lastmod>
   </url><url>
     <loc>http://localhost:1313/examples/</loc>
-    <lastmod>2026-04-13T23:24:05+05:30</lastmod>
   </url><url>
     <loc>http://localhost:1313/</loc>
     <lastmod>2026-04-13T23:24:05+05:30</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/</loc>
-    <lastmod>2026-04-13T23:24:05+05:30</lastmod>
-  </url><url>
     <loc>http://localhost:1313/tags/vision/</loc>
-    <lastmod>2026-04-13T23:24:05+05:30</lastmod>
   </url>
 </urlset>
