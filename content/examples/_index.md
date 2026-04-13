@@ -1,9 +1,8 @@
 ---
-title: "Examples"
+title: "Examples developed using GoMLX"
 description: "A collection of examples, models, and tutorials built using the GoMLX framework."
 ---
 
-### Examples developed using GoMLX
 
 * **🚀 NEW 🚀** [KaLM-Gemma3 12B parameters](https://github.com/gomlx/go-huggingface/tree/main/examples/kalmgemma3): Tencent's top-ranked sentence encoder
   for RAGs, using [go-huggingface](https://github.com/gomlx/go-huggingface/) to load the model and tokenizer, and **GoMLX** to execute it.
