@@ -1,0 +1,40 @@
+- title: Get Started
+  pages:
+    - name: Installation
+      url: /docs/installation/
+    - name: Quick tutorial
+      url: /docs/quick-tutorial/
+    - name: Core concepts
+      url: /docs/core-concepts/
+    - name: Your first model
+      url: /docs/first-model/
+
+- title: Reference
+  pages:
+    - name: Graph execution
+      url: /docs/graph-execution/
+    - name: Layers API
+      url: /docs/layers/
+    - name: Training loops
+      url: /docs/training-loops/
+    - name: Optimizers
+      url: /docs/optimizers/
+    - name: Losses
+      url: /docs/losses/
+    - name: Backends
+      url: /docs/backends/
+    - name: Plots & metrics
+      url: /docs/plots-metrics/
+
+- title: Guides
+  pages:
+    - name: Working with datasets
+      url: /docs/datasets/
+    - name: Saving & loading models
+      url: /docs/checkpoints/
+    - name: Custom layers
+      url: /docs/custom-layers/
+    - name: Debugging & NaN detection
+      url: /docs/debugging/
+    - name: Performance tuning
+      url: /docs/performance/

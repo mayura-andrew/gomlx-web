@@ -1,0 +1,43 @@
+baseURL = "https://gomlx.dev"
+languageCode = "en-us"
+title = "GoMLX — Machine Learning for Go"
+theme = "gomlx"
+enableGitInfo = true
+enableRobotsTXT = true
+
+[markup]
+  [markup.highlight]
+    style = "dracula"
+    lineNos = false
+    codeFences = true
+    guessSyntax = true
+  [markup.goldmark.renderer]
+    unsafe = true
+
+[params]
+  description = "XLA-accelerated machine learning for Go. No Python. Full static typing. Production-ready."
+  version = "v0.17"
+  github = "https://github.com/gomlx/gomlx"
+  slack = "https://gophers.slack.com/channels/gomlx"
+  accent = "#0FA878"
+
+[menu]
+  [[menu.main]]
+    name = "Get Started"
+    url = "/docs/installation/"
+    weight = 1
+  [[menu.main]]
+    name = "Docs"
+    url = "/docs/"
+    weight = 2
+  [[menu.main]]
+    name = "Examples"
+    url = "/examples/"
+    weight = 3
+  [[menu.main]]
+    name = "Community"
+    url = "/community/"
+    weight = 4
+
+[outputs]
+  home = ["HTML", "RSS", "JSON"]
