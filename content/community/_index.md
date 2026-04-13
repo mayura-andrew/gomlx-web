@@ -3,12 +3,36 @@ title: "Community & Support"
 description: "Get help, discuss projects, and join the GoMLX community."
 ---
 
-# 👥 Support
-
 We love connecting with the community! Whether you need help, have an idea, or want to contribute, here are the best places to reach out:
 
-*   **Slack**: Join the conversation in the `#gomlx` channel. [You can join the Slack server here]({{< param slack >}}).
-*   **Discussions & Q&A**: Ask questions, share ideas, and participate in discussions on [GitHub Discussions](https://github.com/gomlx/gomlx/discussions).
-*   **Issues**: Track bugs, feature requests, and library improvements on the [GitHub Issues page](https://github.com/gomlx/gomlx/issues).
-*   **Projects & Brainstorming**: Want to work on something cool? Just start a Q&A on GitHub, and we're more than happy to meet up somewhere in Discord or do a video call (VC) to brainstorm!
-*   **Google Groups**: Join our mailing list at [groups.google.com/g/gomlx-discuss](https://groups.google.com/g/gomlx-discuss) for email updates and discussions.
+<div class="community-grid">
+  <a href="{{< param slack >}}" class="community-card" target="_blank" rel="noopener">
+    <img src="/img/slack.png" alt="Slack icon">
+    <h3>Slack</h3>
+    <p>Join the conversation in the <strong>#gomlx</strong> channel to get immediate help and discuss.</p>
+  </a>
+
+  <a href="https://github.com/gomlx/gomlx/discussions" class="community-card" target="_blank" rel="noopener">
+    <img src="/img/github.png" alt="GitHub icon">
+    <h3>Discussions & Q&A</h3>
+    <p>Ask questions, share ideas, and participate in discussions on GitHub.</p>
+  </a>
+
+  <a href="https://github.com/gomlx/gomlx/issues" class="community-card" target="_blank" rel="noopener">
+    <img src="/img/issues.png" alt="Issues icon">
+    <h3>Issues</h3>
+    <p>Track bugs, feature requests, and follow along with library improvements.</p>
+  </a>
+
+  <a href="https://github.com/gomlx/gomlx/discussions/new?category=q-a" class="community-card" target="_blank" rel="noopener">
+    <img src="/img/brainstrom.png" alt="Brainstorming icon">
+    <h3>Projects & Brainstorming</h3>
+    <p>Want to work on something cool? Start a Q&A and we can jump on Discord or a VC!</p>
+  </a>
+
+  <a href="https://groups.google.com/g/gomlx-discuss" class="community-card" target="_blank" rel="noopener">
+    <img src="/img/group.png" alt="Google group icon">
+    <h3>Google Groups</h3>
+    <p>Join our mailing list at <strong>gomlx-discuss</strong> for email updates and discussions.</p>
+  </a>
+</div>

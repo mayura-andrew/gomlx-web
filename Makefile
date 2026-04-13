@@ -36,5 +36,5 @@ sync-tag:
 clean:
 	rm -rf public/
 
-# Full workflow: sync latest docs, then build
-all: sync build
+# Full workflow: build
+all: build

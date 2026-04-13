@@ -730,6 +730,51 @@ ul { list-style: none; }
 }
 
 /* ================================================================
+   COMMUNITY GRID (from /community/_index.md)
+   ================================================================ */
+.community-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+  margin-top: 2rem;
+}
+.community-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg, 12px);
+  padding: 24px;
+  transition: all 0.18s;
+  text-decoration: none !important;
+  color: var(--text) !important;
+}
+.community-card:hover {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-dim);
+  transform: translateY(-2px);
+}
+.community-card svg,
+.community-card img {
+  margin-bottom: 16px;
+  width: 28px;
+  height: 28px;
+  color: var(--accent);
+}
+.community-card h3 {
+  margin: 0 0 8px 0;
+  font-size: 1.15rem;
+  font-weight: 500;
+  color: var(--heading) !important;
+}
+.community-card p {
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--text-light);
+  line-height: 1.5;
+}
+
+/* ================================================================
    RESPONSIVE
    ================================================================ */
 @media (max-width: 900px) {

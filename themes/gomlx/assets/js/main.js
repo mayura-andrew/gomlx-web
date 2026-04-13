@@ -46,7 +46,7 @@
         btn.querySelector('span') && (btn.textContent = 'Copied!');
         setTimeout(() => {
           btn.classList.remove('copied');
-          btn.innerHTML = `<svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="4" y="4" width="8" height="8" rx="1.5" stroke="currentColor" stroke-width="1.2"/><path d="M2 10V2h8" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg> Copy`;
+          btn.innerHTML = `<img src="/img/copy.svg" class="svg-icon" alt="icon"> Copy`;
         }, 2000);
       });
     });
@@ -61,7 +61,7 @@
 
     const btn = document.createElement('button');
     btn.className = 'code-copy-btn';
-    btn.innerHTML = `<svg width="12" height="12" viewBox="0 0 14 14" fill="none"><rect x="4" y="4" width="8" height="8" rx="1.5" stroke="currentColor" stroke-width="1.2"/><path d="M2 10V2h8" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg> Copy`;
+    btn.innerHTML = `<img src="/img/copy-small.svg" class="svg-icon" alt="icon"> Copy`;
     wrap.appendChild(btn);
 
     btn.addEventListener('click', () => {
@@ -69,7 +69,7 @@
         btn.textContent = 'Copied!';
         btn.classList.add('copied');
         setTimeout(() => {
-          btn.innerHTML = `<svg width="12" height="12" viewBox="0 0 14 14" fill="none"><rect x="4" y="4" width="8" height="8" rx="1.5" stroke="currentColor" stroke-width="1.2"/><path d="M2 10V2h8" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg> Copy`;
+          btn.innerHTML = `<img src="/img/copy-small.svg" class="svg-icon" alt="icon"> Copy`;
           btn.classList.remove('copied');
         }, 2000);
       });
