@@ -7,7 +7,7 @@
         <path d="M7 19L11 15L14 18L17 14L21 19" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/>
       </svg>
       <span class="nav-wordmark">GoMLX</span>
-      <span class="nav-version">{{ .Site.Params.version }}</span>
+      <span class="nav-version" id="gomlx-version" title="Latest Release">{{ .Site.Params.version }}</span>
     </a>
 
     <ul class="nav-links" role="list">
@@ -42,3 +42,18 @@
     </div>
   </div>
 </nav>
+
+<script>
+  // Fetch latest release tag from GitHub and update the navigation bar
+  fetch('https://api.github.com/repos/gomlx/gomlx/releases/latest')
+    .then(response => response.json())
+    .then(data => {
+      if (data && data.tag_name) {
+        const versionEl = document.getElementById('gomlx-version');
+        if (versionEl) {
+          versionEl.textContent = data.tag_name;
+        }
+      }
+    })
+    .catch(err => console.error('Failed to fetch latest GoMLX version:', err));
+</script>

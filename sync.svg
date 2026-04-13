@@ -1,0 +1,101 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 950 550" style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background-color: #ffffff;">
+  
+  <defs>
+    <!-- Arrowhead definitions -->
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#6e7781" />
+    </marker>
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#0969da" />
+    </marker>
+    
+    <!-- Drop shadow -->
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="0" dy="4" stdDeviation="4" flood-opacity="0.1" />
+    </filter>
+  </defs>
+
+  <!-- Title -->
+  <text x="475" y="40" font-size="24" font-weight="bold" text-anchor="middle" fill="#24292f">GoMLX Documentation Sync Architecture</text>
+
+  <!-- 1. Upstream Repo -->
+  <g transform="translate(50, 100)">
+    <rect width="200" height="120" rx="8" fill="#f6f8fa" stroke="#d0d7de" stroke-width="2" filter="url(#shadow)"/>
+    <text x="100" y="35" font-size="16" font-weight="bold" text-anchor="middle" fill="#24292f">Upstream Repo</text>
+    <text x="100" y="60" font-size="14" text-anchor="middle" fill="#0969da">gomlx/gomlx</text>
+    <text x="100" y="85" font-size="12" text-anchor="middle" fill="#57606a">Source of truth for</text>
+    <text x="100" y="105" font-size="12" text-anchor="middle" fill="#57606a">documentation (.md)</text>
+  </g>
+
+  <!-- Community Contributions -->
+  <g transform="translate(50, 280)">
+    <rect width="200" height="80" rx="8" stroke-dasharray="4,4" fill="#ffffff" stroke="#2da44e" stroke-width="2"/>
+    <text x="100" y="30" font-size="14" font-weight="bold" text-anchor="middle" fill="#2da44e">Community</text>
+    <text x="100" y="50" font-size="12" text-anchor="middle" fill="#57606a">Proposes doc fixes here</text>
+    <text x="100" y="65" font-size="12" text-anchor="middle" fill="#57606a">via Teal Banner links</text>
+  </g>
+  <path d="M 150 280 L 150 230" stroke="#2da44e" stroke-width="2" marker-end="url(#arrow)" fill="none" />
+
+  <!-- 2. GitHub Actions Controller -->
+  <g transform="translate(350, 100)">
+    <rect width="250" height="280" rx="8" fill="#f0f6fc" stroke="#54aeff" stroke-width="2" filter="url(#shadow)"/>
+    <text x="475" y="130" font-size="16" font-weight="bold" text-anchor="middle" fill="#0969da">GitHub Actions Workflow</text>
+    <text x="475" y="150" font-size="12" text-anchor="middle" fill="#57606a">.github/workflows/sync-and-deploy.yml</text>
+    
+    <!-- Triggers -->
+    <rect x="375" y="170" width="200" height="40" rx="4" fill="#ffffff" stroke="#d0d7de" />
+    <text x="475" y="195" font-size="12" text-anchor="middle" fill="#24292f">🕒 Cron (04:00 UTC) or Manual trigger</text>
+
+    <!-- Sync Script -->
+    <rect x="375" y="225" width="200" height="90" rx="4" fill="#ffffff" stroke="#0969da" stroke-width="2" />
+    <text x="475" y="245" font-size="14" font-weight="bold" text-anchor="middle" fill="#24292f">scripts/sync-docs.sh</text>
+    <text x="475" y="265" font-size="12" text-anchor="middle" fill="#57606a">• Fetch .md via GitHub API</text>
+    <text x="475" y="280" font-size="12" text-anchor="middle" fill="#57606a">• Inject Hugo Front Matter</text>
+    <text x="475" y="295" font-size="12" text-anchor="middle" fill="#008080">• Add Teal Target Banner</text>
+
+    <!-- Hugo Build -->
+    <rect x="375" y="330" width="200" height="30" rx="4" fill="#ffffff" stroke="#d0d7de" />
+    <text x="475" y="350" font-size="12" font-weight="bold" text-anchor="middle" fill="#24292f">Hugo Build (--minify)</text>
+  </g>
+
+  <!-- Connect Upstream to Fetch -->
+  <path d="M 250 160 L 375 250" stroke="#0969da" stroke-width="2" marker-end="url(#arrow-blue)" fill="none" />
+  <text x="280" y="195" font-size="12" fill="#0969da" transform="rotate(30, 280, 195)">curl downloads</text>
+
+  <!-- 3. Site Repository -->
+  <g transform="translate(680, 170)">
+    <rect width="200" height="120" rx="8" fill="#f6f8fa" stroke="#d0d7de" stroke-width="2" filter="url(#shadow)"/>
+    <text x="100" y="30" font-size="16" font-weight="bold" text-anchor="middle" fill="#24292f">Docs Site Repo</text>
+    <text x="100" y="50" font-size="14" text-anchor="middle" fill="#0969da">gomlx-site</text>
+    
+    <rect x="25" y="65" width="150" height="40" rx="4" fill="#ffffff" stroke="#d0d7de" />
+    <text x="100" y="85" font-size="12" text-anchor="middle" fill="#24292f">content/docs/</text>
+    <text x="100" y="100" font-size="10" text-anchor="middle" fill="#57606a">(Auto-generated files)</text>
+  </g>
+
+  <!-- Connect Injection to Files -->
+  <path d="M 575 250 L 680 200" stroke="#6e7781" stroke-width="2" marker-end="url(#arrow)" fill="none" />
+  <text x="590" y="215" font-size="12" fill="#57606a">Writes files &amp;</text>
+  <text x="590" y="230" font-size="12" fill="#57606a">Git Commits</text>
+
+  <!-- Connect files to hugo build -->
+  <path d="M 680 260 L 575 345" stroke="#6e7781" stroke-width="2" marker-end="url(#arrow)" fill="none" stroke-dasharray="4,4"/>
+  <text x="610" y="325" font-size="12" fill="#57606a">Reads content</text>
+
+  <!-- 4. GitHub Pages Hosting -->
+  <g transform="translate(680, 310)">
+    <rect width="200" height="90" rx="8" fill="#eaeef2" stroke="#6e7781" stroke-width="2" filter="url(#shadow)"/>
+    <text x="100" y="30" font-size="16" font-weight="bold" text-anchor="middle" fill="#24292f">GitHub Pages</text>
+    <text x="100" y="55" font-size="12" text-anchor="middle" fill="#57606a">Live Documentation</text>
+    <rect x="25" y="70" width="150" height="8" rx="4" fill="#008080" /> <!-- Teal banner visual -->
+  </g>
+
+  <!-- Connect Hugo to Pages -->
+  <path d="M 575 355 L 680 355" stroke="#2da44e" stroke-width="2" marker-end="url(#arrow)" fill="none" />
+  <text x="600" y="345" font-size="12" font-weight="bold" fill="#2da44e">Deploys</text>
+
+  <!-- Circular feedback line indicating Teal Box to Upstream -->
+  <path d="M 780 400 L 780 470 L 150 470 L 150 360" stroke="#008080" stroke-width="2" stroke-dasharray="6,4" marker-end="url(#arrow)" fill="none" />
+  <text x="465" y="460" font-size="12" font-weight="bold" fill="#008080">"Found an error? Edit it there" (Teal Banner drives traffic upstream)</text>
+
+</svg>
