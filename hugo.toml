@@ -1,4 +1,5 @@
-baseURL = "https://gomlx.dev"
+relativeURLs = true
+baseURL = "https://mayura-andrew.github.io/gomlx-web"
 languageCode = "en-us"
 title = "GoMLX — Machine Learning for Go"
 theme = "gomlx"
