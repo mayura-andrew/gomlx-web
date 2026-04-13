@@ -2,58 +2,54 @@
   <div class="container">
     <div class="section-label">Examples</div>
     <h2 class="section-title">From MNIST to transformers.</h2>
-    <p class="section-subtitle">Working notebooks you can run right now, in Google Colab or locally.</p>
+    <p class="section-subtitle">Working notebooks, command-line tools, and models you can run right now.</p>
 
     <div class="examples-grid">
-      <a href="/examples/mnist/" class="example-card">
+      <a href="https://github.com/gomlx/gomlx/tree/main/examples/gemma3" class="example-card" target="_blank" rel="noopener">
+        <div class="example-tag example-tag--nlp">GenAI</div>
+        <h3>Gemma 3 270M</h3>
+        <p>Demonstrates ONNX-converted text generation (LLM) using the Gemma 3 model.</p>
+        <div class="example-footer">
+          <span class="colab-badge">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5"/><path d="M9.5 8.5L16 12l-6.5 3.5V8.5z" fill="currentColor"/></svg>
+            View on GitHub
+          </span>
+        </div>
+      </a>
+
+      <a href="https://gomlx.github.io/gomlx/notebooks/cifar.html" class="example-card" target="_blank" rel="noopener">
         <div class="example-tag example-tag--vision">Vision</div>
-        <h3>MNIST classifier</h3>
-        <p>A two-layer MLP from scratch. Start here.</p>
+        <h3>CIFAR-10 Demo</h3>
+        <p>Convolutional network image classifier available as a Jupyter Notebook.</p>
         <div class="example-footer">
           <span class="colab-badge">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5"/><path d="M9.5 8.5L16 12l-6.5 3.5V8.5z" fill="currentColor"/></svg>
-            Open in Colab
+            Open Notebook
           </span>
-          <span class="example-lang">Go · 80 lines</span>
         </div>
       </a>
 
-      <a href="/examples/cifar/" class="example-card">
-        <div class="example-tag example-tag--vision">Vision</div>
-        <h3>CIFAR-10 with ResNet</h3>
-        <p>Convolutional network with skip connections and batch norm.</p>
+      <a href="https://github.com/gomlx/go-huggingface/tree/main/examples/kalmgemma3" class="example-card" target="_blank" rel="noopener">
+        <div class="example-tag example-tag--nlp">RAG</div>
+        <h3>KaLM-Gemma3 12B</h3>
+        <p>Tencent's top-ranked sentence encoder loaded with go-huggingface.</p>
         <div class="example-footer">
           <span class="colab-badge">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5"/><path d="M9.5 8.5L16 12l-6.5 3.5V8.5z" fill="currentColor"/></svg>
-            Open in Colab
+            View on GitHub
           </span>
-          <span class="example-lang">Go · 210 lines</span>
         </div>
       </a>
 
-      <a href="/examples/transformer/" class="example-card">
-        <div class="example-tag example-tag--nlp">NLP</div>
-        <h3>Transformer from scratch</h3>
-        <p>Multi-head attention, positional encoding, and training loop.</p>
+      <a href="https://janpfeifer.github.io/hiveGo/www/hive/" class="example-card" target="_blank" rel="noopener">
+        <div class="example-tag example-tag--rl">WASM</div>
+        <h3>AlphaZero for Hive</h3>
+        <p>AI board evaluation using a GNN. Runs directly in your browser!</p>
         <div class="example-footer">
           <span class="colab-badge">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5"/><path d="M9.5 8.5L16 12l-6.5 3.5V8.5z" fill="currentColor"/></svg>
-            Open in Colab
+            Play Demo
           </span>
-          <span class="example-lang">Go · 340 lines</span>
-        </div>
-      </a>
-
-      <a href="/examples/rl-cartpole/" class="example-card">
-        <div class="example-tag example-tag--rl">RL</div>
-        <h3>CartPole with DQN</h3>
-        <p>Reinforcement learning with experience replay and a target network.</p>
-        <div class="example-footer">
-          <span class="colab-badge">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5"/><path d="M9.5 8.5L16 12l-6.5 3.5V8.5z" fill="currentColor"/></svg>
-            Open in Colab
-          </span>
-          <span class="example-lang">Go · 180 lines</span>
         </div>
       </a>
     </div>
