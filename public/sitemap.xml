@@ -33,6 +33,8 @@
   </url><url>
     <loc>//localhost:1313/docs/onnx-gomlx/</loc>
   </url><url>
+    <loc>//localhost:1313/docs/backends/</loc>
+  </url><url>
     <loc>//localhost:1313/categories/</loc>
   </url><url>
     <loc>//localhost:1313/community/</loc>

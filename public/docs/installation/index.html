@@ -177,11 +177,15 @@
       
       <a href="/docs/dotgeneral-performance/" class="sidebar-link">Dot General Performance</a>
       
+      <a href="/docs/changelog/" class="sidebar-link">Changelog</a>
+      
     </div>
     
     
     
     
+    
+      
     
       
     
@@ -221,95 +225,32 @@
       <h1>Installation</h1>
       <p class="lead">Get GoMLX running in your Go project in under five minutes.</p>
     </header>
-    <div class="docs-body"><h2 id="requirements">Requirements</h2>
-<p>Before installing GoMLX, make sure you have the following:</p>
-<ul>
-<li><strong>Go 1.21 or later</strong> — GoMLX uses generics and newer standard library features</li>
-<li><strong>A C compiler</strong> (gcc or clang) — required to build the XLA bindings</li>
-<li><strong>Optional: CUDA 12+</strong> — for NVIDIA GPU acceleration</li>
-</ul>
-<p>You can verify your Go version with:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>go version
-</span></span><span style="display:flex;"><span><span style="color:#6272a4"># go version go1.21.5 linux/amd64</span>
-</span></span></code></pre></div><h2 id="install-via-go-get">Install via go get</h2>
-<p>GoMLX is a standard Go module. Add it to your project with:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>go get github.com/gomlx/gomlx@latest
-</span></span></code></pre></div><p>This pulls in the core library, the default CPU backend, and all sub-packages. The first build will take a minute or two because it compiles the XLA runtime — subsequent builds are cached.</p>
-
-
-<div class="callout callout--tip" role="note">
-  <span class="callout-icon" aria-hidden="true">💡</span>
-  <div>On Linux, the XLA shared library is downloaded as a pre-built binary. On macOS, it is compiled from source. If you see a long compile step, this is expected.</div>
-</div>
-
-<h2 id="verify-the-installation">Verify the installation</h2>
-<p>Create a <code>main.go</code> in a fresh directory and paste this:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#ff79c6">package</span> main
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#ff79c6">import</span> (
-</span></span><span style="display:flex;"><span>    <span style="color:#f1fa8c">&#34;fmt&#34;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#f1fa8c">&#34;github.com/gomlx/gomlx/backends&#34;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#f1fa8c">&#34;github.com/gomlx/gomlx/graph&#34;</span>
-</span></span><span style="display:flex;"><span>)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">main</span>() {
-</span></span><span style="display:flex;"><span>    manager <span style="color:#ff79c6">:=</span> backends.<span style="color:#50fa7b">New</span>()
-</span></span><span style="display:flex;"><span>    result <span style="color:#ff79c6">:=</span> graph.<span style="color:#50fa7b">Compile</span>(manager, <span style="color:#8be9fd;font-style:italic">func</span>(g <span style="color:#ff79c6">*</span>graph.Graph) <span style="color:#ff79c6">*</span>graph.Node {
-</span></span><span style="display:flex;"><span>        a <span style="color:#ff79c6">:=</span> graph.<span style="color:#50fa7b">Const</span>(g, []<span style="color:#8be9fd">float32</span>{<span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">2</span>, <span style="color:#bd93f9">3</span>})
-</span></span><span style="display:flex;"><span>        b <span style="color:#ff79c6">:=</span> graph.<span style="color:#50fa7b">Const</span>(g, []<span style="color:#8be9fd">float32</span>{<span style="color:#bd93f9">4</span>, <span style="color:#bd93f9">5</span>, <span style="color:#bd93f9">6</span>})
-</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">return</span> graph.<span style="color:#50fa7b">Add</span>(a, b)
-</span></span><span style="display:flex;"><span>    }).<span style="color:#50fa7b">Call</span>()
-</span></span><span style="display:flex;"><span>    fmt.<span style="color:#50fa7b">Println</span>(result) <span style="color:#6272a4">// Tensor[float32: 3] = [5 7 9]</span>
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>Run it:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>go run main.go
-</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Tensor[float32: 3] = [5 7 9]</span>
-</span></span></code></pre></div><p>If you see the tensor output, GoMLX is installed and working correctly.</p>
-<h2 id="gpu-support-nvidia">GPU support (NVIDIA)</h2>
-<p>To enable GPU acceleration, install the CUDA backend:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>go get github.com/gomlx/gomlx/backends/cuda@latest
-</span></span></code></pre></div><p>Then import it as a side-effect in your <code>main.go</code>:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#ff79c6">import</span> (
-</span></span><span style="display:flex;"><span>    _ <span style="color:#f1fa8c">&#34;github.com/gomlx/gomlx/backends/cuda&#34;</span> <span style="color:#6272a4">// registers CUDA backend</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#f1fa8c">&#34;github.com/gomlx/gomlx/backends&#34;</span>
-</span></span><span style="display:flex;"><span>)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">main</span>() {
-</span></span><span style="display:flex;"><span>    manager <span style="color:#ff79c6">:=</span> backends.<span style="color:#50fa7b">New</span>() <span style="color:#6272a4">// automatically uses GPU if available</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// ...</span>
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div>
-
-<div class="callout callout--note" role="note">
-  <span class="callout-icon" aria-hidden="true">📝</span>
-  <div>GoMLX selects the best available backend automatically: GPU &gt; CPU. You can force a specific backend with <code>backends.NewWithName(&quot;cpu&quot;)</code> or <code>backends.NewWithName(&quot;cuda&quot;)</code>.</div>
-</div>
-
-<h2 id="running-examples-with-gonb-jupyter-for-go">Running examples with Gonb (Jupyter for Go)</h2>
-<p>Many GoMLX examples are written as Gonb notebooks — the Go equivalent of Jupyter. To run them locally:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6272a4"># Install Gonb</span>
-</span></span><span style="display:flex;"><span>go install github.com/janpfeifer/gonb@latest
-</span></span><span style="display:flex;"><span>gonb --install
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Launch JupyterLab</span>
-</span></span><span style="display:flex;"><span>jupyter lab
-</span></span></code></pre></div><p>Then open any <code>.ipynb</code> file from the <a href="https://github.com/gomlx/gomlx/tree/main/examples">examples directory</a> in JupyterLab.</p>
-
-
-<div class="callout callout--tip" role="note">
-  <span class="callout-icon" aria-hidden="true">💡</span>
-  <div>All examples also have an &ldquo;Open in Colab&rdquo; link if you prefer not to set up Jupyter locally.</div>
-</div>
-
-<h2 id="troubleshooting">Troubleshooting</h2>
-<p><strong><code>cgo: C compiler not found</code></strong>
-Install gcc: <code>sudo apt install build-essential</code> (Ubuntu) or <code>xcode-select --install</code> (macOS).</p>
-<p><strong><code>undefined: backends.New</code></strong>
-Make sure you are on Go 1.21+. Run <code>go version</code> to confirm.</p>
-<p><strong><code>CUDA backend not found</code></strong>
-Verify CUDA 12 is installed with <code>nvcc --version</code>. The CUDA toolkit must be on your <code>PATH</code>.</p>
-<p><strong>Build is very slow on first run</strong>
-This is normal — XLA is being compiled. Subsequent builds use the cache and are fast.</p>
+    <div class="docs-body"><h2 id="---installation"><a id="installation"></a>🛠️ + ⚙️ Installation</h2>
+<p><strong>For most users, no installation is needed.</strong></p>
+<p><strong>For XLA</strong>, it will by default auto-install the required XLA PJRT plugins (for CPU, GPU and TPUs; Linux and Macs)
+in the user&rsquo;s local lib directory (<code>$HOME/.local/lib/go-xla</code> in Linux; <code>$HOME/Library/Application Support/go-xla</code> in Mac;
+<code>$HOME\AppData\Local\go-xla</code> in Windows).
+It can be disabled by setting <code>GOMLX_NO_AUTO_INSTALL</code> or programmatically by calling <code>xla.EnableAutoInstall(false)</code>).</p>
+<p>If you want to manually pre-install for building production dockers, a specific version, or such custom setups,
+see <a href="https://github.com/gomlx/go-xla">github.com/gomlx/go-xla</a> for details,
+there is a self-explanatory simple installer program.</p>
+<p>If you want to use only a pure <strong>Go backend</strong>, simply do <code>import _ &quot;github.com/gomlx/gomlx/backends/simplego&quot;</code> and
+there is no need to install anything.</p>
+<h2 id="--pre-built-docker">🐳  <a href="https://hub.docker.com/r/janpfeifer/gomlx_jupyterlab">Pre-built Docker</a></h2>
+<p>The easiest to start playing with it, it&rsquo;s just <a href="https://hub.docker.com/r/janpfeifer/gomlx_jupyterlab">pulling the docker image</a>
+that includes <strong>GoMLX</strong> + <a href="https://jupyterlab.readthedocs.io/">JupyterLab</a> + <a href="https://github.com/janpfeifer/gonb">GoNB</a> (a Go kernel for Jupyter) and
+<a href="https://hub.docker.com/layers/nvidia/cuda/11.8.0-cudnn8-runtime-ubuntu22.04/images/sha256-08aed54a213b52e9cb658760b6d985db2f4c5f7e8f11ac45ec66b5c746237823?context=explore">Nvidia&rsquo;s CUDA runtime</a>
+(for optional support of GPU) pre-installed &ndash; it is ~5Gb to download.</p>
+<p>From a directory you want to make visible in Jupyter, do:</p>
+<blockquote>
+<p>For GPU support add the flag <code>--gpus all</code> to the <code>docker run</code> command bellow.</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker pull janpfeifer/gomlx_jupyterlab:latest
+</span></span><span style="display:flex;"><span>docker run -it --rm -p 8888:8888 -v <span style="color:#f1fa8c">&#34;</span><span style="color:#f1fa8c">${</span><span style="color:#8be9fd;font-style:italic">PWD</span><span style="color:#f1fa8c">}</span><span style="color:#f1fa8c">&#34;</span>:/home/jupyter/work janpfeifer/gomlx_jupyterlab:latest
+</span></span></code></pre></div><p>It will display a URL starting with <code>127.0.0.1:8888</code> in the terminal (it will include a secret token needed) that you can open in your browser.</p>
+<p>You can open and interact with the tutorial from there, it is included in the docker under the directory <code>Projects/gomlx/examples/tutorial</code>.</p>
+<p>More details on the <a href="docker/jupyterlab/README.md">docker here</a>.</p>
+<p>It runs on Windows as well: <em>Docker Desktop</em> uses WSL2 under the hood.</p>
 </div>
     
     <div class="last-updated">Last updated April 13, 2026</div>
@@ -328,12 +269,8 @@ This is normal — XLA is being compiled. Subsequent builds use the cache and ar
     <div class="docs-toc-title">On this page</div>
     <nav id="TableOfContents">
   <ul>
-    <li><a href="#requirements">Requirements</a></li>
-    <li><a href="#install-via-go-get">Install via go get</a></li>
-    <li><a href="#verify-the-installation">Verify the installation</a></li>
-    <li><a href="#gpu-support-nvidia">GPU support (NVIDIA)</a></li>
-    <li><a href="#running-examples-with-gonb-jupyter-for-go">Running examples with Gonb (Jupyter for Go)</a></li>
-    <li><a href="#troubleshooting">Troubleshooting</a></li>
+    <li><a href="#---installation">🛠️ + ⚙️ Installation</a></li>
+    <li><a href="#--pre-built-docker">🐳 Pre-built Docker</a></li>
   </ul>
 </nav>
   </aside>
