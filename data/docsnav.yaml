@@ -25,6 +25,8 @@
       url: docs/backends/
     - name: Plots & metrics
       url: docs/plots-metrics/
+    - name: Context, Variables and Checkpointing
+      url: docs/context_variables_checkpointing/
 
 - title: Guides
   pages:
