@@ -133,7 +133,7 @@
       
       <a href="/docs/installation/" class="sidebar-link">Installation</a>
       
-      <a href="/docs/quick-tutorial/" class="sidebar-link">Quick tutorial</a>
+      <a href="/docs/overview/" class="sidebar-link is-active">Overview</a>
       
       <a href="/docs/core-concepts/" class="sidebar-link">Core concepts</a>
       
@@ -163,57 +163,50 @@
     <div class="sidebar-section">
       <div class="sidebar-section-title">Guides</div>
       
+      <a href="/docs/go-huggingface/" class="sidebar-link">Go Huggingface</a>
+      
+      <a href="/docs/onnx-gomlx/" class="sidebar-link">ONNX-GoMLX</a>
+      
       <a href="/docs/datasets/" class="sidebar-link">Working with datasets</a>
-      
-      <a href="/docs/checkpoints/" class="sidebar-link">Saving &amp; loading models</a>
-      
-      <a href="/docs/custom-layers/" class="sidebar-link">Custom layers</a>
-      
-      <a href="/docs/debugging/" class="sidebar-link">Debugging &amp; NaN detection</a>
-      
-      <a href="/docs/performance/" class="sidebar-link">Performance tuning</a>
-      
-    </div>
-    
-    
-    
-    
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-    
-    <div class="sidebar-section">
-      <div class="sidebar-section-title">From upstream</div>
-      
-      <a href="/docs/overview/" class="sidebar-link is-active">What is GoMLX?</a>
-      
-      <a href="/docs/changelog/" class="sidebar-link">CHANGELOG</a>
-      
-      <a href="/docs/todo/" class="sidebar-link">TODO</a>
       
       <a href="/docs/developing/" class="sidebar-link">Developing</a>
       
-      <a href="/docs/dotgeneral-performance/" class="sidebar-link">Dotgeneral Performance</a>
+      <a href="/docs/debugging/" class="sidebar-link">Debugging</a>
       
       <a href="/docs/error-handling/" class="sidebar-link">Error Handling</a>
       
+      <a href="/docs/dotgeneral-performance/" class="sidebar-link">Dot General Performance</a>
+      
     </div>
+    
+    
+    
+    
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+    
+    
     
   </aside>
 
@@ -230,18 +223,8 @@
       
     </header>
     <div class="docs-body"><h1 id="gomlx-an-accelerated-ml-and-math-framework"><strong><em>GoMLX</em></strong>, an Accelerated ML and Math Framework</h1>
-<p><a href="https://pkg.go.dev/github.com/gomlx/gomlx?tab=doc"><img src="https://img.shields.io/badge/go.dev-reference-007d9c?logo=go&amp;logoColor=white" alt="GoDev"></a>
-<a href="https://github.com/gomlx/gomlx/blob/main/LICENSE"><img src="https://img.shields.io/github/license/gomlx/gomlx" alt="GitHub"></a>
-<a href="https://goreportcard.com/report/github.com/gomlx/gomlx"><img src="https://goreportcard.com/badge/github.com/gomlx/gomlx" alt="Go Report Card"></a>
-<a href="https://github.com/gomlx/gomlx/actions/workflows/linux_amd64_tests.yaml"><img src="https://github.com/gomlx/gomlx/actions/workflows/linux_amd64_tests.yaml/badge.svg" alt="Linux/amd64 Tests"></a>
-<a href="https://github.com/gomlx/gomlx/actions/workflows/linux_arm64_tests.yaml"><img src="https://github.com/gomlx/gomlx/actions/workflows/linux_arm64_tests.yaml/badge.svg" alt="Linux/arm64 Tests"></a>
-<a href="https://github.com/gomlx/gomlx/actions/workflows/darwin_tests.yaml"><img src="https://github.com/gomlx/gomlx/actions/workflows/darwin_tests.yaml/badge.svg" alt="Darwin/arm64 Tests"></a>
-<a href="https://github.com/gomlx/gomlx/actions/workflows/windows_amd64_tests.yaml"><img src="https://github.com/gomlx/gomlx/actions/workflows/windows_amd64_tests.yaml/badge.svg" alt="Windows/amd64 Tests"></a>
-<img src="https://img.shields.io/badge/Coverage-71.4%25-yellow" alt="Coverage">
-<a href="https://app.slack.com/client/T029RQSE6/C08TX33BX6U"><img src="https://img.shields.io/badge/Slack-GoMLX-purple.svg?logo=slack" alt="Slack"></a>
-<a href="https://github.com/sponsors/gomlx"><img src="https://img.shields.io/badge/Sponsor-gomlx-white?logo=github&amp;style=flat-square" alt="Sponsor gomlx"></a></p>
 <h2 id="-about-gomlx">📖 About <strong><em>GoMLX</em></strong></h2>
-<img align="right" src="docs/gomlx_gopher2.png" alt="GoMLX Gopher" width="220px"/>
+<img align="right" src="/img/gomlx_gopher2.png" alt="GoMLX Gopher" width="220px"/>
 <p><strong>GoMLX</strong> is an easy-to-use set of Machine Learning and generic math libraries and tools.
 It can be seen as a <strong>PyTorch/Jax/TensorFlow for Go</strong>.</p>
 <p>It can be used to train, fine-tune, modify, and combine machine learning models.

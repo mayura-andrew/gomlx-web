@@ -2,8 +2,8 @@
   pages:
     - name: Installation
       url: /docs/installation/
-    - name: Quick tutorial
-      url: /docs/quick-tutorial/
+    - name: Overview
+      url: /docs/overview/
     - name: Core concepts
       url: /docs/core-concepts/
     - name: Your first model
@@ -28,13 +28,17 @@
 
 - title: Guides
   pages:
+    - name: Go Huggingface
+      url: /docs/go-huggingface/
+    - name: ONNX-GoMLX
+      url: /docs/onnx-gomlx/
     - name: Working with datasets
       url: /docs/datasets/
-    - name: Saving & loading models
-      url: /docs/checkpoints/
-    - name: Custom layers
-      url: /docs/custom-layers/
-    - name: Debugging & NaN detection
+    - name: Developing
+      url: /docs/developing/
+    - name: Debugging
       url: /docs/debugging/
-    - name: Performance tuning
-      url: /docs/performance/
+    - name: Error Handling
+      url: /docs/error-handling/
+    - name: Dot General Performance
+      url: /docs/dotgeneral-performance/

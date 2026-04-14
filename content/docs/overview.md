@@ -7,19 +7,9 @@ source: "https://github.com/gomlx/gomlx/blob/main/README.md"
 
 # **_GoMLX_**, an Accelerated ML and Math Framework
 
-[![GoDev](https://img.shields.io/badge/go.dev-reference-007d9c?logo=go&logoColor=white)](https://pkg.go.dev/github.com/gomlx/gomlx?tab=doc)
-[![GitHub](https://img.shields.io/github/license/gomlx/gomlx)](https://github.com/gomlx/gomlx/blob/main/LICENSE)
-[![Go Report Card](https://goreportcard.com/badge/github.com/gomlx/gomlx)](https://goreportcard.com/report/github.com/gomlx/gomlx)
-[![Linux/amd64 Tests](https://github.com/gomlx/gomlx/actions/workflows/linux_amd64_tests.yaml/badge.svg)](https://github.com/gomlx/gomlx/actions/workflows/linux_amd64_tests.yaml)
-[![Linux/arm64 Tests](https://github.com/gomlx/gomlx/actions/workflows/linux_arm64_tests.yaml/badge.svg)](https://github.com/gomlx/gomlx/actions/workflows/linux_arm64_tests.yaml)
-[![Darwin/arm64 Tests](https://github.com/gomlx/gomlx/actions/workflows/darwin_tests.yaml/badge.svg)](https://github.com/gomlx/gomlx/actions/workflows/darwin_tests.yaml)
-[![Windows/amd64 Tests](https://github.com/gomlx/gomlx/actions/workflows/windows_amd64_tests.yaml/badge.svg)](https://github.com/gomlx/gomlx/actions/workflows/windows_amd64_tests.yaml)
-![Coverage](https://img.shields.io/badge/Coverage-71.4%25-yellow)
-[![Slack](https://img.shields.io/badge/Slack-GoMLX-purple.svg?logo=slack)](https://app.slack.com/client/T029RQSE6/C08TX33BX6U)
-[![Sponsor gomlx](https://img.shields.io/badge/Sponsor-gomlx-white?logo=github&style=flat-square)](https://github.com/sponsors/gomlx)
-
 ## 📖 About **_GoMLX_**
-<img align="right" src="docs/gomlx_gopher2.png" alt="GoMLX Gopher" width="220px"/>
+
+<img align="right" src="/img/gomlx_gopher2.png" alt="GoMLX Gopher" width="220px"/>
 
 **GoMLX** is an easy-to-use set of Machine Learning and generic math libraries and tools. 
 It can be seen as a **PyTorch/Jax/TensorFlow for Go**.

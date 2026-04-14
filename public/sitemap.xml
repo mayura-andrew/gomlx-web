@@ -29,6 +29,10 @@
     <loc>//localhost:1313/docs/error-handling/</loc>
     <lastmod>2026-04-13T23:24:05+05:30</lastmod>
   </url><url>
+    <loc>//localhost:1313/docs/go-huggingface/</loc>
+  </url><url>
+    <loc>//localhost:1313/docs/onnx-gomlx/</loc>
+  </url><url>
     <loc>//localhost:1313/categories/</loc>
   </url><url>
     <loc>//localhost:1313/community/</loc>
@@ -38,7 +42,7 @@
     <lastmod>2026-04-13T23:59:36+05:30</lastmod>
   </url><url>
     <loc>//localhost:1313/examples/</loc>
-    <lastmod>2026-04-14T01:26:08+05:30</lastmod>
+    <lastmod>2026-04-14T04:31:56+05:30</lastmod>
   </url><url>
     <loc>//localhost:1313/</loc>
     <lastmod>2026-04-13T23:24:05+05:30</lastmod>
