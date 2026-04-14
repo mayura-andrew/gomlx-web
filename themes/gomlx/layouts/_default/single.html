@@ -5,12 +5,12 @@
     <div class="sidebar-section">
       <div class="sidebar-section-title">{{ .title }}</div>
       {{ range .pages }}
-      <a href="{{ .url }}" class="sidebar-link{{ if eq $.RelPermalink .url }} is-active{{ end }}">{{ .name }}</a>
+      <a href="{{ .url | relURL }}" class="sidebar-link{{ if eq $.RelPermalink (.url | relURL) }} is-active{{ end }}">{{ .name }}</a>
       {{ end }}
     </div>
     {{ end }}
     {{ $curated := slice }}
-    {{ range .Site.Data.docsnav }}{{ range .pages }}{{ $curated = $curated | append .url }}{{ end }}{{ end }}
+    {{ range .Site.Data.docsnav }}{{ range .pages }}{{ $curated = $curated | append (.url | relURL) }}{{ end }}{{ end }}
     {{ $uncurated := slice }}
     {{ range site.RegularPages }}
       {{ if not (in $curated .RelPermalink) }}{{ $uncurated = $uncurated | append . }}{{ end }}
