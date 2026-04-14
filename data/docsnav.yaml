@@ -1,46 +1,46 @@
 - title: Get Started
   pages:
     - name: Installation
-      url: /docs/installation/
+      url: docs/installation/
     - name: Overview
-      url: /docs/overview/
+      url: docs/overview/
     - name: Core concepts
-      url: /docs/core-concepts/
+      url: docs/core-concepts/
     - name: Your first model
-      url: /docs/first-model/
+      url: docs/first-model/
 
 - title: Reference
   pages:
     - name: Graph execution
-      url: /docs/graph-execution/
+      url: docs/graph-execution/
     - name: Layers API
-      url: /docs/layers/
+      url: docs/layers/
     - name: Training loops
-      url: /docs/training-loops/
+      url: docs/training-loops/
     - name: Optimizers
-      url: /docs/optimizers/
+      url: docs/optimizers/
     - name: Losses
-      url: /docs/losses/
+      url: docs/losses/
     - name: Backends
-      url: /docs/backends/
+      url: docs/backends/
     - name: Plots & metrics
-      url: /docs/plots-metrics/
+      url: docs/plots-metrics/
 
 - title: Guides
   pages:
     - name: Go Huggingface
-      url: /docs/go-huggingface/
+      url: docs/go-huggingface/
     - name: ONNX-GoMLX
-      url: /docs/onnx-gomlx/
+      url: docs/onnx-gomlx/
     - name: Working with datasets
-      url: /docs/datasets/
+      url: docs/datasets/
     - name: Developing
-      url: /docs/developing/
+      url: docs/developing/
     - name: Debugging
-      url: /docs/debugging/
+      url: docs/debugging/
     - name: Error Handling
-      url: /docs/error-handling/
+      url: docs/error-handling/
     - name: Dot General Performance
-      url: /docs/dotgeneral-performance/
+      url: docs/dotgeneral-performance/
     - name: Changelog
-      url: /docs/changelog/
+      url: docs/changelog/
