@@ -16,12 +16,6 @@
       {{ if not (in $curated .RelPermalink) }}{{ $uncurated = $uncurated | append . }}{{ end }}
     {{ end }}
     {{ if $uncurated }}
-    <!-- <div class="sidebar-section">
-      <div class="sidebar-section-title">Docs</div>
-      {{ range $uncurated }}
-      <a href="{{ .RelPermalink }}" class="sidebar-link{{ if eq $.RelPermalink .RelPermalink }} is-active{{ end }}">{{ .Title }}</a>
-      {{ end }}
-    </div> -->
     {{ end }}
   </aside>
 
