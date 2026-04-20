@@ -21,12 +21,14 @@
       url: docs/optimizers/
     - name: Losses
       url: docs/losses/
-    - name: Backends
-      url: docs/backends/
+    - name: Hyperparameters (with Context)
+      url: docs/hyperparameters/
     - name: Plots & metrics
       url: docs/plots-metrics/
     - name: Context, Variables and Checkpointing
       url: docs/context_variables_checkpointing/
+    - name: Backends
+      url: docs/backends/
 
 - title: Guides
   pages:
